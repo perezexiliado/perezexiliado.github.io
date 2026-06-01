@@ -5,47 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Pérez Exiliado | Humor en Videos - +7 años de caos y risas">
     <title>PÉREZ EXILIADO | HUMOR EN VIDEOS</title>
-   
-    <!-- Tailwind -->
+  
     <script src="https://cdn.tailwindcss.com"></script>
-   
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-   
-    <!-- Fuentes Google -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-
+    
     <style>
-        :root {
-            --purple: #9f00ff;
-        }
-      
+        :root { --purple: #9f00ff; }
+     
         * {
             transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
             transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
             transition-duration: 150ms;
         }
-      
-        body {
-            font-family: 'Space Grotesk', system-ui, sans-serif;
-        }
-      
-        .glitch,
-        .neon-text {
-            font-family: 'Press Start 2P', system-ui;
-        }
-      
+     
+        body { font-family: 'Space Grotesk', system-ui, sans-serif; }
+     
+        .glitch, .neon-text { font-family: 'Press Start 2P', system-ui; }
+     
         .glitch {
             position: relative;
             color: white;
-            text-shadow:
-                0.05em 0 0 #ff00ff,
-                -0.025em -0.05em 0 #00ffff,
-                0.025em 0.05em 0 #ffff00;
+            text-shadow: 0.05em 0 0 #ff00ff, -0.025em -0.05em 0 #00ffff, 0.025em 0.05em 0 #ffff00;
             animation: glitch 1.5s infinite;
         }
-      
+     
         @keyframes glitch {
             0% { text-shadow: 0.05em 0 0 #ff00ff, -0.05em -0.025em 0 #00ffff, 0.025em 0.05em 0 #ffff00; }
             14% { text-shadow: 0.05em 0 0 #ff00ff, -0.05em -0.025em 0 #00ffff, 0.025em 0.05em 0 #ffff00; }
@@ -55,22 +40,11 @@
             99% { text-shadow: 0.025em 0.05em 0 #ff00ff, 0.05em 0 0 #00ffff, 0 -0.05em 0 #ffff00; }
             100% { text-shadow: -0.025em 0 0 #ff00ff, -0.025em -0.025em 0 #00ffff, -0.025em -0.05em 0 #ffff00; }
         }
-      
-        .hero-video {
-            filter: brightness(0.85) contrast(1.1);
-        }
-      
-        .neon-text {
-            text-shadow:
-                0 0 10px #ff00ff,
-                0 0 20px #ff00ff,
-                0 0 40px #9f00ff;
-        }
-      
-        section {
-            scroll-margin-top: 80px;
-        }
-      
+     
+        .hero-video { filter: brightness(0.85) contrast(1.1); }
+        .neon-text { text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 40px #9f00ff; }
+        section { scroll-margin-top: 80px; }
+     
         .redes-card {
             transition: all 0.3s ease;
         }
@@ -78,6 +52,10 @@
             transform: translateY(-8px) scale(1.03);
             box-shadow: 0 0 30px -5px currentColor;
         }
+
+        /* Mobile menu */
+        .mobile-menu { display: none; }
+        .mobile-menu.open { display: block; }
     </style>
 </head>
 <body class="bg-[#0f001a] text-white overflow-x-hidden">
@@ -91,28 +69,40 @@
             </div>
             <h1 class="text-2xl font-bold tracking-widest glitch">EXILIADO</h1>
         </div>
-    
+
+        <!-- Desktop Menu -->
         <div class="hidden md:flex items-center gap-8 text-sm uppercase">
             <a href="index.html" class="text-purple-400 border-b-2 border-purple-400">INICIO</a>
             <a href="marcas.html" class="hover:text-purple-400">MARCAS</a>
             <a href="saludo.html" class="hover:text-purple-400">SALUDOS</a>
             <a href="cursos.html" class="hover:text-purple-400">CURSOS</a>
         </div>
+
         <div class="flex items-center gap-4">
-            <a href="https://www.tiktok.com/@perezexiliado" target="_blank" class="hover:scale-110 text-2xl">
-                <i class="fab fa-tiktok"></i>
-            </a>
-            <a href="https://www.instagram.com/martinpemiliano" target="_blank" class="hover:scale-110 text-2xl">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://www.youtube.com/@perezexiliado" target="_blank" class="hover:scale-110 text-2xl">
-                <i class="fab fa-youtube"></i>
-            </a>
-         
+            <!-- Social Icons -->
+            <a href="https://www.tiktok.com/@perezexiliado" target="_blank" class="hover:scale-110 text-2xl"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.instagram.com/martinpemiliano" target="_blank" class="hover:scale-110 text-2xl"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@perezexiliado" target="_blank" class="hover:scale-110 text-2xl"><i class="fab fa-youtube"></i></a>
+        
             <button onclick="showContactModal()" class="bg-purple-600 hover:bg-purple-500 px-6 py-2 text-sm font-bold rounded-xl flex items-center gap-2 transition-all active:scale-95">
                 <span>CONTACTO</span>
                 <i class="fas fa-arrow-right"></i>
             </button>
+
+            <!-- Hamburger Button -->
+            <button id="menu-btn" class="md:hidden text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu md:hidden bg-black/95 border-t border-purple-500">
+        <div class="flex flex-col px-6 py-4 text-sm uppercase">
+            <a href="index.html" class="py-3 border-b border-purple-900/50 text-purple-400">INICIO</a>
+            <a href="marcas.html" class="py-3 border-b border-purple-900/50">MARCAS</a>
+            <a href="saludo.html" class="py-3 border-b border-purple-900/50">SALUDOS</a>
+            <a href="cursos.html" class="py-3">CURSOS</a>
         </div>
     </div>
 </nav>
@@ -120,10 +110,8 @@
 <!-- MODAL DE CONTACTO -->
 <div id="contactModal" class="hidden fixed inset-0 z-[9999] flex items-center justify-center">
     <div onclick="if(event.target === this) hideContactModal()" class="absolute inset-0 bg-black/70 backdrop-blur-xl"></div>
-  
     <div class="relative bg-black border-2 border-purple-500 rounded-3xl p-8 max-w-md w-full mx-4 text-center shadow-2xl shadow-purple-500/30">
         <button onclick="hideContactModal()" class="absolute top-4 right-4 text-4xl leading-none text-purple-400 hover:text-white transition-colors">×</button>
-       
         <div class="mb-6">
             <div class="inline-flex items-center gap-2 bg-purple-950 text-purple-300 text-sm px-4 py-1 rounded-full border border-purple-500/30">
                 <span class="relative flex h-3 w-3">
@@ -135,11 +123,8 @@
         </div>
         <h2 class="text-4xl font-bold tracking-widest glitch mb-2">EXILIADO</h2>
         <p class="text-purple-300 text-lg mb-8">Mi mail oficial</p>
-       
         <div onclick="copyEmail()" class="group cursor-pointer bg-zinc-900 hover:bg-zinc-800 border border-purple-500/50 hover:border-purple-400 rounded-2xl p-5 mb-8 transition-all flex items-center justify-center gap-3">
-            <span class="font-mono text-xl text-white group-active:scale-95 transition-transform">
-                perezexiliadomkt@gmail.com
-            </span>
+            <span class="font-mono text-xl text-white group-active:scale-95 transition-transform">perezexiliadomkt@gmail.com</span>
             <i class="fas fa-copy text-purple-400 group-hover:text-purple-300"></i>
         </div>
         <p class="text-sm text-purple-400">Hacé click arriba para copiar el mail</p>
@@ -149,84 +134,79 @@
 <!-- HERO -->
 <header class="relative h-screen flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0 bg-cover bg-center bg-no-repeat z-[-1] blur-sm scale-110 brightness-75" style="background-image: url('assets/fondito.jpg');"></div>
-    
     <video id="introVideo" class="hero-video absolute inset-0 w-full h-full object-cover z-0" autoplay loop muted playsinline>
         <source src="INTRO.mp4" type="video/mp4">
-        Tu navegador no soporta el video.
     </video>
- 
     <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/60 to-black/90 z-10"></div>
- 
+    
     <div class="relative z-20 text-center px-6 max-w-5xl mx-auto">
         <div class="mb-8">
             <span class="inline-block px-6 py-2 bg-purple-600/80 text-xs tracking-[4px] rounded-full mb-6">ESTOY EXILIADO... PERO EN INTERNET</span>
         </div>
-     
-        <h1 class="text-7xl md:text-8xl font-bold glitch mb-4 tracking-widest neon-text">EXILIADO</h1>
-        <p class="text-3xl md:text-4xl text-purple-300 mb-8">HUMOR EN VIDEOS</p>
-     
-        <p class="text-2xl md:text-3xl font-bold text-white mb-12 max-w-2xl mx-auto">
+    
+        <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold glitch mb-4 tracking-widest neon-text">EXILIADO</h1>
+        <p class="text-2xl sm:text-3xl md:text-4xl text-purple-300 mb-8">HUMOR EN VIDEOS</p>
+    
+        <p class="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-10 max-w-2xl mx-auto">
             +7 años de experiencia creando caos divertido
         </p>
-     
-        <div class="flex flex-wrap justify-center gap-4">
-            <a href="https://www.tiktok.com/@perezexiliado" target="_blank" class="flex items-center gap-3 bg-[#000] hover:bg-[#ff0050] px-8 py-4 rounded-2xl text-lg font-bold transition-all">
-                <i class="fab fa-tiktok text-3xl"></i>
+    
+        <div class="flex flex-wrap justify-center gap-3">
+            <a href="https://www.tiktok.com/@perezexiliado" target="_blank" class="flex items-center gap-3 bg-[#000] hover:bg-[#ff0050] px-6 py-3.5 rounded-2xl text-base font-bold transition-all">
+                <i class="fab fa-tiktok text-2xl"></i>
                 <span>@perezexiliado</span>
             </a>
-            <a href="https://www.instagram.com/martinpemiliano" target="_blank" class="flex items-center gap-3 bg-[#000] hover:bg-[#e1306c] px-8 py-4 rounded-2xl text-lg font-bold transition-all">
-                <i class="fab fa-instagram text-3xl"></i>
+            <a href="https://www.instagram.com/martinpemiliano" target="_blank" class="flex items-center gap-3 bg-[#000] hover:bg-[#e1306c] px-6 py-3.5 rounded-2xl text-base font-bold transition-all">
+                <i class="fab fa-instagram text-2xl"></i>
                 <span>martinpemiliano</span>
             </a>
-            <a href="https://www.youtube.com/@perezexiliado" target="_blank" class="flex items-center gap-3 bg-[#000] hover:bg-[#ff0000] px-8 py-4 rounded-2xl text-lg font-bold transition-all">
-                <i class="fab fa-youtube text-3xl"></i>
+            <a href="https://www.youtube.com/@perezexiliado" target="_blank" class="flex items-center gap-3 bg-[#000] hover:bg-[#ff0000] px-6 py-3.5 rounded-2xl text-base font-bold transition-all">
+                <i class="fab fa-youtube text-2xl"></i>
                 <span>@perezexiliado</span>
             </a>
         </div>
-     
-        <div class="mt-16 text-sm uppercase tracking-widest flex items-center justify-center gap-2 text-purple-300">
-            <div class="h-px w-12 bg-purple-400"></div>
-            SCROLL PARA MÁS CAOS
-            <div class="h-px w-12 bg-purple-400"></div>
+    
+        <div class="mt-12 text-sm uppercase tracking-widest flex items-center justify-center gap-2 text-purple-300">
+            <div class="h-px w-10 bg-purple-400"></div>
+            BAJÁ PARA MÁS
+            <div class="h-px w-10 bg-purple-400"></div>
         </div>
     </div>
 </header>
 
 <!-- SOBRE MÍ -->
-<section id="sobre" class="py-24 bg-[#150022]">
-    <!-- (se mantiene igual) -->
+<section id="sobre" class="py-16 md:py-24 bg-[#150022]">
     <div class="max-w-6xl mx-auto px-6">
-        <div class="grid md:grid-cols-2 gap-16 items-center">
+        <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
             <div>
-                <h2 class="text-5xl font-bold mb-8">¿QUIÉN CARAJO ES<br>PÉREZ EXILIADO?</h2>
-                <p class="text-xl leading-relaxed text-purple-200 mb-8">
-                    Soy el tipo que transforma el aburrimiento en explosiones de risa.
+                <h2 class="text-4xl md:text-5xl font-bold mb-8">¿QUIÉN ES<br>PÉREZ EXILIADO?</h2>
+                <p class="text-lg md:text-xl leading-relaxed text-purple-200 mb-6">
+                    Soy tu amigo y vecino, transformo situaciones de la vida cotidiana en videos.
                     Con más de <span class="text-purple-400 font-bold">7 años de experiencia</span> creando contenido viral,
                     me especializo en humor absurdo, memes, sketches y todo lo que haga que la gente se parta de risa.
                 </p>
-                <p class="text-xl leading-relaxed text-purple-200">
+                <p class="text-lg md:text-xl leading-relaxed text-purple-200">
                     Mi estilo es único: mezcla gaming retro, terror pixelado, humor negro y mucha energía argentina.
                 </p>
-                <div class="mt-12 flex gap-8">
-                    <div><div class="text-6xl font-bold text-purple-400">7+</div><div class="uppercase text-sm">Años de experiencia</div></div>
-                    <div><div class="text-6xl font-bold text-purple-400">3M+</div><div class="uppercase text-sm">Seguidores combinados</div></div>
-                    <div><div class="text-6xl font-bold text-purple-400">∞</div><div class="uppercase text-sm">Videos virales</div></div>
+                <div class="mt-10 flex gap-8">
+                    <div><div class="text-5xl md:text-6xl font-bold text-purple-400">7+</div><div class="uppercase text-sm">Años</div></div>
+                    <div><div class="text-5xl md:text-6xl font-bold text-purple-400">3M+</div><div class="uppercase text-sm">Seguidores</div></div>
+                    <div><div class="text-5xl md:text-6xl font-bold text-purple-400">∞</div><div class="uppercase text-sm">Videos</div></div>
                 </div>
             </div>
-            <div class="bg-gradient-to-br from-purple-900/30 to-pink-900/20 border border-purple-500/50 rounded-3xl p-8 text-center">
-                <div class="text-8xl mb-6">🎮💀🎥</div>
-                <p class="text-2xl leading-tight">"Si no te da risa... es porque todavía no viste mi próximo video."</p>
-                <p class="mt-8 text-purple-400">- Pérez Exiliado</p>
+            <div class="bg-gradient-to-br from-purple-900/30 to-pink-900/20 border border-purple-500/50 rounded-3xl p-8 text-center mt-8 md:mt-0">
+                <div class="text-7xl md:text-8xl mb-6">🎮💀🎥</div>
+                <p class="text-xl leading-tight">"Si no te da risa... es porque todavía no viste mi próximo video."</p>
+                <p class="mt-6 text-purple-400">- Pérez Exiliado</p>
             </div>
         </div>
     </div>
 </section>
 
 <!-- EXPERIENCIA -->
-<section id="experiencia" class="py-24 bg-black">
-    <!-- (se mantiene igual) -->
+<section id="experiencia" class="py-16 md:py-24 bg-black">
     <div class="max-w-6xl mx-auto px-6">
-        <h2 class="text-5xl font-bold text-center mb-16">EXPERIENCIA QUE DA MIEDO (de lo bueno)</h2>
+        <h2 class="text-4xl md:text-5xl font-bold text-center mb-12">EXPERIENCIA QUE DA MIEDO</h2>
         <div class="grid md:grid-cols-3 gap-8">
             <div class="bg-[#1f0033] p-8 rounded-3xl border border-purple-500 hover:border-pink-500">
                 <div class="text-purple-400 mb-4">📈</div>
@@ -247,66 +227,62 @@
     </div>
 </section>
 
-<!-- MARCAS - VERSIÓN SIMPLIFICADA -->
-<section id="marcas" class="py-24 bg-[#150022]">
+<!-- MARCAS -->
+<section id="marcas" class="py-16 md:py-24 bg-[#150022]">
     <div class="max-w-6xl mx-auto px-6 text-center">
-        <h2 class="text-5xl font-bold mb-6">TRABAJÉ CON MÁS DE 20 MARCAS</h2>
-        <p class="text-xl text-purple-300 mb-10 max-w-2xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6">TRABAJÉ CON MÁS DE 20 MARCAS</h2>
+        <p class="text-lg md:text-xl text-purple-300 mb-10 max-w-2xl mx-auto">
             Nacionales e internacionales que confiaron en mi humor para conectar con su audiencia.
         </p>
-        
-        <a href="marcas.html" 
-           class="inline-flex items-center gap-4 bg-purple-600 hover:bg-purple-500 text-white px-12 py-6 rounded-3xl text-2xl font-bold transition-all hover:scale-105">
+        <a href="marcas.html" class="inline-flex items-center gap-4 bg-purple-600 hover:bg-purple-500 text-white px-10 py-5 rounded-3xl text-xl font-bold transition-all hover:scale-105">
             VER TODAS LAS MARCAS
-            <i class="fas fa-arrow-right text-3xl"></i>
+            <i class="fas fa-arrow-right text-2xl"></i>
         </a>
     </div>
 </section>
 
-<!-- REDES, CTA y FOOTER se mantienen igual -->
 <!-- REDES -->
-<section id="redes" class="py-24 bg-black">
+<section id="redes" class="py-16 md:py-24 bg-black">
     <div class="max-w-6xl mx-auto px-6">
-        <h2 class="text-5xl md:text-6xl font-bold text-center mb-16 glitch tracking-widest">SEGUIME EN TODAS PARTES</h2>
+        <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 glitch tracking-widest">SEGUIME EN TODAS PARTES</h2>
         <div class="grid md:grid-cols-3 gap-8">
-            <!-- TikTok, Instagram y YouTube cards (igual que antes) -->
-            <a href="https://www.tiktok.com/@perezexiliado" target="_blank" class="redes-card bg-gradient-to-br from-[#3a001f] to-[#8a0028] border border-[#ff0050] rounded-3xl p-10 flex flex-col items-center text-center hover:border-[#ff0050]">
-                <i class="fab fa-tiktok text-8xl mb-6 text-white"></i>
-                <p class="text-1xl font-bold text-white mb-3">@perezexiliado</p>
-                <p class="text-purple-300 text-sm leading-tight">TikTok • El lugar donde nació<br>el caos</p>
+            <a href="https://www.tiktok.com/@perezexiliado" target="_blank" class="redes-card bg-gradient-to-br from-[#3a001f] to-[#8a0028] border border-[#ff0050] rounded-3xl p-8 md:p-10 flex flex-col items-center text-center hover:border-[#ff0050]">
+                <i class="fab fa-tiktok text-7xl md:text-8xl mb-6 text-white"></i>
+                <p class="text-xl font-bold text-white mb-2">@perezexiliado</p>
+                <p class="text-purple-300 text-sm">TikTok • El lugar donde nació el caos</p>
             </a>
-            <a href="https://www.instagram.com/martinpemiliano" target="_blank" class="redes-card bg-gradient-to-br from-[#3a0033] to-[#6a00aa] border border-[#c13584] rounded-3xl p-10 flex flex-col items-center text-center hover:border-[#c13584]">
-                <i class="fab fa-instagram text-8xl mb-6 text-white"></i>
-                <p class="text-1xl font-bold text-white mb-3">martinpemiliano</p>
-                <p class="text-purple-300 text-sm leading-tight">Instagram • Fotos, reels y<br>humor diario</p>
+            <a href="https://www.instagram.com/martinpemiliano" target="_blank" class="redes-card bg-gradient-to-br from-[#3a0033] to-[#6a00aa] border border-[#c13584] rounded-3xl p-8 md:p-10 flex flex-col items-center text-center hover:border-[#c13584]">
+                <i class="fab fa-instagram text-7xl md:text-8xl mb-6 text-white"></i>
+                <p class="text-xl font-bold text-white mb-2">martinpemiliano</p>
+                <p class="text-purple-300 text-sm">Instagram • Fotos, reels y humor diario</p>
             </a>
-            <a href="https://www.youtube.com/@perezexiliado" target="_blank" class="redes-card bg-gradient-to-br from-[#3a0000] to-[#8a0011] border border-[#ff0000] rounded-3xl p-10 flex flex-col items-center text-center hover:border-[#ff0000]">
-                <i class="fab fa-youtube text-8xl mb-6 text-white"></i>
-                <p class="text-1xl font-bold text-white mb-3">@perezexiliado</p>
-                <p class="text-purple-300 text-sm leading-tight">YouTube • Videos largos y<br>sketches épicos</p>
+            <a href="https://www.youtube.com/@perezexiliado" target="_blank" class="redes-card bg-gradient-to-br from-[#3a0000] to-[#8a0011] border border-[#ff0000] rounded-3xl p-8 md:p-10 flex flex-col items-center text-center hover:border-[#ff0000]">
+                <i class="fab fa-youtube text-7xl md:text-8xl mb-6 text-white"></i>
+                <p class="text-xl font-bold text-white mb-2">@perezexiliado</p>
+                <p class="text-purple-300 text-sm">YouTube • Videos largos y sketches épicos</p>
             </a>
         </div>
     </div>
 </section>
 
 <!-- CTA FINAL -->
-<section id="contacto" class="py-24 bg-gradient-to-r from-purple-900 to-pink-900">
+<section id="contacto" class="py-16 md:py-24 bg-gradient-to-r from-purple-900 to-pink-900">
     <div class="max-w-4xl mx-auto text-center px-6">
-        <h2 class="text-6xl font-bold mb-6">¿QUERÉS COLABORAR O HACER ALGO ÉPICO?</h2>
-        <p class="text-2xl mb-12">Escribime y hagamos que internet se rompa de risa.</p>
-        <a href="mailto:perezexiliadomkt@gmail.com" class="inline-flex items-center gap-4 bg-black text-white text-2xl font-bold px-16 py-8 rounded-3xl hover:bg-white hover:text-black">
+        <h2 class="text-4xl md:text-6xl font-bold mb-6">¿QUERÉS COLABORAR O HACER ALGO ÉPICO?</h2>
+        <p class="text-xl md:text-2xl mb-10">Escribime y hagamos que internet se rompa de risa.</p>
+        <a href="mailto:perezexiliadomkt@gmail.com" class="inline-flex items-center gap-4 bg-black text-white text-xl md:text-2xl font-bold px-10 md:px-16 py-6 md:py-8 rounded-3xl hover:bg-white hover:text-black">
             ENVIAME UN MENSAJE
-            <i class="fas fa-arrow-right text-4xl"></i>
+            <i class="fas fa-arrow-right text-3xl"></i>
         </a>
-        <p class="mt-10 text-sm opacity-75">O directamente por Instagram / TikTok DM</p>
+        <p class="mt-8 text-sm opacity-75">O directamente por Instagram / TikTok DM</p>
     </div>
 </section>
 
 <!-- FOOTER -->
-<footer class="bg-black py-12 border-t border-purple-900">
-    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between text-sm">
+<footer class="bg-black py-10 border-t border-purple-900">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between text-sm gap-4">
         <p>© 2026 PÉREZ EXILIADO • HECHO CON MUCHO HUMOR Y UN POCO DE GLITCH</p>
-        <div class="flex gap-6 mt-6 md:mt-0">
+        <div class="flex gap-6">
             <a href="https://www.tiktok.com/@perezexiliado" target="_blank">TikTok</a>
             <a href="https://www.instagram.com/martinpemiliano" target="_blank">Instagram</a>
             <a href="https://www.youtube.com/@perezexiliado" target="_blank">YouTube</a>
@@ -316,6 +292,32 @@
 </footer>
 
 <script>
+    // Mobile Menu Toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('open');
+        const icon = menuBtn.querySelector('i');
+        if (mobileMenu.classList.contains('open')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    });
+
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            menuBtn.querySelector('i').classList.remove('fa-times');
+            menuBtn.querySelector('i').classList.add('fa-bars');
+        });
+    });
+
+    // Contact Modal
     function showContactModal() {
         const modal = document.getElementById('contactModal');
         modal.classList.remove('hidden');
@@ -341,12 +343,11 @@
         }
     });
 
+    // Tailwind + Video
     tailwind.config = { content: [], theme: { extend: {} } };
-    
     const video = document.getElementById('introVideo');
     video.addEventListener('canplay', () => video.play().catch(() => {}));
-
-    console.log('%c✅ Página de Pérez Exiliado cargada con éxito. ¡Que empiece el caos!', 'color:#ff00ff; font-family:monospace');
 </script>
+
 </body>
-</htmls
+</html>
