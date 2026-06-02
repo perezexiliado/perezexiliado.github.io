@@ -339,5 +339,50 @@
     }
 </script>
 
+<!-- Menú Hamburguesa Móvil - Versión Mejorada -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const icon = menuBtn ? menuBtn.querySelector('i') : null;
+
+    if (!menuBtn || !mobileMenu) {
+        console.log('No se encontró el botón o el menú móvil');
+        return;
+    }
+
+    // Toggle del menú
+    menuBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        mobileMenu.classList.toggle('hidden');
+        
+        if (icon) {
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        }
+    });
+
+    // Cerrar menú al hacer clic en cualquier link
+    const mobileLinks = mobileMenu.querySelectorAll('a');
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            mobileMenu.classList.add('hidden');
+            if (icon) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    });
+
+    console.log('Menú móvil inicializado correctamente');
+});
+</script>
+
 </body>
 </html>
