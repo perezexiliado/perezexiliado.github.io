@@ -1,6 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <style>
+    @keyframes xpFill {
+        from { width: 0%; }
+        to { width: 98%; }
+    }
+
+    .xp-bar-filled {
+        animation: xpFill 2.2s ease-out forwards;
+    }
+
+    @keyframes shimmer {
+        0% { transform: translateX(-150%); }
+        100% { transform: translateX(250%); }
+    }
+    </style>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="PEREZEXILIADO | Humor en videos">
@@ -222,8 +238,8 @@
             </div>
             <div class="bg-gradient-to-br from-purple-900/30 to-pink-900/20 border border-purple-500/50 rounded-3xl p-8 text-center mt-8 md:mt-0">
                 <div class="text-7xl md:text-8xl mb-6">🎮💀🎥</div>
-                <p class="text-xl leading-tight">"Si no te da risa... es porque todavía no viste mi próximo video."</p>
-                <p class="mt-6 text-purple-400">- Pérez Exiliado</p>
+                <p class="text-xl leading-tight">"Si no te da risa... el siguiente video menos."</p>
+                <p class="mt-6 text-purple-400">- perezexiliado</p>
             </div>
         </div>
     </div>
@@ -232,22 +248,56 @@
 <!-- EXPERIENCIA -->
 <section id="experiencia" class="py-16 md:py-24 bg-black">
     <div class="max-w-6xl mx-auto px-6">
-        <h2 class="text-4xl md:text-5xl font-bold text-center mb-12">EXPERIENCIA QUE DA MIEDO</h2>
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="bg-[#1f0033] p-8 rounded-3xl border border-purple-500 hover:border-pink-500">
-                <div class="text-purple-400 mb-4">📈</div>
-                <h3 class="text-2xl font-bold mb-4">+7 AÑOS EN LA BATALLA</h3>
-                <p class="text-purple-200">De los primeros videos en YouTube hasta los trends más grandes de TikTok.</p>
+        <h2 class="text-4xl md:text-5xl font-bold text-center mb-8">EXPERIENCIA QUE DA MIEDO</h2>
+
+        <!-- BARRA DE EXPERIENCIA / XP -->
+        <div class="max-w-2xl mx-auto mb-12 px-2">
+            <div class="flex items-center justify-between mb-2.5">
+                <div class="flex items-center gap-2">
+                    <span class="text-purple-400 text-xl">🎮</span>
+                    <span class="uppercase tracking-[2.5px] text-sm text-purple-300 font-medium">Experiencia Acumulada</span>
+                </div>
+                <div>
+                    <span class="font-mono text-white text-lg font-bold">LVL 99</span>
+                </div>
             </div>
-            <div class="bg-[#1f0033] p-8 rounded-3xl border border-purple-500 hover:border-pink-500">
+
+            <!-- Barra que se llena -->
+            <div class="relative h-6 rounded-full bg-[#120022] border border-purple-600/60 overflow-hidden shadow-inner">
+                <div id="xp-bar-fill"
+                     class="h-full bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-500 rounded-full
+                            shadow-[0_0_25px_rgb(236,72,153,0.6)] w-0 transition-all">
+                </div>
+                
+                <!-- Efecto de brillo retro -->
+                <div class="absolute inset-0 bg-[linear-gradient(to_right,transparent_25%,rgba(255,255,255,0.3)_50%,transparent_75%)]
+                            animate-[shimmer_1.8s_infinite]"></div>
+            </div>
+
+            <!-- +20 XP -->
+            <div class="flex justify-end mt-2">
+                <div class="inline-flex items-center gap-1.5 bg-black/70 border border-pink-500/40 px-4 py-1 rounded-full">
+                    <span class="text-pink-400 font-mono text-sm font-bold tracking-wider">+20 XP</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- TARJETAS -->
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-[#1f0033] p-8 rounded-3xl border border-purple-500 hover:border-pink-500 transition-colors">
+                <div class="text-purple-400 mb-4">📈</div>
+                <h3 class="text-2xl font-bold mb-4">+7 AÑOS EN EL CAMPO DE BATALLA</h3>
+                <p class="text-purple-200">Desde los primeros videos en YouTube hasta los trends más grandes de TikTok.</p>
+            </div>
+            <div class="bg-[#1f0033] p-8 rounded-3xl border border-purple-500 hover:border-pink-500 transition-colors">
                 <div class="text-purple-400 mb-4">🎤</div>
                 <h3 class="text-2xl font-bold mb-4">CREADOR DE CONTENIDO</h3>
-                <p class="text-purple-200">Skits, challenges, reacciones, gaming, humor negro y parodias.</p>
+                <p class="text-purple-200">Humor, chistes, parodias, sketches, reacciones y más.</p>
             </div>
-            <div class="bg-[#1f0033] p-8 rounded-3xl border border-purple-500 hover:border-pink-500">
+            <div class="bg-[#1f0033] p-8 rounded-3xl border border-purple-500 hover:border-pink-500 transition-colors">
                 <div class="text-purple-400 mb-4">🤝</div>
                 <h3 class="text-2xl font-bold mb-4">+20 MARCAS</h3>
-                <p class="text-purple-200">He trabajado con más de 20 marcas nacionales e internacionales.</p>
+                <p class="text-purple-200">He trabajado con más de 20 marcas a nivel nacional e internacional.</p>
             </div>
         </div>
     </div>
@@ -256,7 +306,7 @@
 <!-- MARCAS -->
 <section id="marcas" class="py-16 md:py-24 bg-[#150022]">
     <div class="max-w-6xl mx-auto px-6 text-center">
-        <h2 class="text-4xl md:text-5xl font-bold mb-6">TRABAJÉ CON MÁS DE 20 MARCAS</h2>
+        <h2 class="text-4xl md:text-5xl font-bold mb-6">MAS DE 20 MARCAS SATISFECHAS</h2>
         <p class="text-lg md:text-xl text-purple-300 mb-10 max-w-2xl mx-auto">
             Nacionales e internacionales que confiaron en mi humor para conectar con su audiencia.
         </p>
@@ -372,6 +422,28 @@
     tailwind.config = { content: [], theme: { extend: {} } };
     const video = document.getElementById('introVideo');
     video.addEventListener('canplay', () => video.play().catch(() => {}));
+</script>
+
+// JAVASCRIPT PARA LA BARRA DE XP
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const section = document.getElementById("experiencia");
+        const bar = document.getElementById("xp-bar-fill");
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Se activa la animación cuando la sección entra en pantalla
+                    bar.classList.add("xp-bar-filled");
+                    observer.unobserve(section); // Para que solo se active una vez
+                }
+            });
+        }, {
+            threshold: 0.35 // Se activa cuando el 35% de la sección es visible
+        });
+
+        observer.observe(section);
+    });
 </script>
 
 </body>
