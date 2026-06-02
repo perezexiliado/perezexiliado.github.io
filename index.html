@@ -121,8 +121,8 @@
     <div id="mobile-menu" class="md:hidden bg-[#0a0012] border-t border-purple-700">
         <div class="flex flex-col px-5 py-1 text-sm uppercase">
             <a href="index.html" class="py-3 border-b border-purple-900/40">INICIO</a>
-            <a href="marcas.html" class="py-3 border-b border-purple-900/40">MARCAS</a>
-            <a href="saludo.html" class="py-3 border-b border-purple-900/40">SALUDOS</a>
+            <a href="marcas.html" class="py-3">MARCAS</a>
+            <a href="saludo.html" class="py-3">SALUDOS</a>
             <a href="cursos.html" class="py-3">CURSOS</a>
         </div>
     </div>
@@ -224,30 +224,100 @@
 </header>
 
 <!-- SOBRE MÍ -->
-<section id="sobre" class="py-16 md:py-24 bg-[#150022]">
+<section id="sobre" class="py-16 md:py-24 bg-black">
     <div class="max-w-6xl mx-auto px-6">
         <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+            
+            <!-- Texto izquierdo -->
             <div>
                 <h2 class="text-4xl md:text-5xl font-bold mb-8">¿QUIÉN ES<br>PEREZEXILIADO?</h2>
                 <p class="text-lg md:text-xl leading-relaxed text-purple-200 mb-6">
                     Soy tu amigo y vecino, transformo situaciones de la vida cotidiana en videos.
                     Con más de <span class="text-purple-400 font-bold">7 años de experiencia</span> creando contenido viral,
-                    me especializo en humor absurdo, memes, sketches y todo lo necesario para hacer reir un ratob.
+                    me especializo en humor absurdo, memes, sketches y todo lo necesario para hacer reir un rato.
                 </p>
                 <p class="text-lg md:text-xl leading-relaxed text-purple-200">
                     Mi estilo es único: le pongo la peor de las ondas a los videos y curiosamente quedan bien.
                 </p>
+                
+                <!-- Stats -->
                 <div class="mt-10 flex gap-8">
-                    <div><div class="text-5xl md:text-6xl font-bold text-purple-400">7+</div><div class="uppercase text-sm">Años</div></div>
-                    <div><div class="text-5xl md:text-6xl font-bold text-purple-400">3M+</div><div class="uppercase text-sm">Seguidores</div></div>
-                    <div><div class="text-5xl md:text-6xl font-bold text-purple-400">∞</div><div class="uppercase text-sm">Videos</div></div>
+                    <div>
+                        <div class="text-5xl md:text-6xl font-bold text-purple-400">7+</div>
+                        <div class="uppercase text-sm">Años</div>
+                    </div>
+                    <div>
+                        <div class="text-5xl md:text-6xl font-bold text-purple-400">3M+</div>
+                        <div class="uppercase text-sm">Seguidores</div>
+                    </div>
+                    <div>
+                        <div class="text-5xl md:text-6xl font-bold text-purple-400">∞</div>
+                        <div class="uppercase text-sm">Videos</div>
+                    </div>
                 </div>
             </div>
-            <div class="bg-gradient-to-br from-purple-900/30 to-pink-900/20 border border-purple-500/50 rounded-3xl p-8 text-center mt-8 md:mt-0">
-                <div class="text-7xl md:text-8xl mb-6">🎮💀🎥</div>
-                <p class="text-xl leading-tight">"Si no te da risa... el siguiente video menos."</p>
-                <p class="mt-6 text-purple-400">- perezexiliado</p>
+
+            <!-- Columna derecha: Recuadro + Botón -->
+            <div class="mt-8 md:mt-0">
+                
+                <!-- Recuadro de la frase -->
+                <div class="bg-gradient-to-br from-purple-900/30 to-pink-900/20 border border-purple-500/50 rounded-3xl p-8 text-center">
+                    <div class="text-7xl md:text-8xl mb-6">🎮💀🎥</div>
+                    <p class="text-xl leading-tight">"Si no te da risa... el siguiente video menos."</p>
+                    <p class="mt-6 text-purple-400">- perezexiliado</p>
+                </div>
+
+                <!-- BOTÓN NUEVO (fuera del recuadro) -->
+                <div class="mt-6 flex justify-center">
+                    <a href="marcas.html" 
+                       class="inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-purple-600 hover:bg-purple-500 active:bg-purple-700 text-white font-bold text-sm uppercase tracking-[1.5px] rounded-2xl transition-all active:scale-[0.985] shadow-lg shadow-purple-900/30">
+                        Marcas trabajadas
+                        <i class="fas fa-arrow-right text-base"></i>
+                    </a>
+                </div>
+
             </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- SALUDO PERSONALIZADO -->
+<section class="py-16 md:py-20 bg-[#150022]">
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+            
+            <!-- IMAGEN VERTICAL 9:16 (izquierda) -->
+            <div class="order-1 md:order-none flex justify-center md:justify-start">
+                <div class="aspect-[9/16] w-full max-w-[280px] md:max-w-[320px] rounded-3xl overflow-hidden border border-purple-500/40 shadow-2xl">
+                    <!-- Cambiá la ruta por tu foto vertical -->
+                    <img src="assets/foto-vertical.jpg" 
+                         alt="Perez Exiliado - Saludo personalizado" 
+                         class="w-full h-full object-cover">
+                </div>
+            </div>
+
+            <!-- Texto + Botón (derecha) -->
+            <div class="order-2 md:order-none text-center md:text-left">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                    ¿Querés un<br>saludo personalizado?
+                </h2>
+                
+                <p class="text-lg md:text-xl text-purple-200 mb-8 max-w-md mx-auto md:mx-0">
+                    Para cumpleaños, regalos, amigos, o lo que se te ocurra. 
+                    Hago saludos 100% personalizados y con la mejor onda.
+                </p>
+
+                <!-- Botón -->
+                <div class="flex justify-center md:justify-start">
+                    <a href="saludo.html" 
+                       class="inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-purple-600 hover:bg-purple-500 active:bg-purple-700 text-white font-bold text-sm uppercase tracking-[1.5px] rounded-2xl transition-all active:scale-[0.985] shadow-lg shadow-purple-900/30">
+                        Pedir saludo personalizado
+                        <i class="fas fa-arrow-right text-base"></i>
+                    </a>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
