@@ -15,6 +15,16 @@
         0% { transform: translateX(-150%); }
         100% { transform: translateX(250%); }
     }
+.heart {
+    position: absolute;
+    animation: floatHeart 25s infinite linear;
+    user-select: none;
+}
+
+@keyframes floatHeart {
+    0%   { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-120vh) rotate(360deg); }
+}
     </style>
 
     <meta charset="UTF-8">
@@ -192,7 +202,7 @@
    
         <!-- Descripción -->
         <p class="text-lg sm:text-xl md:text-2xl font-bold text-white mb-8 max-w-xl mx-auto">
-            +7 años de experiencia haciendo videos
+            +7 años haciéndote reír
         </p>
    
         <!-- Botones -->
@@ -274,45 +284,57 @@
 </section>
 
 <!-- SALUDO PERSONALIZADO -->
-<section class="py-16 md:py-20 bg-[#150022]">
-    <div class="max-w-6xl mx-auto px-6">
+<section class="py-16 md:py-20 bg-[#150022] relative overflow-hidden">
+    
+    <!-- Corazones rosas blurreados de fondo -->
+    <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(236,72,153,0.08)_0%,transparent_50%)]"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_60%,rgba(236,72,153,0.07)_0%,transparent_50%)]"></div>
+        
+        <!-- Corazones -->
+        <div class="heart absolute text-pink-400 text-6xl opacity-30 blur-md" style="top: 15%; left: 10%; animation-delay: 0s;">♥</div>
+        <div class="heart absolute text-pink-500 text-5xl opacity-20 blur-xl" style="top: 25%; left: 25%; animation-delay: 2s;">♥</div>
+        <div class="heart absolute text-pink-400 text-7xl opacity-25 blur-md" style="top: 40%; left: 65%; animation-delay: 1s;">♥</div>
+        <div class="heart absolute text-pink-500 text-4xl opacity-30 blur-lg" style="top: 55%; left: 15%; animation-delay: 3s;">♥</div>
+        <div class="heart absolute text-pink-400 text-6xl opacity-20 blur-md" style="top: 70%; left: 80%; animation-delay: 0.5s;">♥</div>
+        <div class="heart absolute text-pink-500 text-5xl opacity-25 blur-xl" style="top: 80%; left: 35%; animation-delay: 2.5s;">♥</div>
+        <div class="heart absolute text-pink-400 text-7xl opacity-20 blur-lg" style="top: 10%; left: 75%; animation-delay: 4s;">♥</div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-6 relative z-10">
         <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
-            
-            <!-- IMAGEN VERTICAL 9:16 (izquierda) -->
+           
+            <!-- IMAGEN VERTICAL -->
             <div class="order-1 md:order-none flex justify-center md:justify-start">
                 <div class="aspect-[9/16] w-full max-w-[280px] md:max-w-[320px] rounded-3xl overflow-hidden border border-purple-500/40 shadow-2xl">
-                    <!-- Cambiá la ruta por tu foto vertical -->
-                    <img src="assets/foto-vertical.jpg" 
-                         alt="Perez Exiliado - Saludo personalizado" 
+                    <img src="assets/filtrogordito.jpg"
+                         alt="Perez Exiliado - Saludo personalizado"
                          class="w-full h-full object-cover">
                 </div>
             </div>
 
-            <!-- Texto + Botón (derecha) -->
+            <!-- Texto + Botón -->
             <div class="order-2 md:order-none text-center md:text-left">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                    ¿Querés un<br>saludo personalizado?
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight text-white">
+                    ¿Querés un saludo personalizado?
                 </h2>
-                
+               
                 <p class="text-lg md:text-xl text-purple-200 mb-8 max-w-md mx-auto md:mx-0">
-                    Para cumpleaños, regalos, amigos, o el funeral de tu suegra. 
-                    Hago saludos 100% personalizados y con la mejor onda.
+                    Para cumpleaños, regalos, amigos, o el funeral de tu suegra.<br>
+                    Hago saludos 100% personalizados y con la mejor onda (o la peor si querés)
                 </p>
 
-                <!-- Botón -->
                 <div class="flex justify-center md:justify-start">
-                    <a href="saludo.html" 
+                    <a href="saludo.html"
                        class="inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-purple-600 hover:bg-purple-500 active:bg-purple-700 text-white font-bold text-sm uppercase tracking-[1.5px] rounded-2xl transition-all active:scale-[0.985] shadow-lg shadow-purple-900/30">
-                        Pedir saludo personalizado
+                        PEDÍ TU SALUDO
                         <i class="fas fa-arrow-right text-base"></i>
                     </a>
                 </div>
             </div>
-
         </div>
     </div>
 </section>
-
 <!-- EXPERIENCIA -->
 <section id="experiencia" class="py-16 md:py-24 bg-black">
     <div class="max-w-6xl mx-auto px-6">
@@ -362,7 +384,7 @@
             </div>
             <div class="bg-[#1f0033] p-8 rounded-3xl border border-purple-500 hover:border-pink-500 transition-colors">
                 <h3 class="text-2xl font-bold mb-4">+20 MARCAS</h3>
-                <p class="text-purple-200">He trabajado con más de 20 marcas a nivel nacional e internacional.</p>
+                <p class="text-purple-200">He trabajado con más de 20 marcas a nivel nacional e internacional. Todas quedaron realmente satisfechas</p>
             </div>
         </div>
 
@@ -378,15 +400,15 @@
     </div>
 </section>
 
-<!-- MARCAS -->
-<section id="marcas" class="py-16 md:py-24 bg-[#150022]">
+<!-- CURSO -->
+<section id="curso" class="py-16 md:py-24 bg-[#150022]">
     <div class="max-w-6xl mx-auto px-6 text-center">
-        <h2 class="text-4xl md:text-5xl font-bold mb-6">MAS DE 20 MARCAS SATISFECHAS</h2>
+        <h2 class="text-4xl md:text-5xl font-bold mb-6">¿QUERÉS APRENDER A CREAR CONTENIDO?</h2>
         <p class="text-lg md:text-xl text-purple-300 mb-10 max-w-2xl mx-auto">
-            Nacionales e internacionales que confiaron en mi humor para conectar con su audiencia.
+            +15 clientes ya confiaron en mí y crecieron orgánicamente.
         </p>
         <a href="marcas.html" class="inline-flex items-center gap-4 bg-purple-600 hover:bg-purple-500 text-white px-10 py-5 rounded-3xl text-xl font-bold transition-all hover:scale-105">
-            VER TODAS LAS MARCAS <i class="fas fa-arrow-right text-2xl"></i>
+            APRENDÉ A CREAR  AHORA MISMO <i class="fas fa-arrow-right text-2xl"></i>
         </a>
     </div>
 </section>
