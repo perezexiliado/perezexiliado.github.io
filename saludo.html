@@ -152,24 +152,24 @@
         <div class="inline-block px-5 py-1.5 bg-purple-600/20 text-purple-400 text-sm tracking-[3px] rounded-full mb-6 border border-purple-500/30">
             DESDE EL EXILIO PARA VOS
         </div>
-        
-        <h1 class="text-6xl md:text-7xl font-bold mb-4 glitch tracking-widest">SALUDO PERSONALIZADO</h1>
-        <p class="text-3xl md:text-7xl text-green-300 mb-6">$3999</p>
-        
-        <p class="max-w-2xl mx-auto text-xl text-purple-200">
+       
+        <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold mb-4 glitch tracking-widest">SALUDO PERSONALIZADO</h1>
+        <p class="text-5xl sm:text-6xl md:text-7xl text-green-300 mb-6 font-bold">$3999</p>
+       
+        <p class="max-w-2xl mx-auto text-lg sm:text-xl text-purple-200">
             Cumpleaños, eventos, despedidas o el funeral de tu suegra.<br>
             Te grabo un saludo personalizado diciendo lo que quieras.
         </p>
     </div>
 </header>
 
+<!-- VIDEO EJEMPLO -->
 <section class="py-12 bg-black">
     <div class="max-w-4xl mx-auto px-6">
         <h2 class="text-center text-3xl font-bold mb-8">Mirá un ejemplo</h2>
-       
+      
         <div class="flex justify-center">
-            <div class="relative w-full max-w-[320px] md:max-w-[360px] rounded-3xl overflow-hidden border border-purple-500/40 shadow-2xl">
-               
+            <div class="relative w-full max-w-[320px] sm:max-w-[360px] mx-auto rounded-3xl overflow-hidden border border-purple-500/40 shadow-2xl">
                 <video
                     controls
                     preload="metadata"
@@ -179,18 +179,9 @@
                     <source src="assets/SALUDOTEST(Luegoborrar).mp4" type="video/mp4">
                     Tu navegador no soporta el video.
                 </video>
-               
             </div>
         </div>
-        
-        <p class="text-center text-purple-400 text-sm mt-6">* Este es un ejemplo. El tuyo lo grabo especialmente para vos.</p>
-    </div>
-</section>
-        
-        <p class="text-center text-purple-400 text-sm mt-6">* Este es un ejemplo. El tuyo lo grabo especialmente para vos.</p>
-    </div>
-</section>
-        
+       
         <p class="text-center text-purple-400 text-sm mt-6">* Este es un ejemplo. El tuyo lo grabo especialmente para vos.</p>
     </div>
 </section>
@@ -199,7 +190,7 @@
 <section class="py-16 bg-[#150022]">
     <div class="max-w-6xl mx-auto px-6">
         <h2 class="text-center text-4xl font-bold mb-12">¿Cómo funciona?</h2>
-        
+       
         <div class="grid md:grid-cols-3 gap-8">
             <!-- Paso 1 -->
             <div class="saludo-card bg-[#1f0033] border border-purple-500/50 rounded-3xl p-8 text-center">
@@ -209,7 +200,7 @@
                 <h3 class="text-2xl font-bold mb-3">Completás los datos</h3>
                 <p class="text-purple-200">Nombre de la persona, ocasión (cumpleaños, evento, etc.) y el mensaje que querés que diga.</p>
             </div>
-            
+           
             <!-- Paso 2 -->
             <div class="saludo-card bg-[#1f0033] border border-purple-500/50 rounded-3xl p-8 text-center">
                 <div class="w-16 h-16 mx-auto mb-6 bg-purple-600/20 rounded-2xl flex items-center justify-center">
@@ -218,7 +209,7 @@
                 <h3 class="text-2xl font-bold mb-3">Pagás con Mercado Pago</h3>
                 <p class="text-purple-200">Hacés el pago de forma segura. Una vez acreditado, me pongo a laburar.</p>
             </div>
-            
+           
             <!-- Paso 3 -->
             <div class="saludo-card bg-[#1f0033] border border-purple-500/50 rounded-3xl p-8 text-center">
                 <div class="w-16 h-16 mx-auto mb-6 bg-purple-600/20 rounded-2xl flex items-center justify-center">
@@ -234,35 +225,38 @@
 <!-- FORMULARIO + BOTÓN DE PAGO -->
 <section class="py-16 bg-black">
     <div class="max-w-3xl mx-auto px-6">
-        <div class="bg-[#150022] border border-purple-500/40 rounded-3xl p-10">
-            <h2 class="text-4xl font-bold text-center mb-8">Pedí tu saludo ahora</h2>
-            
-            <!-- Formulario (solo visual por ahora) -->
-            <div class="space-y-6 mb-8">
+        <div class="bg-[#150022] border border-purple-500/40 rounded-3xl p-8 sm:p-10">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8">Pedí tu saludo ahora</h2>
+          
+            <!-- Formulario -->
+            <form id="saludoForm" class="space-y-6 mb-8">
                 <div>
                     <label class="block text-sm uppercase tracking-widest text-purple-400 mb-2">Nombre de la persona que recibe el saludo</label>
-                    <input type="text" placeholder="Ej: Juan" class="w-full bg-black border border-purple-500/40 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:border-purple-500">
+                    <input type="text" id="nombre_persona" placeholder="Ej: Juan" required
+                           class="w-full bg-black border border-purple-500/40 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:border-purple-500">
                 </div>
-                
+              
                 <div>
                     <label class="block text-sm uppercase tracking-widest text-purple-400 mb-2">Ocasión / Motivo</label>
-                    <input type="text" placeholder="Ej: Cumpleaños, Aniversario, Evento, etc." class="w-full bg-black border border-purple-500/40 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:border-purple-500">
+                    <input type="text" id="ocasion" placeholder="Ej: Cumpleaños, Aniversario, Evento, etc." required
+                           class="w-full bg-black border border-purple-500/40 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:border-purple-500">
                 </div>
-                
+              
                 <div>
                     <label class="block text-sm uppercase tracking-widest text-purple-400 mb-2">Mensaje personalizado (lo que querés que diga)</label>
-                    <textarea rows="4" placeholder="Ej: ¡Feliz cumpleaños hermano! Que la pases bomba..." class="w-full bg-black border border-purple-500/40 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:border-purple-500 resize-y"></textarea>
+                    <textarea id="mensaje" rows="4" placeholder="Ej: ¡Feliz cumpleaños hermano! Que la pases bomba..." required
+                              class="w-full bg-black border border-purple-500/40 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:border-purple-500 resize-y"></textarea>
                 </div>
-            </div>
-            
-            <!-- Botón de Mercado Pago -->
+            </form>
+          
+            <!-- Botón de Pago -->
             <div class="text-center">
-                <a href="https://link-mercado-pago-aqui.com" target="_blank"
-                   class="inline-flex items-center justify-center gap-4 bg-[#00b894] hover:bg-[#00a080] text-white text-xl font-bold px-14 py-6 rounded-3xl transition-all hover:scale-[1.02] shadow-lg">
+                <button onclick="enviarPedidoYRedirigir()"
+                        class="inline-flex items-center justify-center gap-4 w-full sm:w-auto bg-[#00b894] hover:bg-[#00a080] text-white text-xl font-bold px-8 sm:px-14 py-6 rounded-3xl transition-all hover:scale-[1.02] shadow-lg cursor-pointer">
                     <i class="fas fa-credit-card text-3xl"></i>
                     <span>PAGAR CON MERCADO PAGO</span>
-                </a>
-                
+                </button>
+              
                 <p class="text-purple-400 text-sm mt-4">Una vez que pagues, te contacto para confirmar los datos y grabar tu saludo.</p>
             </div>
         </div>
@@ -270,17 +264,15 @@
 </section>
 
 <!-- FOOTER -->
-<footer class="bg-black py-12 border-t border-purple-900">
-    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between text-sm">
-        <p>© 2026 PÉREZ EXILIADO • HECHO CON MUCHO HUMOR Y UN POCO DE GLITCH</p>
-        <div class="flex gap-6 mt-6 md:mt-0">
-            <a href="index.html">Inicio</a>
-            <a href="saludo.html">Saludos</a>
-            <a href="https://www.tiktok.com/@perezexiliado" target="_blank">TikTok</a>
-            <a href="https://www.instagram.com/martinpemiliano" target="_blank">Instagram</a>
-            <a href="https://www.youtube.com/@perezexiliado" target="_blank">YouTube</a>
+<footer class="bg-black py-8 sm:py-10 border-t border-purple-900">
+    <div class="max-w-6xl mx-auto px-5 sm:px-6 flex flex-col md:flex-row items-center justify-center md:justify-between text-sm gap-y-3 md:gap-4 text-center md:text-left">
+        <p class="text-purple-200">© 2026 PÉREZ EXILIADO • HECHO CON MUCHO HUMOR Y AMOR</p>
+        <div class="flex flex-wrap justify-center gap-x-6 gap-y-1 text-purple-300">
+            <a href="https://www.tiktok.com/@perezexiliado" target="_blank" class="hover:text-purple-100 transition-colors">TikTok</a>
+            <a href="https://www.instagram.com/martinpemiliano" target="_blank" class="hover:text-purple-100 transition-colors">Instagram</a>
+            <a href="https://www.youtube.com/@perezexiliado" target="_blank" class="hover:text-purple-100 transition-colors">YouTube</a>
         </div>
-        <p class="text-purple-400">Exiliado pero nunca olvidado</p>
+        <p class="text-purple-400 text-xs sm:text-sm">Para mis seres queridos y la gente que amo</p>
     </div>
 </footer>
 
@@ -352,6 +344,67 @@
 
     // Inicializar cuando cargue la página
     document.addEventListener('DOMContentLoaded', initMobileMenu);
+</script>
+
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+    // === CONFIGURACIÓN EMAILJS - CAMBIÁ ESTOS 3 VALORES ===
+    const EMAILJS_PUBLIC_KEY = "KMYGAyGuz9uYee6ci";        // ← Pegá tu Public Key
+    const EMAILJS_SERVICE_ID = "service_0cvl5ce";            // ← Pegá tu Service ID
+    const EMAILJS_TEMPLATE_ID = "template_do0vu6p";          // ← Pegá tu Template ID
+
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+
+    function enviarPedidoYRedirigir() {
+        const form = document.getElementById('saludoForm');
+        
+        // Validar que todos los campos estén completos
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
+
+        const btn = event.currentTarget;
+        const originalText = btn ? btn.innerHTML : '';
+        
+        // Cambiar texto del botón mientras envía
+        if (btn) {
+            btn.innerHTML = `<i class="fas fa-spinner fa-spin text-3xl"></i> <span>ENVIANDO...</span>`;
+            btn.disabled = true;
+        }
+
+        const templateParams = {
+            nombre_persona: document.getElementById('nombre_persona').value,
+            ocasion: document.getElementById('ocasion').value,
+            mensaje: document.getElementById('mensaje').value
+        };
+
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+            .then(function() {
+                // Éxito → Redirigir a Mercado Pago
+                window.open('https://mpago.li/2LSbVrv', '_blank');
+                
+                // Mostrar mensaje de éxito
+                alert('✅ ¡Perfecto! Recibí tu pedido por mail. Ahora completá el pago en la ventana que se abrió.');
+                
+                // Opcional: limpiar el formulario
+                form.reset();
+                
+                if (btn) {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                }
+            }, function(error) {
+                console.error('Error al enviar:', error);
+                alert('Hubo un problema al enviar el pedido. Por favor intentá de nuevo o escribime por Instagram.');
+                
+                if (btn) {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                }
+            });
+    }
 </script>
 
 </body>
