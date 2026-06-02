@@ -227,28 +227,36 @@
     <div class="max-w-3xl mx-auto px-6">
         <div class="bg-[#150022] border border-purple-500/40 rounded-3xl p-8 sm:p-10">
             <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8">Pedí tu saludo ahora</h2>
-          
+         
             <!-- Formulario -->
             <form id="saludoForm" class="space-y-6 mb-8">
+                
+                <!-- NUEVO CAMPO: Nombre de quien paga -->
                 <div>
-                    <label class="block text-sm uppercase tracking-widest text-purple-400 mb-2">Nombre de la persona que recibe el saludo</label>
-                    <input type="text" id="nombre_persona" placeholder="Ej: Juan" required
+                    <label class="block text-sm uppercase tracking-widest text-purple-400 mb-2">Nombre del comprador (tu nombre)</label>
+                    <input type="text" id="nombre_paga" placeholder="Como figura en tu mercadopago" required
                            class="w-full bg-black border border-purple-500/40 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:border-purple-500">
                 </div>
-              
+
+                <div>
+                    <label class="block text-sm uppercase tracking-widest text-purple-400 mb-2">Tu mail (para enviarte el saludo)</label>
+                    <input type="email" id="email_comprador" placeholder="Ej: jorgito@gmail.com" required
+                           class="w-full bg-black border border-purple-500/40 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:border-purple-500">
+                </div>
+             
                 <div>
                     <label class="block text-sm uppercase tracking-widest text-purple-400 mb-2">Ocasión / Motivo</label>
-                    <input type="text" id="ocasion" placeholder="Ej: Cumpleaños, Aniversario, Evento, etc." required
+                    <input type="text" id="ocasion" placeholder="Ej: Cumpleaños o el funeral de tu suegra." required
                            class="w-full bg-black border border-purple-500/40 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:border-purple-500">
                 </div>
-              
+             
                 <div>
                     <label class="block text-sm uppercase tracking-widest text-purple-400 mb-2">Mensaje personalizado (lo que querés que diga)</label>
                     <textarea id="mensaje" rows="4" placeholder="Ej: ¡Feliz cumpleaños hermano! Que la pases bomba..." required
                               class="w-full bg-black border border-purple-500/40 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:border-purple-500 resize-y"></textarea>
                 </div>
             </form>
-          
+         
             <!-- Botón de Pago -->
             <div class="text-center">
                 <button onclick="enviarPedidoYRedirigir()"
@@ -256,8 +264,8 @@
                     <i class="fas fa-credit-card text-3xl"></i>
                     <span>PAGAR CON MERCADO PAGO</span>
                 </button>
-              
-                <p class="text-purple-400 text-sm mt-4">Una vez que pagues, te contacto para confirmar los datos y grabar tu saludo.</p>
+             
+                <p class="text-purple-400 text-sm mt-4">Una vez que pagues, te mando el saludo en menos de 24hs.</p>
             </div>
         </div>
     </div>
@@ -374,11 +382,12 @@
             btn.disabled = true;
         }
 
-        const templateParams = {
-            nombre_persona: document.getElementById('nombre_persona').value,
-            ocasion: document.getElementById('ocasion').value,
-            mensaje: document.getElementById('mensaje').value
-        };
+	const templateParams = {
+   	 nombre_paga: document.getElementById('nombre_paga').value,
+    	email_comprador: document.getElementById('email_comprador').value,
+    	ocasion: document.getElementById('ocasion').value,
+    	mensaje: document.getElementById('mensaje').value
+	};
 
         emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
             .then(function() {
