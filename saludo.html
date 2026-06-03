@@ -177,26 +177,51 @@
     </div>
 </header>
 
-<!-- VIDEO EJEMPLO -->
+<!-- VIDEO EJEMPLO + CHISTE -->
 <section class="py-12 bg-black">
-    <div class="max-w-4xl mx-auto px-6">
-        <h2 class="text-center text-3xl font-bold mb-8">Mirá un ejemplo</h2>
-     
-        <div class="flex justify-center">
-            <div class="relative w-full max-w-[320px] sm:max-w-[360px] mx-auto rounded-3xl overflow-hidden border border-purple-500/40 shadow-2xl">
-                <video
-                    controls
-                    preload="metadata"
-                    playsinline
-                    class="w-full aspect-[9/16] bg-black object-cover"
-                    poster="assets/SALUDOTEST(Luegoborrar).jpg">
-                    <source src="assets/SALUDOTEST(Luegoborrar).mp4" type="video/mp4">
-                    Tu navegador no soporta el video.
-                </video>
+    <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-center text-3xl font-bold mb-10">Mirá un ejemplo</h2>
+       
+        <div class="grid md:grid-cols-2 gap-10 md:gap-12 items-center">
+           
+            <!-- LADO IZQUIERDO: Chiste + Imagen Horizontal -->
+            <div class="order-2 md:order-1 text-center md:text-left">
+                <div class="mb-6">
+                    <p class="text-2xl md:text-3xl font-bold text-purple-200 leading-tight">
+                        Pedirme un saludo personalizado<br>
+                        es básicamente...
+                    </p>
+                    <p class="text-3xl md:text-4xl font-bold text-purple-400 mt-3">
+                        Ponerme a agarrar la pala
+                    </p>
+                </div>
+               
+                <!-- IMAGEN HORIZONTAL -->
+                <div class="mx-auto md:mx-0 max-w-[340px] rounded-3xl overflow-hidden border border-purple-500/40 shadow-xl">
+                    <img src="assets/agarrelapala.jpg" 
+                         alt="Pedirme un saludo personalizado es básicamente ponerme a agarrar la pala"
+                         class="w-full aspect-[16/9] object-cover">
+                </div>
             </div>
+            
+            <!-- LADO DERECHO: VIDEO -->
+            <div class="order-1 md:order-2">
+                <div class="relative w-full max-w-[320px] mx-auto md:mx-0 rounded-3xl overflow-hidden border border-purple-500/40 shadow-2xl">
+                    <video
+                        controls
+                        preload="metadata"
+                        playsinline
+                        class="w-full aspect-[9/16] bg-black object-cover"
+                        poster="assets/SALUDOTEST(Luegoborrar).jpg">
+                        <source src="assets/SALUDOTEST(Luegoborrar).mp4" type="video/mp4">
+                        Tu navegador no soporta el video.
+                    </video>
+                </div>
+                
+                <p class="text-center text-purple-400 text-sm mt-6">* Este es un ejemplo. El tuyo lo grabo especialmente para vos.</p>
+            </div>
+            
         </div>
-      
-        <p class="text-center text-purple-400 text-sm mt-6">* Este es un ejemplo. El tuyo lo grabo especialmente para vos.</p>
     </div>
 </section>
 
@@ -212,7 +237,7 @@
                     <span class="text-4xl font-bold text-purple-400">1</span>
                 </div>
                 <h3 class="text-2xl font-bold mb-3">Completás los datos</h3>
-                <p class="text-purple-200">Nombre de la persona, ocasión (cumpleaños, evento, etc.) y el mensaje que querés que diga.</p>
+                <p class="text-purple-200">Tu nombre, tu mail, la ocasión (cumpleaños, evento, etc.) y el mensaje que querés que diga o para quién.</p>
             </div>
           
             <!-- Paso 2 -->
