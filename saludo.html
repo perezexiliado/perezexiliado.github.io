@@ -276,19 +276,17 @@
                 </div>
             </form>
         
-            <!-- Botón de Pago -->
-            <div class="text-center">
-                <button onclick="enviarPedidoYRedirigir()"
-                        class="inline-flex items-center justify-center gap-4 w-full sm:w-auto bg-[#00b894] hover:bg-[#00a080] text-white text-xl font-bold px-8 sm:px-14 py-6 rounded-3xl transition-all hover:scale-[1.02] shadow-lg cursor-pointer">
-                    <i class="fas fa-credit-card text-3xl"></i>
-                    <span>PAGAR CON MERCADO PAGO</span>
-                </button>
-            
-                <p class="text-purple-400 text-sm mt-4">Una vez que pagues, te mando el saludo en menos de 24hs.</p>
-            </div>
-        </div>
-    </div>
-</section>
+<!-- Botón de Pago -->
+<div class="text-center">
+    <button id="btnPagar"
+            onclick="enviarPedidoYRedirigir()"
+            class="inline-flex items-center justify-center gap-4 w-full sm:w-auto bg-[#00b894] hover:bg-[#00a080] text-white text-xl font-bold px-8 sm:px-14 py-6 rounded-3xl transition-all hover:scale-[1.02] shadow-lg cursor-pointer">
+        <i class="fas fa-credit-card text-3xl"></i>
+        <span>PAGAR CON MERCADO PAGO</span>
+    </button>
+
+    <p class="text-purple-400 text-sm mt-4">Una vez que pagues, te mando el saludo en menos de 24hs.</p>
+</div>
 
 <!-- FOOTER -->
 <footer class="bg-black py-8 sm:py-10 border-t border-purple-900">
@@ -310,24 +308,20 @@
     const EMAILJS_PUBLIC_KEY = "KMYGAyGuz9uYee6ci";
     const EMAILJS_SERVICE_ID = "service_0cvl5ce";
     const EMAILJS_TEMPLATE_ID = "template_do0vu6p";
-
     emailjs.init(EMAILJS_PUBLIC_KEY);
 
     function enviarPedidoYRedirigir() {
         const form = document.getElementById('saludoForm');
-       
+        const btn = document.getElementById('btnPagar');
+
         if (!form.checkValidity()) {
             form.reportValidity();
             return;
         }
 
-        const btn = event.currentTarget;
-        const originalText = btn ? btn.innerHTML : '';
-       
-        if (btn) {
-            btn.innerHTML = `<i class="fas fa-spinner fa-spin text-3xl"></i> <span>ENVIANDO...</span>`;
-            btn.disabled = true;
-        }
+        const originalText = btn.innerHTML;
+        btn.innerHTML = `<i class="fas fa-spinner fa-spin text-3xl"></i> <span>ENVIANDO...</span>`;
+        btn.disabled = true;
 
         const templateParams = {
             nombre_paga: document.getElementById('nombre_paga').value,
@@ -338,22 +332,30 @@
 
         emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
             .then(function() {
-                window.open('https://mpago.li/2LSbVrv', '_blank');
-                alert('✅ ¡Perfecto! Recibí tu pedido por mail. Ahora completá el pago en la ventana que se abrió.');
-                form.reset();
-               
-                if (btn) {
-                    btn.innerHTML = originalText;
-                    btn.disabled = false;
+                // === REDIRECCIÓN MEJORADA ===
+                const linkPago = 'https://mpago.li/2LSbVrv';
+                const esMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+                if (esMobile) {
+                    // En celular: mejor para que intente abrir la app de Mercado Pago
+                    window.location.href = linkPago;
+                } else {
+                    // En computadora: abre en pestaña nueva
+                    window.open(linkPago, '_blank');
                 }
-            }, function(error) {
+
+                alert('✅ ¡Perfecto! Recibí tu pedido por mail. Ahora completá el pago.');
+                form.reset();
+
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            })
+            .catch(function(error) {
                 console.error('Error al enviar:', error);
                 alert('Hubo un problema al enviar el pedido. Por favor intentá de nuevo o escribime por Instagram.');
-               
-                if (btn) {
-                    btn.innerHTML = originalText;
-                    btn.disabled = false;
-                }
+
+                btn.innerHTML = originalText;
+                btn.disabled = false;
             });
     }
 </script>
