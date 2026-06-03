@@ -245,22 +245,28 @@
         <p class="text-center mt-12 sm:mt-16 text-purple-400 text-xs sm:text-sm uppercase tracking-[2px] sm:tracking-widest px-4">
             ¿Querés que tu marca sea la próxima? Hablemos.
         </p>
-<!-- BOTÓN DE CONTACTO MEJORADO -->
-<div class="flex justify-center mt-6 sm:mt-8">
-    <a href="mailto:perezexiliadomkt@gmail.com?subject=Quiero%20que%20mi%20marca%20colabore%20con%20Exiliado"
-       onclick="if (!/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
-           window.open('https://mail.google.com/mail/?view=cm&fs=1&to=perezexiliadomkt@gmail.com&su=Quiero%20que%20mi%20marca%20colabore%20con%20Exiliado', '_blank');
-           return false;
-       }"
-       class="group inline-flex items-center justify-center gap-3 px-8 sm:px-12 py-4 rounded-3xl border border-purple-500/40 bg-black/50 hover:bg-purple-950/50 hover:border-purple-400 hover:scale-[1.02] active:scale-[0.985] transition-all duration-300 text-purple-300 hover:text-purple-100 font-semibold tracking-[2px] sm:tracking-[3px] text-xs sm:text-sm uppercase">
+
+<!-- CONTACTO -->
+<section class="py-16 sm:py-20 pb-24 sm:pb-28 bg-zinc-950">
+    <div class="max-w-2xl mx-auto px-5 text-center mb-12 sm:mb-16">
        
-        <!-- Icono de mail -->
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition-transform group-hover:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2.01 2.01 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-        </svg>
-        HABLEMOS
-    </a>
-</div>
+        <h2 class="text-3xl sm:text-4xl font-bold text-white mb-3">Trabajemos juntos</h2>
+        <p class="text-purple-300 mb-8 text-lg">Hablemos de un reel, collab, o lo que sea. Te respondo rápido.</p>
+       
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=perezexiliadomkt@gmail.com"
+           onclick="if (window.innerWidth < 768) { window.location.href='mailto:perezexiliadomkt@gmail.com'; return false; }"
+           target="_blank"
+           class="inline-flex items-center justify-center gap-3 px-10 py-4 bg-purple-600 hover:bg-purple-500 active:bg-purple-700 text-white font-bold text-xl rounded-2xl transition-all duration-200 active:scale-[0.985] shadow-lg shadow-purple-900/50 group">
+           
+            <!-- Icono de mail -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 transition-transform group-hover:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2.01 2.01 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            CONTACTAME
+        </a>
+       
+        <p class="text-purple-400 text-sm mt-4">perezexiliadomkt@gmail.com</p>
+    </div>
 </section>
 
 <!-- FOOTER -->
