@@ -97,7 +97,7 @@
             </button>
 
             <!-- Hamburger -->
-            <button id="menu-btn" class="md:hidden text-2xl px-2 focus:outline-none">
+            <button id="menu-btn" onclick="toggleMobileMenu()" class="md:hidden text-2xl px-2 focus:outline-none">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
@@ -554,6 +554,43 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+</script>
+
+<script>
+    // === MENÚ HAMBURGUESA (CELULAR) ===
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('hidden');
+    }
+
+    // === MODAL DE CONTACTO ===
+    function showContactModal() {
+        const modal = document.getElementById('contactModal');
+        if (modal) modal.classList.remove('hidden');
+    }
+
+    function hideContactModal() {
+        const modal = document.getElementById('contactModal');
+        if (modal) modal.classList.add('hidden');
+    }
+
+    // === COPIAR EMAIL ===
+    function copyEmail() {
+        const email = "perezexiliadomkt@gmail.com";
+        navigator.clipboard.writeText(email).then(() => {
+            const originalText = event.currentTarget.innerHTML;
+            const btn = event.currentTarget;
+            
+            btn.innerHTML = `<i class="fas fa-check text-green-400"></i> <span class="text-green-400">¡Copiado!</span>`;
+            
+            setTimeout(() => {
+                if (btn) btn.innerHTML = originalText;
+            }, 1500);
+        }).catch(() => {
+            // Fallback si no funciona el clipboard
+            prompt("Copiá este mail:", email);
+        });
+    }
 </script>
 
 </body>
