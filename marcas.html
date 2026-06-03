@@ -67,53 +67,39 @@
 <!-- NAVBAR -->
 <nav class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-purple-500">
     <div class="max-w-7xl mx-auto px-4 md:px-5 py-3 md:py-4 flex items-center justify-between">
-      
-        <!-- Logo -->
         <div class="flex items-center gap-2 md:gap-3">
             <div class="w-8 h-8 md:w-9 md:h-9 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center overflow-hidden border border-purple-400/30">
                 <img src="assets/logoaizq.jpg" alt="Exiliado Logo" class="w-8 h-8 md:w-9 md:h-9 object-contain">
             </div>
             <h1 class="text-lg md:text-xl font-bold tracking-widest glitch">EXILIADO</h1>
         </div>
-
-        <!-- Desktop Menu -->
         <div class="hidden md:flex items-center gap-6 text-sm uppercase">
             <a href="index.html" class="hover:text-purple-400">INICIO</a>
             <a href="marcas.html" class="text-purple-400 border-b-2 border-purple-400">MARCAS</a>
             <a href="saludo.html" class="hover:text-purple-400">SALUDOS</a>
             <a href="cursos.html" class="hover:text-purple-400">CURSOS</a>
         </div>
-
-        <!-- Right Side -->
         <div class="flex items-center gap-2 md:gap-3">
-          
-            <!-- Social Icons -->
             <div class="hidden sm:flex items-center gap-3 md:gap-4 text-xl">
                 <a href="https://www.tiktok.com/@perezexiliado" target="_blank" class="hover:scale-110"><i class="fab fa-tiktok"></i></a>
                 <a href="https://www.instagram.com/martinpemiliano" target="_blank" class="hover:scale-110"><i class="fab fa-instagram"></i></a>
                 <a href="https://www.youtube.com/@perezexiliado" target="_blank" class="hover:scale-110"><i class="fab fa-youtube"></i></a>
             </div>
-
-            <!-- Contact Button -->
             <button onclick="showContactModal()"
                     class="bg-purple-600 hover:bg-purple-500 px-4 md:px-5 py-1.5 md:py-2 text-xs md:text-sm font-bold rounded-xl flex items-center gap-2 transition-all active:scale-95">
                 <span>CONTACTO</span>
             </button>
-
-            <!-- Hamburger -->
             <button id="menu-btn" class="md:hidden text-2xl px-2 focus:outline-none">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
     </div>
-
-    <!-- Mobile Menu (agregué la clase hidden) -->
     <div id="mobile-menu" class="hidden md:hidden bg-[#0a0012] border-t border-purple-700">
         <div class="flex flex-col px-5 py-1 text-sm uppercase">
-            <a href="index.html" class="py-3">INICIO</a>
-            <a href="marcas.html" class="py-3 border-b border-purple-900/40">MARCAS</a>
-            <a href="saludo.html" class="py-3">SALUDOS</a>
-            <a href="cursos.html" class="py-3">CURSOS</a>
+            <a href="index.html" class="py-3 hover:text-purple-400">INICIO</a>
+            <a href="marcas.html" class="py-3 text-purple-400 border-b-2 border-purple-400">MARCAS</a>
+            <a href="saludo.html" class="py-3 hover:text-purple-400">SALUDO</a>
+            <a href="cursos.html" class="py-3 hover:text-purple-400">CURSOS</a>
         </div>
     </div>
 </nav>
