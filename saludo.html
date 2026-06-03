@@ -195,8 +195,8 @@
                         preload="metadata"
                         playsinline
                         class="w-full aspect-[9/16] bg-black object-cover"
-                        poster="assets/SALUDOTEST(Luegoborrar).jpg">
-                        <source src="assets/SALUDOTEST(Luegoborrar).mp4" type="video/mp4">
+                        poster="assets/saludopreview.png">
+                        <source src="assets/saludovideo.mov" type="video/mp4">
                         Tu navegador no soporta el video.
                     </video>
                 </div>      
@@ -224,7 +224,7 @@
                 <div class="w-16 h-16 mx-auto mb-6 bg-purple-600/20 rounded-2xl flex items-center justify-center">
                     <span class="text-4xl font-bold text-purple-400">2</span>
                 </div>
-                <h3 class="text-2xl font-bold mb-3">Pagás con Mercado Pago</h3>
+                <h3 class="text-2xl font-bold mb-3">Pagás con Mercado Pago o PayPal</h3>
                 <p class="text-purple-200">Hacés el pago de forma segura. Una vez acreditado, me pongo a laburar.</p>
             </div>
           
@@ -234,7 +234,7 @@
                     <span class="text-4xl font-bold text-purple-400">3</span>
                 </div>
                 <h3 class="text-2xl font-bold mb-3">Recibís tu video</h3>
-                <p class="text-purple-200">En 24-48 horas te envío el saludo personalizado por Instagram o mail.</p>
+                <p class="text-purple-200">En menos de 24 horas te envío el saludo personalizado por mail.</p>
             </div>
         </div>
     </div>
@@ -276,17 +276,20 @@
                 </div>
             </form>
         
-<!-- Botón de Pago -->
-<div class="text-center">
-    <button id="btnPagar"
-            onclick="enviarPedidoYRedirigir()"
-            class="inline-flex items-center justify-center gap-4 w-full sm:w-auto bg-[#009EE3] hover:bg-[#0088CC] text-white text-xl font-bold px-8 sm:px-14 py-6 rounded-3xl transition-all hover:scale-[1.02] shadow-lg cursor-pointer">
-        <i class="fas fa-credit-card text-3xl"></i>
-        <span>MERCADOPAGO</span>
-    </button>
+            <!-- Botón de Pago -->
+            <div class="text-center">
+                <button id="btnPagar"
+                        onclick="enviarPedidoYRedirigir()"
+                        class="inline-flex items-center justify-center gap-4 w-full sm:w-auto bg-[#009EE3] hover:bg-[#0088CC] text-white text-xl font-bold px-8 sm:px-14 py-6 rounded-3xl transition-all hover:scale-[1.02] shadow-lg cursor-pointer">
+                    <i class="fas fa-credit-card text-3xl"></i>
+                    <span>MERCADOPAGO</span>
+                </button>
 
-    <p class="text-purple-400 text-sm mt-4">Una vez que pagues, te mando el saludo en menos de 24hs.</p>
-</div>
+                <p class="text-purple-400 text-sm mt-4">Una vez que pagues, te mando el saludo en menos de 24hs.</p>
+            </div>
+
+        </div>      <!-- Cierra el contenedor del formulario -->
+    </section>      <!-- Cierra la sección completa -->
 
     <!-- FOOTER -->
     <footer class="bg-black py-8 sm:py-10 border-t border-purple-900">
