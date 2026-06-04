@@ -341,10 +341,10 @@
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
-    // === CONFIGURACIÓN EMAILJS ===
     const EMAILJS_PUBLIC_KEY = "KMYGAyGuz9uYee6ci";
     const EMAILJS_SERVICE_ID = "service_0cvl5ce";
     const EMAILJS_TEMPLATE_ID = "template_do0vu6p";
+
     emailjs.init(EMAILJS_PUBLIC_KEY);
 
     function enviarPedidoYRedirigir() {
@@ -369,28 +369,24 @@
 
         emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
             .then(function() {
-                // === REDIRECCIÓN MEJORADA ===
                 const linkPago = 'https://mpago.li/2LSbVrv';
                 const esMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
                 if (esMobile) {
-                    // En celular: mejor para que intente abrir la app de Mercado Pago
                     window.location.href = linkPago;
                 } else {
-                    // En computadora: abre en pestaña nueva
                     window.open(linkPago, '_blank');
                 }
 
-                alert('✅ Se te redirigirá a mercadopago (web o app). Ahora completá el pago.');
+                // Resetear formulario y botón (por si la redirección tarda)
                 form.reset();
-
                 btn.innerHTML = originalText;
                 btn.disabled = false;
+
             })
             .catch(function(error) {
                 console.error('Error al enviar:', error);
                 alert('Hubo un problema al enviar el pedido. Por favor intentá de nuevo o escribime por Instagram.');
-
                 btn.innerHTML = originalText;
                 btn.disabled = false;
             });
