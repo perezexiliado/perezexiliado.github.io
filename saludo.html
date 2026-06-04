@@ -60,11 +60,10 @@
 </head>
 <body class="bg-[#0f001a] text-white overflow-x-hidden">
 
-<!-- NAVBAR -->
+<!-- BARRA DE NAVEGACIÓN -->
 <nav class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-purple-500">
     <div class="max-w-7xl mx-auto px-4 md:px-5 py-3 md:py-4 flex items-center justify-between">
        
-        <!-- Logo -->
         <div class="flex items-center gap-2 md:gap-3">
             <div class="w-8 h-8 md:w-9 md:h-9 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center overflow-hidden border border-purple-400/30">
                 <img src="assets/logoaizq.jpg" alt="Exiliado Logo" class="w-8 h-8 md:w-9 md:h-9 object-contain">
@@ -72,7 +71,6 @@
             <h1 class="text-lg md:text-xl font-bold tracking-widest glitch">EXILIADO</h1>
         </div>
 
-        <!-- Desktop Menu -->
         <div class="hidden md:flex items-center gap-6 text-sm uppercase">
             <a href="index.html" class="hover:text-purple-400">INICIO</a>
             <a href="marcas.html" class="hover:text-purple-400">MARCAS</a>
@@ -80,30 +78,25 @@
             <a href="cursos.html" class="hover:text-purple-400">CURSOS</a>
         </div>
 
-        <!-- Right Side -->
         <div class="flex items-center gap-2 md:gap-3">
            
-            <!-- Social Icons -->
             <div class="hidden sm:flex items-center gap-3 md:gap-4 text-xl">
                 <a href="https://www.tiktok.com/@perezexiliado" target="_blank" class="hover:scale-110"><i class="fab fa-tiktok"></i></a>
                 <a href="https://www.instagram.com/martinpemiliano" target="_blank" class="hover:scale-110"><i class="fab fa-instagram"></i></a>
                 <a href="https://www.youtube.com/@perezexiliado" target="_blank" class="hover:scale-110"><i class="fab fa-youtube"></i></a>
             </div>
 
-            <!-- Contact Button -->
             <button onclick="showContactModal()" 
                     class="bg-purple-600 hover:bg-purple-500 px-4 md:px-5 py-1.5 md:py-2 text-xs md:text-sm font-bold rounded-xl flex items-center gap-2 transition-all active:scale-95">
                 <span>CONTACTO</span>
             </button>
 
-            <!-- Hamburger -->
             <button id="menu-btn" onclick="toggleMobileMenu()" class="md:hidden text-2xl px-2 focus:outline-none">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
     </div>
 
-    <!-- Mobile Menu (CORREGIDO) -->
     <div id="mobile-menu" class="hidden md:hidden bg-[#0a0012] border-t border-purple-700">
         <div class="flex flex-col px-5 py-1 text-sm uppercase">
             <a href="index.html" class="py-3 hover:text-purple-400">INICIO</a>
@@ -114,7 +107,7 @@
     </div>
 </nav>
 
-<!-- MODAL DE CONTACTO -->
+<!-- BOTON DE CONTACTO -->
 <div id="contactModal" class="hidden fixed inset-0 z-[9999] flex items-center justify-center">
     <div onclick="if(event.target === this) hideContactModal()" class="absolute inset-0 bg-black/70 backdrop-blur-xl"></div>
   
@@ -134,7 +127,6 @@
         <h2 class="text-4xl font-bold tracking-widest glitch mb-2">EXILIADO</h2>
         <p class="text-purple-300 text-lg mb-8">Mi mail oficial</p>
       
-        <!-- EMAIL MEJORADO -->
         <div onclick="copyEmail()" 
              class="group cursor-pointer bg-zinc-900 hover:bg-zinc-800 border border-purple-500/50 hover:border-purple-400 rounded-2xl p-4 sm:p-5 mb-8 transition-all flex items-center justify-center gap-3">
             
@@ -149,7 +141,7 @@
     </div>
 </div>
 
-<!-- HEADER -->
+<!-- CABEZAL -->
 <header class="pt-16 sm:pt-20 pb-10 sm:pb-12 bg-gradient-to-b from-[#0f001a] to-[#150022]">
     <div class="max-w-5xl mx-auto px-6 text-center">
         <div class="inline-block px-5 py-1.5 bg-purple-600/20 text-purple-400 text-sm tracking-[3px] rounded-full mb-6 border border-purple-500/30">
@@ -174,7 +166,6 @@
             Te grabo un saludo personalizado diciendo lo que quieras.
         </p>
 
-        <!-- BOTÓN CTA PRINCIPAL (movido adentro y ajustado) -->
         <div class="mt-8 flex justify-center">
             <a href="#formulario-pago"
                class="group inline-flex items-center justify-center
@@ -194,14 +185,12 @@
     </div>
 </header>
 
-<!-- VIDEO EJEMPLO + CHISTE -->
 <section class="py-12 bg-black">
     <div class="max-w-6xl mx-auto px-6">
         <h2 class="text-center text-3xl font-bold mb-10">Mirá un ejemplo</h2>
        
         <div class="grid md:grid-cols-2 gap-10 md:gap-12 items-center">
            
-            <!-- LADO IZQUIERDO: Chiste + Imagen Horizontal -->
             <div class="order-2 md:order-1 text-center md:text-left">
                 <div class="mb-6">
                     <p class="text-2xl md:text-3xl font-bold text-purple-200 leading-tight">
@@ -213,7 +202,6 @@
                     </p>
                 </div>
                
-                <!-- IMAGEN HORIZONTAL -->
                 <div class="mx-auto md:mx-0 max-w-[340px] rounded-3xl overflow-hidden border border-purple-500/40 shadow-xl">
                     <img src="assets/agarrelapala.jpg" 
                          alt="Pedirme un saludo personalizado es básicamente ponerme a agarrar la pala"
@@ -221,7 +209,6 @@
                 </div>
             </div>
             
-            <!-- LADO DERECHO: VIDEO -->
             <div class="order-1 md:order-2">
                 <div class="relative w-full max-w-[320px] mx-auto md:mx-0 rounded-3xl overflow-hidden border border-purple-500/40 shadow-2xl">
                     <video
@@ -238,13 +225,11 @@
     </div>
 </section>
 
-<!-- CÓMO FUNCIONA -->
 <section class="py-16 bg-[#150022]">
     <div class="max-w-6xl mx-auto px-6">
         <h2 class="text-center text-4xl font-bold mb-12">¿Cómo funciona?</h2>
       
         <div class="grid md:grid-cols-3 gap-8">
-            <!-- Paso 1 -->
             <div class="saludo-card bg-[#1f0033] border border-purple-500/50 rounded-3xl p-8 text-center">
                 <div class="w-16 h-16 mx-auto mb-6 bg-purple-600/20 rounded-2xl flex items-center justify-center">
                     <span class="text-4xl font-bold text-purple-400">1</span>
@@ -253,7 +238,6 @@
                 <p class="text-purple-200">Tu nombre, tu mail, la ocasión (cumpleaños, evento, etc.) y el mensaje que querés que diga o para quién.</p>
             </div>
           
-            <!-- Paso 2 -->
             <div class="saludo-card bg-[#1f0033] border border-purple-500/50 rounded-3xl p-8 text-center">
                 <div class="w-16 h-16 mx-auto mb-6 bg-purple-600/20 rounded-2xl flex items-center justify-center">
                     <span class="text-4xl font-bold text-purple-400">2</span>
@@ -262,7 +246,6 @@
                 <p class="text-purple-200">Hacés el pago de forma segura. Una vez acreditado, me pongo a laburar.</p>
             </div>
           
-            <!-- Paso 3 -->
             <div class="saludo-card bg-[#1f0033] border border-purple-500/50 rounded-3xl p-8 text-center">
                 <div class="w-16 h-16 mx-auto mb-6 bg-purple-600/20 rounded-2xl flex items-center justify-center">
                     <span class="text-4xl font-bold text-purple-400">3</span>
@@ -274,17 +257,14 @@
     </div>
 </section>
 
-<!-- FORMULARIO + BOTÓN DE PAGO -->
 <section id="formulario-pago" class="...">
 <section class="py-16 bg-black">
     <div class="max-w-3xl mx-auto px-6">
         <div class="bg-[#150022] border border-purple-500/40 rounded-3xl p-6 sm:p-10">
             <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8">Pedí tu saludo ahora</h2>
         
-            <!-- Formulario -->
             <form id="saludoForm" class="space-y-5 sm:space-y-6 mb-8">
                
-                <!-- Nombre del comprador -->
                 <div>
                     <label class="block text-sm uppercase tracking-widest text-purple-400 mb-2">Nombre del comprador (tu nombre)</label>
                     <input type="text" id="nombre_paga" placeholder="Como figura en tu Mercado Pago" required
@@ -310,7 +290,6 @@
                 </div>
             </form>
         
-            <!-- Botón de Pago -->
             <div class="text-center">
                 <button id="btnPagar"
                         onclick="enviarPedidoYRedirigir()"
@@ -325,7 +304,7 @@
         </div>   
     </section>     
 
-    <!-- FOOTER -->
+    <!-- PIE DE PÁGINA -->
     <footer class="bg-black py-8 sm:py-10 border-t border-purple-900">
         <div class="max-w-6xl mx-auto px-5 sm:px-6 flex flex-col md:flex-row items-center justify-center md:justify-between text-sm gap-y-3 md:gap-4 text-center md:text-left">
             <p class="text-purple-200">© 2026 PÉREZ EXILIADO • HECHO CON MUCHO HUMOR Y AMOR</p>
@@ -338,7 +317,7 @@
         </div>
     </footer>
 
-<!-- Scripts -->
+<!-- Scripts que hago -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
     const EMAILJS_PUBLIC_KEY = "KMYGAyGuz9uYee6ci";
@@ -393,7 +372,6 @@
     }
 </script>
 
-<!-- Menú Hamburguesa Móvil - Versión Mejorada -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const menuBtn = document.getElementById('menu-btn');
@@ -405,7 +383,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
-    // Toggle del menú
     menuBtn.addEventListener('click', function(e) {
         e.preventDefault();
         
@@ -422,7 +399,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Cerrar menú al hacer clic en cualquier link
     const mobileLinks = mobileMenu.querySelectorAll('a');
     mobileLinks.forEach(link => {
         link.addEventListener('click', function() {
@@ -438,11 +414,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<!-- ============================================= -->
-<!-- SCRIPTS NECESARIOS (Contacto + Menú Móvil)   -->
-<!-- ============================================= -->
+<!-- SCRIPTS PARA EL CELULAR -->
 <script>
-    // === MODAL DE CONTACTO ===
     function showContactModal() {
         const modal = document.getElementById('contactModal');
         if (modal) {
@@ -476,7 +449,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Cerrar modal con tecla ESC
     document.addEventListener('keydown', function(e) {
         if (e.key === "Escape") {
             const modal = document.getElementById('contactModal');
@@ -486,7 +458,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // === MENÚ HAMBURGUESA MÓVIL ===
     document.addEventListener('DOMContentLoaded', function() {
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -508,7 +479,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
-            // Cerrar menú al hacer clic en un link
             const links = mobileMenu.querySelectorAll('a');
             links.forEach(link => {
                 link.addEventListener('click', () => {
@@ -538,7 +508,6 @@ function toggleMobileMenu() {
     }
 }
 
-// Cierra el menú al tocar cualquier link (mejor experiencia)
 document.addEventListener('DOMContentLoaded', () => {
     const links = document.querySelectorAll('#mobile-menu a');
     links.forEach(link => {
@@ -553,13 +522,11 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script>
-    // === MENÚ HAMBURGUESA (CELULAR) ===
     function toggleMobileMenu() {
         const menu = document.getElementById('mobile-menu');
         menu.classList.toggle('hidden');
     }
 
-    // === MODAL DE CONTACTO ===
     function showContactModal() {
         const modal = document.getElementById('contactModal');
         if (modal) modal.classList.remove('hidden');
@@ -570,7 +537,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (modal) modal.classList.add('hidden');
     }
 
-    // === COPIAR EMAIL ===
     function copyEmail() {
         const email = "perezexiliadomkt@gmail.com";
         navigator.clipboard.writeText(email).then(() => {
