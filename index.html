@@ -76,15 +76,12 @@
             transform: translateY(-8px) scale(1.03);
             box-shadow: 0 0 30px -5px currentColor;
         }
-
-        /* Mobile Menu */
         #mobile-menu { display: none; }
         #mobile-menu.show { display: block; }
     </style>
 </head>
 <body class="bg-[#0f001a] text-white overflow-x-hidden">
 
-<!-- NAVBAR -->
 <nav class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-purple-500">
     <div class="max-w-7xl mx-auto px-4 md:px-5 py-3 md:py-4 flex items-center justify-between">
        
@@ -96,38 +93,32 @@
             <h1 class="text-lg md:text-xl font-bold tracking-widest glitch">EXILIADO</h1>
         </div>
 
-        <!-- Desktop Menu -->
         <div class="hidden md:flex items-center gap-6 text-sm uppercase">
-            <a href="/inicio/index.html" class="text-purple-400 border-b-2 border-purple-400">INICIO</a>
+            <a href="index.html" class="text-purple-400 border-b-2 border-purple-400">INICIO</a>
             <a href="marcas.html" class="hover:text-purple-400">MARCAS</a>
             <a href="saludo.html" class="hover:text-purple-400">SALUDOS</a>
             <a href="cursos.html" class="hover:text-purple-400">CURSOS</a>
         </div>
 
-        <!-- Right Side -->
         <div class="flex items-center gap-2 md:gap-3">
            
-            <!-- Social Icons -->
             <div class="hidden sm:flex items-center gap-3 md:gap-4 text-xl">
                 <a href="https://www.tiktok.com/@perezexiliado" target="_blank" class="hover:scale-110"><i class="fab fa-tiktok"></i></a>
                 <a href="https://www.instagram.com/martinpemiliano" target="_blank" class="hover:scale-110"><i class="fab fa-instagram"></i></a>
                 <a href="https://www.youtube.com/@perezexiliado" target="_blank" class="hover:scale-110"><i class="fab fa-youtube"></i></a>
             </div>
 
-            <!-- Contact Button -->
             <button onclick="showContactModal()" 
                     class="bg-purple-600 hover:bg-purple-500 px-4 md:px-5 py-1.5 md:py-2 text-xs md:text-sm font-bold rounded-xl flex items-center gap-2 transition-all active:scale-95">
                 <span>CONTACTO</span>
             </button>
 
-            <!-- Hamburger -->
             <button id="menu-btn" class="md:hidden text-2xl px-2 focus:outline-none">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
     </div>
 
-    <!-- Mobile Menu (CORREGIDO) -->
     <div id="mobile-menu" class="hidden md:hidden bg-[#0a0012] border-t border-purple-700">
         <div class="flex flex-col px-5 py-1 text-sm uppercase">
             <a href="index.html" class="py-3 text-purple-400 border-b-2 border-purple-400">INICIO</a>
@@ -138,7 +129,6 @@
     </div>
 </nav>
 
-<!-- MODAL DE CONTACTO -->
 <div id="contactModal" class="hidden fixed inset-0 z-[9999] flex items-center justify-center">
     <div onclick="if(event.target === this) hideContactModal()" class="absolute inset-0 bg-black/70 backdrop-blur-xl"></div>
   
@@ -158,7 +148,6 @@
         <h2 class="text-4xl font-bold tracking-widest glitch mb-2">EXILIADO</h2>
         <p class="text-purple-300 text-lg mb-8">Mi mail oficial</p>
       
-        <!-- EMAIL MEJORADO -->
         <div onclick="copyEmail()" 
              class="group cursor-pointer bg-zinc-900 hover:bg-zinc-800 border border-purple-500/50 hover:border-purple-400 rounded-2xl p-4 sm:p-5 mb-8 transition-all flex items-center justify-center gap-3">
             
@@ -173,7 +162,6 @@
     </div>
 </div>
 
-<!-- HERO - Mejorado para móvil -->
 <header class="relative h-screen flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0 bg-cover bg-center bg-no-repeat z-[-1] blur-sm scale-110 brightness-75" style="background-image: url('assets/fondito.jpg');"></div>
    
@@ -185,27 +173,22 @@
    
     <div class="relative z-20 text-center px-5 max-w-5xl mx-auto pt-10">
         
-        <!-- Badge -->
         <div class="mb-6">
             <span class="inline-block px-5 py-1.5 bg-purple-600/80 text-xs tracking-[3px] rounded-full">
                 ESTOY EXILIADO... PERO EN INTERNET
             </span>
         </div>
    
-        <!-- Título principal -->
         <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold glitch mb-3 tracking-widest neon-text leading-none">
             EXILIADO
         </h1>
         
-        <!-- Subtítulo -->
         <p class="text-xl sm:text-2xl md:text-3xl text-purple-300 mb-6">HUMOR EN VIDEOS</p>
    
-        <!-- Descripción -->
         <p class="text-lg sm:text-xl md:text-2xl font-bold text-white mb-8 max-w-xl mx-auto">
             +7 años haciéndote reír
         </p>
    
-        <!-- Botones -->
         <div class="flex flex-wrap justify-center gap-3">
             <a href="https://www.tiktok.com/@perezexiliado" target="_blank" 
                class="flex items-center gap-2 bg-[#000] hover:bg-[#ff0050] px-5 py-3 rounded-2xl text-sm font-bold transition-all">
@@ -224,7 +207,6 @@
             </a>
         </div>
    
-        <!-- Scroll indicator -->
         <div class="mt-10 text-xs uppercase tracking-widest flex items-center justify-center gap-2 text-purple-300">
             <div class="h-px w-8 bg-purple-400"></div>
             BAJÁ PARA MÁS
@@ -233,12 +215,10 @@
     </div>
 </header>
 
-<!-- SOBRE MÍ -->
 <section id="sobre" class="py-16 md:py-24 bg-[#150022]">
     <div class="max-w-6xl mx-auto px-6">
         <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
             
-            <!-- Texto izquierdo -->
             <div>
                 <h2 class="text-4xl md:text-5xl font-bold mb-8">¿QUIÉN ES<br>PEREZEXILIADO?</h2>
                 <p class="text-lg md:text-xl leading-relaxed text-purple-200 mb-6">
@@ -267,7 +247,6 @@
                 </div>
             </div>
 
-            <!-- Columna derecha: Recuadro + Botón -->
             <div class="mt-8 md:mt-0">
                 
                 <!-- Recuadro de la frase -->
@@ -283,7 +262,6 @@
     </div>
 </section>
 
-<!-- SALUDO PERSONALIZADO -->
 <section class="py-16 md:py-20 bg-[#150022] relative overflow-hidden">
     
     <!-- Corazones rosas blurreados de fondo -->
@@ -304,7 +282,6 @@
     <div class="max-w-6xl mx-auto px-6 relative z-10">
         <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
            
-            <!-- IMAGEN VERTICAL -->
             <div class="order-1 md:order-none flex justify-center md:justify-start">
                 <div class="aspect-[9/16] w-full max-w-[280px] md:max-w-[320px] rounded-3xl overflow-hidden border border-purple-500/40 shadow-2xl">
                     <img src="assets/filtrogordito.jpg"
@@ -313,7 +290,6 @@
                 </div>
             </div>
 
-            <!-- Texto + Botón -->
             <div class="order-2 md:order-none text-center md:text-left">
                 <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight text-white">
                     ¿Querés un saludo personalizado?
@@ -336,12 +312,10 @@
     </div>
 </section>
 
-<!-- EXPERIENCIA -->
 <section id="experiencia" class="py-16 md:py-24 bg-black">
     <div class="max-w-6xl mx-auto px-6">
         <h2 class="text-4xl md:text-5xl font-bold text-center mb-8">EXPERIENCIA QUE DA MIEDO</h2>
 
-        <!-- BARRA DE EXPERIENCIA / XP -->
         <div class="max-w-2xl mx-auto mb-12 px-2">
             <div class="flex items-center justify-between mb-2.5">
                 <div class="flex items-center gap-2">
@@ -353,19 +327,16 @@
                 </div>
             </div>
 
-            <!-- Barra que se llena -->
             <div class="relative h-6 rounded-full bg-[#120022] border border-purple-600/60 overflow-hidden shadow-inner">
                 <div id="xp-bar-fill"
                      class="h-full bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-500 rounded-full
                             shadow-[0_0_25px_rgb(236,72,153,0.6)] w-0 transition-all">
                 </div>
                 
-                <!-- Efecto de brillo retro -->
                 <div class="absolute inset-0 bg-[linear-gradient(to_right,transparent_25%,rgba(255,255,255,0.3)_50%,transparent_75%)]
                             animate-[shimmer_1.8s_infinite]"></div>
             </div>
 
-            <!-- +20 XP -->
             <div class="flex justify-end mt-2">
                 <div class="inline-flex items-center gap-1.5 bg-black/70 border border-pink-500/40 px-4 py-1 rounded-full">
                     <span class="text-pink-400 font-mono text-sm font-bold tracking-wider">+20 XP</span>
@@ -373,7 +344,6 @@
             </div>
         </div>
 
-        <!-- TARJETAS -->
         <div class="grid md:grid-cols-3 gap-8">
             <div class="bg-[#1f0033] p-8 rounded-3xl border border-purple-500 hover:border-pink-500 transition-colors">
                 <h3 class="text-2xl font-bold mb-4">+7 AÑOS EN EL CAMPO DE BATALLA</h3>
@@ -389,7 +359,6 @@
             </div>
         </div>
 
-        <!-- BOTÓN NUEVO - Ver marcas trabajadas -->
         <div class="mt-10 flex justify-center">
             <a href="marcas.html" 
                class="inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-purple-600 hover:bg-purple-500 active:bg-purple-700 text-white font-bold text-sm uppercase tracking-[1.5px] rounded-2xl transition-all active:scale-[0.985] shadow-lg shadow-purple-900/30">
@@ -401,7 +370,6 @@
     </div>
 </section>
 
-<!-- CURSO -->
 <section id="curso" class="py-16 md:py-24 bg-[#150022]">
     <div class="max-w-6xl mx-auto px-6 text-center">
         <h2 class="text-4xl md:text-5xl font-bold mb-6">¿QUERÉS APRENDER A CREAR CONTENIDO?</h2>
@@ -414,7 +382,6 @@
     </div>
 </section>
 
-<!-- REDES -->
 <section id="redes" class="py-16 md:py-24 bg-black">
     <div class="max-w-6xl mx-auto px-6">
         <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 glitch tracking-widest">SEGUIME EN TODAS PARTES</h2>
@@ -438,13 +405,11 @@
     </div>
 </section>
 
-<!-- CTA FINAL -->
 <section id="contacto" class="py-16 md:py-24 bg-gradient-to-r from-purple-900 to-pink-900">
     <div class="max-w-4xl mx-auto text-center px-6">
         <h2 class="text-4xl md:text-6xl font-bold mb-6">¿QUERÉS COLABORAR O HACER ALGO ÉPICO?</h2>
         <p class="text-xl md:text-2xl mb-10">Escribime y hagamos que internet se rompa de risa.</p>
         
-        <!-- BOTÓN CAMBIADO A GMAIL -->
         <a href="https://mail.google.com/mail/?view=cm&fs=1&to=perezexiliadomkt@gmail.com" 
            target="_blank"
            rel="noopener noreferrer"
@@ -456,7 +421,6 @@
     </div>
 </section>
 
-<!-- FOOTER -->
 <footer class="bg-black py-8 sm:py-10 border-t border-purple-900">
     <div class="max-w-6xl mx-auto px-5 sm:px-6 flex flex-col md:flex-row items-center justify-center md:justify-between text-sm gap-y-3 md:gap-4 text-center md:text-left">
         <p class="text-purple-200">© 2026 PÉREZ EXILIADO • HECHO CON MUCHO HUMOR Y AMOR</p>
