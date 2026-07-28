@@ -9,7 +9,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
    
-    <!-- Fuentes -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
@@ -66,7 +65,6 @@
     </style>
 </head>
 <body class="bg-[#0f001a] text-white overflow-x-hidden">
-<!-- BARRA DE NAVEGACIÓN -->
 <nav class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-purple-500">
     <div class="max-w-7xl mx-auto px-4 md:px-5 py-3 md:py-4 flex items-center justify-between">
       
@@ -255,7 +253,6 @@
         <p class="text-center text-purple-300 mb-12 max-w-xl mx-auto">10 módulos intensivos + bonus + comunidad para que pases de cero a subir videos que la rompen.</p>
      
         <div class="grid md:grid-cols-2 gap-6">
-            <!-- Módulo 1 -->
             <div class="modulo-card bg-[#1f0033] border border-purple-500/40 rounded-3xl p-7">
                 <div class="flex items-start gap-4">
                     <div class="w-12 h-12 flex-shrink-0 bg-purple-600/20 rounded-2xl flex items-center justify-center">
@@ -454,7 +451,6 @@
     </div>
 </section>
 
-<!-- PIE DE PÁGINA -->
 <footer class="bg-black py-8 sm:py-10 border-t border-purple-900">
     <div class="max-w-6xl mx-auto px-5 sm:px-6 flex flex-col md:flex-row items-center justify-center md:justify-between text-sm gap-y-3 md:gap-4 text-center md:text-left">
         <p class="text-purple-200">© 2026 PÉREZ EXILIADO • HECHO CON MUCHO HUMOR Y AMOR</p>
@@ -467,7 +463,6 @@
     </div>
 </footer>
 
-<!-- SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
     const EMAILJS_PUBLIC_KEY = "KMYGAyGuz9uYee6ci";
@@ -476,7 +471,6 @@
     
     emailjs.init(EMAILJS_PUBLIC_KEY);
     
-    // LINK DE PAGO - CAMBIAR POR EL DE MERCADOPAGO DEL CURSO
     const CURSO_PAGO_LINK = "https://mpago.la/31Ex4MV";
     
     function enviarInscripcionYRedirigir() {
@@ -509,7 +503,6 @@
                     window.open(CURSO_PAGO_LINK, '_blank');
                 }
                 
-                // Reset
                 form.reset();
                 btn.innerHTML = originalText;
                 btn.disabled = false;
@@ -524,7 +517,6 @@
 </script>
 
 <script>
-    // Menú móvil limpio
     function toggleMobileMenu() {
         const menu = document.getElementById('mobile-menu');
         const btn = document.getElementById('menu-btn');
@@ -545,7 +537,6 @@
         }
     }
     
-    // Modal de contacto
     function showContactModal() {
         const modal = document.getElementById('contactModal');
         if (modal) {
@@ -578,9 +569,7 @@
         });
     }
     
-    // Inicialización
     document.addEventListener('DOMContentLoaded', function() {
-        // Cerrar menú móvil al hacer click en un link
         const mobileLinks = document.querySelectorAll('#mobile-menu a');
         mobileLinks.forEach(link => {
             link.addEventListener('click', function() {
@@ -597,7 +586,6 @@
             });
         });
         
-        // Cerrar modal con ESC
         document.addEventListener('keydown', function(e) {
             if (e.key === "Escape") {
                 const modal = document.getElementById('contactModal');

@@ -229,7 +229,6 @@
                     Mi estilo es único: le pongo la peor de las ondas a los videos y curiosamente quedan bien.
                 </p>
                 
-                <!-- Stats -->
                 <div class="mt-10 flex gap-8">
                     <div>
                         <div class="text-5xl md:text-6xl font-bold text-purple-400">7+</div>
@@ -494,13 +493,12 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // Se activa la animación cuando la sección entra en pantalla
                     bar.classList.add("xp-bar-filled");
-                    observer.unobserve(section); // Para que solo se active una vez
+                    observer.unobserve(section);
                 }
             });
         }, {
-            threshold: 0.35 // Se activa cuando el 35% de la sección es visible
+            threshold: 0.35
         });
 
         observer.observe(section);
