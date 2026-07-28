@@ -417,14 +417,36 @@
     </div>
 </section>
 
+<section id="contacto" class="py-16 md:py-24 bg-gradient-to-r from-purple-900 to-pink-900">
+    <div class="max-w-4xl mx-auto text-center px-6">
+        <h2 class="text-4xl md:text-6xl font-bold mb-6">¿QUERÉS COLABORAR O HACER ALGO ÉPICO?</h2>
+        <p class="text-xl md:text-2xl mb-10">Escribime y armemos algo juntos.</p>
+        
+        <!-- El href ya tiene los datos codificados para que funcione nativamente en PC -->
+        <a href="mailto:perezexiliadomkt@gmail.com?subject=Colaboremos%20juntos&body=Hola%20Mart%C3%ADn,%20te%20contacto%20porque..." 
+           onclick="abrirGmailApp(event)"
+           class="inline-flex items-center gap-4 bg-black text-white text-xl md:text-2xl font-bold px-10 md:px-16 py-6 md:py-8 rounded-3xl hover:bg-white hover:text-black transition-all active:scale-[0.985]">
+            ENVIAME UN MENSAJE <i class="fas fa-arrow-right text-3xl"></i>
+        </a>
+        
+        <p class="mt-8 text-sm opacity-75">O directamente por Instagram / TikTok DM</p>
+    </div>
+</section>
+
 <script>
     function abrirGmailApp(event) {
+        const ua = navigator.userAgent.toLowerCase();
+        const isMobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(ua);
+
+        if (!isMobile) {
+            return; 
+        }
+
         event.preventDefault();
         
         const email = "perezexiliadomkt@gmail.com";
         const subject = encodeURIComponent("Colaboremos juntos");
         const body = encodeURIComponent("Hola Martín, te contacto porque...");
-        const ua = navigator.userAgent.toLowerCase();
 
         if (ua.indexOf("android") !== -1) {
             window.location.href = `intent://compose?to=${email}&subject=${subject}&body=${body}#Intent;package=com.google.android.gm;scheme=gmail;end`;
