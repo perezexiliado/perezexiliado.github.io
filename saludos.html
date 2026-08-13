@@ -253,8 +253,7 @@
     </div>
 </section>
 
-<section id="formulario-pago" class="...">
-<section class="py-16 bg-black">
+<section id="formulario-pago" class="py-16 bg-black">
     <div class="max-w-3xl mx-auto px-6">
         <div class="bg-[#150022] border border-purple-500/40 rounded-3xl p-6 sm:p-10">
             <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8">Pedí tu saludo ahora</h2>
@@ -287,12 +286,20 @@
             </form>
         
             <div class="text-center">
-                <button id="btnPagar"
-                        onclick="enviarPedidoYRedirigir()"
-                        class="inline-flex items-center justify-center gap-4 w-full sm:w-auto bg-[#009EE3] hover:bg-[#0088CC] text-white text-xl font-bold px-8 sm:px-14 py-6 rounded-3xl transition-all hover:scale-[1.02] shadow-lg cursor-pointer">
-                    <i class="fas fa-credit-card text-3xl"></i>
-                    <span>MERCADOPAGO</span>
-                </button>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <button id="btnPagar"
+                            onclick="enviarPedidoYRedirigir('mercadopago')"
+                            class="inline-flex items-center justify-center gap-4 w-full sm:w-auto bg-[#009EE3] hover:bg-[#0088CC] text-white text-lg sm:text-xl font-bold px-8 sm:px-10 py-5 sm:py-6 rounded-3xl transition-all hover:scale-[1.02] shadow-lg cursor-pointer">
+                        <i class="fas fa-credit-card text-2xl sm:text-3xl"></i>
+                        <span>MERCADOPAGO</span>
+                    </button>
+                    <button id="btnPagarPaypal"
+                            onclick="enviarPedidoYRedirigir('paypal')"
+                            class="inline-flex items-center justify-center gap-4 w-full sm:w-auto bg-[#FFC439] hover:bg-[#F0B429] text-[#003087] text-lg sm:text-xl font-bold px-8 sm:px-10 py-5 sm:py-6 rounded-3xl transition-all hover:scale-[1.02] shadow-lg cursor-pointer">
+                        <i class="fab fa-paypal text-2xl sm:text-3xl"></i>
+                        <span>PAYPAL</span>
+                    </button>
+                </div>
 
                 <p class="text-purple-400 text-sm mt-4">Te mando el saludo en menos de 24hs.</p>
             </div>
@@ -321,9 +328,15 @@
 
     emailjs.init(EMAILJS_PUBLIC_KEY);
 
-    function enviarPedidoYRedirigir() {
+    const LINK_PAGO_MERCADOPAGO = 'https://mpago.li/2LSbVrv';
+    const LINK_PAGO_PAYPAL = 'https://www.paypal.com/ncp/payment/W2DJCXYMZQPPJ';
+
+    function enviarPedidoYRedirigir(metodo) {
         const form = document.getElementById('saludoForm');
-        const btn = document.getElementById('btnPagar');
+        const btnId = metodo === 'paypal' ? 'btnPagarPaypal' : 'btnPagar';
+        const btn = document.getElementById(btnId);
+        const otroBtnId = metodo === 'paypal' ? 'btnPagar' : 'btnPagarPaypal';
+        const otroBtn = document.getElementById(otroBtnId);
 
         if (!form.checkValidity()) {
             form.reportValidity();
@@ -331,19 +344,22 @@
         }
 
         const originalText = btn.innerHTML;
-        btn.innerHTML = `<i class="fas fa-spinner fa-spin text-3xl"></i> <span>ENVIANDO...</span>`;
+        btn.innerHTML = `<i class="fas fa-spinner fa-spin text-2xl sm:text-3xl"></i> <span>ENVIANDO...</span>`;
         btn.disabled = true;
+        if (otroBtn) otroBtn.disabled = true;
 
         const templateParams = {
             nombre_paga: document.getElementById('nombre_paga').value,
             email_comprador: document.getElementById('email_comprador').value,
             ocasion: document.getElementById('ocasion').value,
-            mensaje: document.getElementById('mensaje').value
+            mensaje: document.getElementById('mensaje').value,
+            metodo_pago: metodo === 'paypal' ? 'PayPal' : 'MercadoPago'
         };
+
+        const linkPago = metodo === 'paypal' ? LINK_PAGO_PAYPAL : LINK_PAGO_MERCADOPAGO;
 
         emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
             .then(function() {
-                const linkPago = 'https://mpago.li/2LSbVrv';
                 const esMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
                 if (esMobile) {
@@ -355,6 +371,7 @@
                 form.reset();
                 btn.innerHTML = originalText;
                 btn.disabled = false;
+                if (otroBtn) otroBtn.disabled = false;
 
             })
             .catch(function(error) {
@@ -362,6 +379,7 @@
                 alert('Hubo un problema al enviar el pedido. Por favor intentá de nuevo o escribime por Instagram.');
                 btn.innerHTML = originalText;
                 btn.disabled = false;
+                if (otroBtn) otroBtn.disabled = false;
             });
     }
 </script>
