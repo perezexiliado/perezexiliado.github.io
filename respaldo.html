@@ -439,20 +439,12 @@
             </form>
        
             <div class="text-center">
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <button id="btnPagarCurso"
-                            onclick="enviarInscripcionYRedirigir('mercadopago')"
-                            class="inline-flex items-center justify-center gap-4 w-full sm:w-auto bg-[#009EE3] hover:bg-[#0088CC] text-white text-lg sm:text-xl font-bold px-8 sm:px-10 py-5 sm:py-6 rounded-3xl transition-all hover:scale-[1.02] shadow-lg cursor-pointer">
-                        <i class="fas fa-credit-card text-2xl sm:text-3xl"></i>
-                        <span>PAGAR CON MERCADOPAGO</span>
-                    </button>
-                    <button id="btnPagarPaypal"
-                            onclick="enviarInscripcionYRedirigir('paypal')"
-                            class="inline-flex items-center justify-center gap-4 w-full sm:w-auto bg-[#FFC439] hover:bg-[#F0B429] text-[#003087] text-lg sm:text-xl font-bold px-8 sm:px-10 py-5 sm:py-6 rounded-3xl transition-all hover:scale-[1.02] shadow-lg cursor-pointer">
-                        <i class="fab fa-paypal text-2xl sm:text-3xl"></i>
-                        <span>PAGAR CON PAYPAL</span>
-                    </button>
-                </div>
+                <button id="btnPagarCurso"
+                        onclick="enviarInscripcionYRedirigir()"
+                        class="inline-flex items-center justify-center gap-4 w-full sm:w-auto bg-[#009EE3] hover:bg-[#0088CC] text-white text-xl font-bold px-8 sm:px-14 py-6 rounded-3xl transition-all hover:scale-[1.02] shadow-lg cursor-pointer">
+                    <i class="fas fa-credit-card text-3xl"></i>
+                    <span>PAGAR CON MERCADOPAGO</span>
+                </button>
                 <p class="text-purple-400 text-sm mt-4">Acceso inmediato • Soporte por mail</p>
             </div>
         </div>
@@ -480,15 +472,11 @@
     
     emailjs.init(EMAILJS_PUBLIC_KEY);
     
-    const CURSO_PAGO_LINK_MERCADOPAGO = "https://mpago.la/31Ex4MV";
-    const CURSO_PAGO_LINK_PAYPAL = "https://www.paypal.com/ncp/payment/SFM55MDGXCC2N";
+    const CURSO_PAGO_LINK = "https://mpago.la/31Ex4MV";
     
-    function enviarInscripcionYRedirigir(metodo) {
+    function enviarInscripcionYRedirigir() {
         const form = document.getElementById('cursoForm');
-        const btnId = metodo === 'paypal' ? 'btnPagarPaypal' : 'btnPagarCurso';
-        const btn = document.getElementById(btnId);
-        const otroBtnId = metodo === 'paypal' ? 'btnPagarCurso' : 'btnPagarPaypal';
-        const otroBtn = document.getElementById(otroBtnId);
+        const btn = document.getElementById('btnPagarCurso');
         
         if (!form.checkValidity()) {
             form.reportValidity();
@@ -496,41 +484,35 @@
         }
         
         const originalText = btn.innerHTML;
-        btn.innerHTML = `<i class="fas fa-spinner fa-spin text-2xl sm:text-3xl"></i> <span>PROCESANDO...</span>`;
+        btn.innerHTML = `<i class="fas fa-spinner fa-spin text-3xl"></i> <span>PROCESANDO...</span>`;
         btn.disabled = true;
-        if (otroBtn) otroBtn.disabled = true;
         
         const templateParams = {
             nombre: document.getElementById('nombre_curso').value,
             email: document.getElementById('email_curso').value,
             redes: document.getElementById('redes_curso').value || "No especificado",
             motivo: document.getElementById('motivo_curso').value || "Sin mensaje adicional",
-            curso: "Humor en Videos - Curso Completo",
-            metodo_pago: metodo === 'paypal' ? 'PayPal' : 'MercadoPago'
+            curso: "Humor en Videos - Curso Completo"
         };
-        
-        const linkDePago = metodo === 'paypal' ? CURSO_PAGO_LINK_PAYPAL : CURSO_PAGO_LINK_MERCADOPAGO;
         
         emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID_CURSO, templateParams)
             .then(function() {
                 const esMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
                 if (esMobile) {
-                    window.location.href = linkDePago;
+                    window.location.href = CURSO_PAGO_LINK;
                 } else {
-                    window.open(linkDePago, '_blank');
+                    window.open(CURSO_PAGO_LINK, '_blank');
                 }
                 
                 form.reset();
                 btn.innerHTML = originalText;
                 btn.disabled = false;
-                if (otroBtn) otroBtn.disabled = false;
             })
             .catch(function(error) {
                 console.error('Error al enviar:', error);
                 alert('Hubo un problema al enviar la inscripción. Por favor intentá de nuevo o escribime por Instagram @perezexiliado');
                 btn.innerHTML = originalText;
                 btn.disabled = false;
-                if (otroBtn) otroBtn.disabled = false;
             });
     }
 </script>
