@@ -250,7 +250,7 @@
 <section class="py-16 bg-black">
     <div class="max-w-6xl mx-auto px-6">
         <h2 class="text-center text-4xl font-bold mb-4">El programa completo</h2>
-        <p class="text-center text-purple-300 mb-12 max-w-xl mx-auto">10 módulos intensivos + bonus + comunidad para que pases de cero a subir videos que la rompen.</p>
+        <p class="text-center text-purple-300 mb-12 max-w-xl mx-auto">8 módulos intensivos + bonus + comunidad para que pases de cero a subir videos que la rompen.</p>
      
         <div class="grid md:grid-cols-2 gap-6">
             <div class="modulo-card bg-[#1f0033] border border-purple-500/40 rounded-3xl p-7">
@@ -392,7 +392,7 @@
             <div class="curso-card bg-[#1f0033] border border-purple-500/50 rounded-3xl p-8">
                 <div class="flex items-center gap-4 mb-6">
                     <img src="assets/lolialumna.jpg" 
-                         alt="Nahuel R." 
+                         alt="Loli R." 
                          class="w-12 h-12 rounded-full object-cover border border-purple-500/30 shadow-md">
                     <div>
                         <p class="font-bold">Loli R. - Buenos Aires</p>
@@ -402,6 +402,10 @@
                 <p class="text-purple-200 italic">"Que mas decir, me compartió todo su conocimiento y mis cuentas despegaron, ya monetizo facebook!!! siganme: loliradich"</p>
             </div>
         </div>
+
+        <p class="text-center text-purple-400 text-xs mt-8 max-w-2xl mx-auto">
+            Resultados individuales de estudiantes reales. No representan una garantía ni un resultado típico o esperable: el crecimiento en redes depende de múltiples factores fuera de nuestro control. Ver más en los <a href="t&c" class="underline hover:text-purple-300">Términos y Condiciones</a>.
+        </p>
     </div>
 </section>
 
@@ -437,6 +441,14 @@
                               class="w-full bg-black border border-purple-500/40 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:border-purple-500 resize-y"></textarea>
                 </div>
             </form>
+
+            <div class="mb-6 flex items-start justify-center gap-3 text-left max-w-lg mx-auto">
+                <input type="checkbox" id="aceptaTerminosCurso" required
+                       class="mt-1 w-5 h-5 accent-purple-500 flex-shrink-0 cursor-pointer">
+                <label for="aceptaTerminosCurso" class="text-purple-300 text-sm cursor-pointer">
+                    He leído y acepto los <a href="t&c" target="_blank" class="underline text-purple-200 hover:text-white">Términos y Condiciones</a>, incluyendo la política de reembolsos y resultados.
+                </label>
+            </div>
        
             <div class="text-center">
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -454,6 +466,7 @@
                     </button>
                 </div>
                 <p class="text-purple-400 text-sm mt-4">Acceso inmediato • Soporte por mail</p>
+                <p class="text-purple-500 text-xs mt-2">El pago con PayPal se procesa en dólares estadounidenses (USD) según la cotización de PayPal al momento de la transacción, y puede diferir levemente del monto en pesos mostrado arriba.</p>
             </div>
         </div>
     </div>
@@ -494,6 +507,13 @@
             form.reportValidity();
             return;
         }
+
+        const aceptaTerminos = document.getElementById('aceptaTerminosCurso');
+        if (aceptaTerminos && !aceptaTerminos.checked) {
+            alert('Para continuar con el pago, tenés que aceptar los Términos y Condiciones.');
+            aceptaTerminos.focus();
+            return;
+        }
         
         const originalText = btn.innerHTML;
         btn.innerHTML = `<i class="fas fa-spinner fa-spin text-2xl sm:text-3xl"></i> <span>PROCESANDO...</span>`;
@@ -506,7 +526,8 @@
             redes: document.getElementById('redes_curso').value || "No especificado",
             motivo: document.getElementById('motivo_curso').value || "Sin mensaje adicional",
             curso: "Humor en Videos - Curso Completo",
-            metodo_pago: metodo === 'paypal' ? 'PayPal' : 'MercadoPago'
+            metodo_pago: metodo === 'paypal' ? 'PayPal' : 'MercadoPago',
+            acepto_terminos: 'Sí, ' + new Date().toLocaleString('es-AR')
         };
         
         const linkDePago = metodo === 'paypal' ? CURSO_PAGO_LINK_PAYPAL : CURSO_PAGO_LINK_MERCADOPAGO;

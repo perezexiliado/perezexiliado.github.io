@@ -148,11 +148,6 @@
             <span class="block text-xl sm:text-3xl md:text-4xl lg:text-5xl">PERSONALIZADO</span>
         </h1>
 <div class="relative inline-block mb-6 text-center">
-    <span class="absolute -top-4 right-[-6px] sm:right-[-20px]
-                 text-red-500 text-sm sm:text-base font-semibold 
-                 tracking-wider line-through">
-        ANTES $5999
-    </span>
     <p class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-green-300 font-bold">
         $3999
     </p>
@@ -217,6 +212,7 @@
                         Tu navegador no soporta el video.
                     </video>
                 </div>      
+            </div>
         </div>
     </div>
 </section>
@@ -247,7 +243,7 @@
                     <span class="text-4xl font-bold text-purple-400">3</span>
                 </div>
                 <h3 class="text-2xl font-bold mb-3">Recibís tu video</h3>
-                <p class="text-purple-200">En menos de 24 horas te envío el saludo personalizado por mail.</p>
+                <p class="text-purple-200">En 24 a 72 horas hábiles te envío el saludo personalizado por mail.</p>
             </div>
         </div>
     </div>
@@ -284,6 +280,14 @@
                               class="w-full bg-black border border-purple-500/40 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:border-purple-500 resize-y"></textarea>
                 </div>
             </form>
+
+            <div class="mb-6 flex items-start justify-center gap-3 text-left max-w-lg mx-auto">
+                <input type="checkbox" id="aceptaTerminosSaludo" required
+                       class="mt-1 w-5 h-5 accent-purple-500 flex-shrink-0 cursor-pointer">
+                <label for="aceptaTerminosSaludo" class="text-purple-300 text-sm cursor-pointer">
+                    He leído y acepto los <a href="t&c" target="_blank" class="underline text-purple-200 hover:text-white">Términos y Condiciones</a>, incluyendo la política de producción, entrega y reembolsos de saludos personalizados.
+                </label>
+            </div>
         
             <div class="text-center">
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -301,11 +305,13 @@
                     </button>
                 </div>
 
-                <p class="text-purple-400 text-sm mt-4">Te mando el saludo en menos de 24hs.</p>
+                <p class="text-purple-400 text-sm mt-4">Te mando el saludo en 24 a 72hs hábiles.</p>
+                <p class="text-purple-500 text-xs mt-2">El pago con PayPal se procesa en dólares estadounidenses (USD) según la cotización de PayPal al momento de la transacción, y puede diferir levemente del monto en pesos mostrado arriba.</p>
             </div>
 
-        </div>   
-    </section>     
+        </div>
+    </div>
+</section>     
 
 <footer class="bg-black py-8 sm:py-10 border-t border-purple-900">
     <div class="max-w-6xl mx-auto px-5 sm:px-6 flex flex-col md:flex-row items-center justify-center md:justify-between text-sm gap-y-3 md:gap-4 text-center md:text-left">
@@ -343,6 +349,13 @@
             return;
         }
 
+        const aceptaTerminos = document.getElementById('aceptaTerminosSaludo');
+        if (aceptaTerminos && !aceptaTerminos.checked) {
+            alert('Para continuar con el pago, tenés que aceptar los Términos y Condiciones.');
+            aceptaTerminos.focus();
+            return;
+        }
+
         const originalText = btn.innerHTML;
         btn.innerHTML = `<i class="fas fa-spinner fa-spin text-2xl sm:text-3xl"></i> <span>ENVIANDO...</span>`;
         btn.disabled = true;
@@ -353,7 +366,8 @@
             email_comprador: document.getElementById('email_comprador').value,
             ocasion: document.getElementById('ocasion').value,
             mensaje: document.getElementById('mensaje').value,
-            metodo_pago: metodo === 'paypal' ? 'PayPal' : 'MercadoPago'
+            metodo_pago: metodo === 'paypal' ? 'PayPal' : 'MercadoPago',
+            acepto_terminos: 'Sí, ' + new Date().toLocaleString('es-AR')
         };
 
         const linkPago = metodo === 'paypal' ? LINK_PAGO_PAYPAL : LINK_PAGO_MERCADOPAGO;
@@ -385,23 +399,16 @@
 </script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const menuBtn = document.getElementById('menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const icon = menuBtn ? menuBtn.querySelector('i') : null;
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        const btn = document.getElementById('menu-btn');
+        if (!menu || !btn) return;
 
-    if (!menuBtn || !mobileMenu) {
-        console.log('No se encontró el botón o el menú móvil');
-        return;
-    }
+        menu.classList.toggle('hidden');
 
-    menuBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        mobileMenu.classList.toggle('hidden');
-        
+        const icon = btn.querySelector('i');
         if (icon) {
-            if (mobileMenu.classList.contains('hidden')) {
+            if (menu.classList.contains('hidden')) {
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
             } else {
@@ -409,24 +416,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 icon.classList.add('fa-times');
             }
         }
-    });
+    }
 
-    const mobileLinks = mobileMenu.querySelectorAll('a');
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            mobileMenu.classList.add('hidden');
-            if (icon) {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
-    });
-
-    console.log('Menú móvil inicializado correctamente');
-});
-</script>
-
-<script>
     function showContactModal() {
         const modal = document.getElementById('contactModal');
         if (modal) {
@@ -451,7 +442,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const originalText = emailSpan.textContent;
                 emailSpan.textContent = '✅ COPIADO!';
                 setTimeout(() => {
-                    emailSpan.textContent = originalText;
+                    if (emailSpan) emailSpan.textContent = originalText;
                 }, 2000);
             }
         }).catch(() => {
@@ -459,107 +450,34 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    document.addEventListener('keydown', function(e) {
-        if (e.key === "Escape") {
-            const modal = document.getElementById('contactModal');
-            if (modal && !modal.classList.contains('hidden')) {
-                hideContactModal();
-            }
-        }
-    });
-
     document.addEventListener('DOMContentLoaded', function() {
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const icon = menuBtn ? menuBtn.querySelector('i') : null;
-
-        if (menuBtn && mobileMenu) {
-            menuBtn.addEventListener('click', function() {
-                mobileMenu.classList.toggle('hidden');
-                
-                if (icon) {
-                    if (mobileMenu.classList.contains('hidden')) {
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    } else {
-                        icon.classList.remove('fa-bars');
-                        icon.classList.add('fa-times');
-                    }
-                }
-            });
-
-            const links = mobileMenu.querySelectorAll('a');
-            links.forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
+        const mobileLinks = document.querySelectorAll('#mobile-menu a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                const menu = document.getElementById('mobile-menu');
+                const btn = document.getElementById('menu-btn');
+                if (menu) menu.classList.add('hidden');
+                if (btn) {
+                    const icon = btn.querySelector('i');
                     if (icon) {
                         icon.classList.remove('fa-times');
                         icon.classList.add('fa-bars');
                     }
-                });
+                }
             });
-        }
-    });
-</script>
-
-<script>
-function toggleMobileMenu() {
-    const menu = document.getElementById('mobile-menu');
-    const btn = document.getElementById('menu-btn');
-
-    menu.classList.toggle('hidden');
-
-    if (!menu.classList.contains('hidden')) {
-        btn.innerHTML = '<i class="fas fa-times"></i>';
-    } else {
-        btn.innerHTML = '<i class="fas fa-bars"></i>';
-    }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    const links = document.querySelectorAll('#mobile-menu a');
-    links.forEach(link => {
-        link.addEventListener('click', () => {
-            const menu = document.getElementById('mobile-menu');
-            const btn = document.getElementById('menu-btn');
-            menu.classList.add('hidden');
-            btn.innerHTML = '<i class="fas fa-bars"></i>';
         });
-    });
-});
-</script>
 
-<script>
-    function toggleMobileMenu() {
-        const menu = document.getElementById('mobile-menu');
-        menu.classList.toggle('hidden');
-    }
-
-    function showContactModal() {
-        const modal = document.getElementById('contactModal');
-        if (modal) modal.classList.remove('hidden');
-    }
-
-    function hideContactModal() {
-        const modal = document.getElementById('contactModal');
-        if (modal) modal.classList.add('hidden');
-    }
-
-    function copyEmail() {
-        const email = "perezexiliadomkt@gmail.com";
-        navigator.clipboard.writeText(email).then(() => {
-            const originalText = event.currentTarget.innerHTML;
-            const btn = event.currentTarget;
-            
-            btn.innerHTML = `<i class="fas fa-check text-green-400"></i> <span class="text-green-400">¡Copiado!</span>`;
-            
-            setTimeout(() => {
-                if (btn) btn.innerHTML = originalText;
-            }, 1500);
-        }).catch(() => {
-            prompt("Copiá este mail:", email);
+        document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape") {
+                const modal = document.getElementById('contactModal');
+                if (modal && !modal.classList.contains('hidden')) {
+                    hideContactModal();
+                }
+            }
         });
-    }
+
+        console.log('%c[saludos.html] Página de saludos inicializada correctamente', 'color:#9f00ff');
+    });
 </script>
 
 </body>
