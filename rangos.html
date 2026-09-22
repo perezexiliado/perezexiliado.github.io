@@ -120,6 +120,32 @@
         .rango-pago-pp:hover { background: #F0B429; }
         .rango-pago-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
+        /* --- estilo pixel-slot compartido con el resto del sitio --- */
+        .ip-icon-slot {
+            clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+            box-shadow: inset 2px 2px 0 rgba(255,255,255,0.12), inset -2px -2px 0 rgba(0,0,0,0.6);
+        }
+        .info-slot {
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            box-shadow: inset 2px 2px 0 rgba(255,255,255,0.07), inset -2px -2px 0 rgba(0,0,0,0.5);
+        }
+        .card-slot {
+            clip-path: polygon(18px 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%, 0 18px);
+            box-shadow: inset 3px 3px 0 rgba(255,255,255,0.06), inset -3px -3px 0 rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+        }
+        .rule-slot {
+            clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+            box-shadow: inset 2px 2px 0 rgba(255,255,255,0.06), inset -2px -2px 0 rgba(0,0,0,0.5);
+            transition: all 0.25s ease;
+        }
+        .rule-slot:hover { transform: translateY(-3px); }
+
+        #rango-zeus.card-slot:hover { box-shadow: inset 3px 3px 0 rgba(255,255,255,0.06), inset -3px -3px 0 rgba(0,0,0,0.5), 0 0 30px -8px #38bdf8; }
+        #rango-hades.card-slot:hover { box-shadow: inset 3px 3px 0 rgba(255,255,255,0.06), inset -3px -3px 0 rgba(0,0,0,0.5), 0 0 30px -8px #f43f5e; }
+        #rango-poseidon.card-slot:hover { box-shadow: inset 3px 3px 0 rgba(255,255,255,0.06), inset -3px -3px 0 rgba(0,0,0,0.5), 0 0 30px -8px #2dd4bf; }
+        #rango-vip.card-slot:hover { box-shadow: inset 3px 3px 0 rgba(255,255,255,0.06), inset -3px -3px 0 rgba(0,0,0,0.5), 0 0 30px -8px #facc15; }
+
         section { scroll-margin-top: 80px; }
     </style>
 </head>
@@ -215,7 +241,7 @@
 <section id="rangos" class="-mt-px pt-0 pb-12 md:pb-20 bg-[#150022]">
     <div class="max-w-5xl mx-auto px-6">
 
-        <div class="max-w-2xl mx-auto mb-6 bg-purple-500/10 border border-purple-500/30 rounded-2xl px-5 py-4 flex items-start gap-3 text-left">
+        <div class="info-slot max-w-2xl mx-auto mb-6 bg-purple-500/10 border-2 border-purple-500/40 px-5 py-4 flex items-start gap-3 text-left">
             <i class="fas fa-triangle-exclamation text-purple-300 text-lg mt-0.5"></i>
             <p class="text-sm sm:text-base text-purple-200">
                 <span class="font-bold text-purple-100">¿Jugás desde Bedrock (Xbox, PlayStation, Switch, celular)?</span>
@@ -225,12 +251,12 @@
 
         <div class="relative max-w-sm mx-auto mb-10" id="rango-dropdown-wrap">
             <button type="button" id="rango-dropdown-btn" onclick="toggleRangoDropdown()"
-                    class="rango-dropdown-btn w-full flex items-center justify-between gap-3 bg-black border border-purple-500/40 rounded-2xl px-5 py-4 text-left transition-all">
+                    class="info-slot rango-dropdown-btn w-full flex items-center justify-between gap-3 bg-black border-2 border-purple-500/40 px-5 py-4 text-left transition-all">
                 <span id="rango-dropdown-label" class="font-bold tracking-wide text-sm sm:text-base">Seleccioná tu rango</span>
                 <i id="rango-dropdown-icono" class="fas fa-chevron-down transition-transform duration-300"></i>
             </button>
 
-            <div id="rango-dropdown-list" class="rango-dropdown-list hidden absolute left-0 right-0 mt-2 bg-black border border-purple-500/40 rounded-2xl overflow-hidden z-20 shadow-xl shadow-black/50">
+            <div id="rango-dropdown-list" class="info-slot rango-dropdown-list hidden absolute left-0 right-0 mt-2 bg-black border-2 border-purple-500/40 overflow-hidden z-20 shadow-xl shadow-black/50">
                 <button type="button" onclick="mostrarRango('zeus')" data-rango-btn="zeus"
                         class="rango-opcion w-full flex items-center gap-3 px-5 py-3 text-left text-sm sm:text-base font-semibold uppercase tracking-wide transition-all">
                     <i class="fas fa-bolt"></i> Zeus
@@ -258,11 +284,11 @@
         </p>
 
         <!-- Zeus -->
-        <div id="rango-zeus" data-rango-panel class="rango-panel hidden bg-black border-2 rounded-3xl p-6 sm:p-8">
+        <div id="rango-zeus" data-rango-panel class="rango-panel card-slot hidden bg-black border-2 p-6 sm:p-8">
             <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
                 <!-- EDITAR: reemplazar por la imagen real del rango, formato 9:16 -->
                 <img src="assets/rango-zeus.png" alt="Rango Zeus"
-                     class="w-28 sm:w-32 aspect-[9/16] object-cover rounded-2xl border-2 flex-shrink-0 rango-img">
+                     class="w-28 sm:w-32 aspect-[9/16] object-cover card-slot border-2 flex-shrink-0 rango-img">
                 <div class="flex-1 text-center sm:text-left">
                     <h3 class="text-2xl sm:text-3xl font-bold mb-1 rango-titulo">ZEUS</h3>
                     <p class="text-lg sm:text-xl font-bold mb-2" style="color:#22c55e;">$59,99 USD <span class="text-xs sm:text-sm font-semibold text-purple-300">· de por vida</span></p>
@@ -277,21 +303,21 @@
                         <div>
                             <label class="block text-xs uppercase tracking-widest text-purple-400 mb-1.5">Tu usuario en el server</label>
                             <input type="text" id="rangoUsuarioMC_zeus" placeholder="Tu nombre exacto en Minecraft" required
-                                   class="w-full bg-black border border-purple-500/40 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-purple-500">
+                                   class="info-slot w-full bg-black border-2 border-purple-500/40 px-4 py-3 text-sm focus:outline-none focus:border-purple-500">
                         </div>
                         <div>
                             <label class="block text-xs uppercase tracking-widest text-purple-400 mb-1.5">Nombre en MercadoPago / PayPal</label>
                             <input type="text" id="rangoNombrePago_zeus" placeholder="Como figura en tu Mercado Pago o PayPal" required
-                                   class="w-full bg-black border border-purple-500/40 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-purple-500">
+                                   class="info-slot w-full bg-black border-2 border-purple-500/40 px-4 py-3 text-sm focus:outline-none focus:border-purple-500">
                         </div>
                     </div>
                     <div class="flex flex-col sm:flex-row items-center sm:items-start justify-center sm:justify-start gap-3">
                         <button id="btnPagarZeusMP" onclick="pagarRango('zeus','mercadopago')"
-                                class="rango-pago-btn rango-pago-mp inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 rounded-2xl font-bold text-sm sm:text-base transition-all hover:scale-[1.02] active:scale-95 shadow-lg">
+                                class="info-slot rango-pago-btn rango-pago-mp inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 font-bold text-sm sm:text-base transition-all hover:scale-[1.02] active:scale-95 shadow-lg">
                             <i class="fas fa-credit-card"></i> PAGAR CON MERCADOPAGO
                         </button>
                         <button id="btnPagarZeusPP" onclick="pagarRango('zeus','paypal')"
-                                class="rango-pago-btn rango-pago-pp inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 rounded-2xl font-bold text-sm sm:text-base transition-all hover:scale-[1.02] active:scale-95 shadow-lg">
+                                class="info-slot rango-pago-btn rango-pago-pp inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 font-bold text-sm sm:text-base transition-all hover:scale-[1.02] active:scale-95 shadow-lg">
                             <i class="fab fa-paypal"></i> PAGAR CON PAYPAL
                         </button>
                     </div>
@@ -300,11 +326,11 @@
         </div>
 
         <!-- Hades -->
-        <div id="rango-hades" data-rango-panel class="rango-panel hidden bg-black border-2 rounded-3xl p-6 sm:p-8">
+        <div id="rango-hades" data-rango-panel class="rango-panel card-slot hidden bg-black border-2 p-6 sm:p-8">
             <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
                 <!-- EDITAR: reemplazar por la imagen real del rango, formato 9:16 -->
                 <img src="assets/rango-hades.png" alt="Rango Hades"
-                     class="w-28 sm:w-32 aspect-[9/16] object-cover rounded-2xl border-2 flex-shrink-0 rango-img">
+                     class="w-28 sm:w-32 aspect-[9/16] object-cover card-slot border-2 flex-shrink-0 rango-img">
                 <div class="flex-1 text-center sm:text-left">
                     <h3 class="text-2xl sm:text-3xl font-bold mb-1 rango-titulo">HADES</h3>
                     <p class="text-lg sm:text-xl font-bold mb-2" style="color:#22c55e;">$39,99 USD <span class="text-xs sm:text-sm font-semibold text-purple-300">· de por vida</span></p>
@@ -319,21 +345,21 @@
                         <div>
                             <label class="block text-xs uppercase tracking-widest text-purple-400 mb-1.5">Tu usuario en el server</label>
                             <input type="text" id="rangoUsuarioMC_hades" placeholder="Tu nombre exacto en Minecraft" required
-                                   class="w-full bg-black border border-purple-500/40 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-purple-500">
+                                   class="info-slot w-full bg-black border-2 border-purple-500/40 px-4 py-3 text-sm focus:outline-none focus:border-purple-500">
                         </div>
                         <div>
                             <label class="block text-xs uppercase tracking-widest text-purple-400 mb-1.5">Nombre en MercadoPago / PayPal</label>
                             <input type="text" id="rangoNombrePago_hades" placeholder="Como figura en tu Mercado Pago o PayPal" required
-                                   class="w-full bg-black border border-purple-500/40 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-purple-500">
+                                   class="info-slot w-full bg-black border-2 border-purple-500/40 px-4 py-3 text-sm focus:outline-none focus:border-purple-500">
                         </div>
                     </div>
                     <div class="flex flex-col sm:flex-row items-center sm:items-start justify-center sm:justify-start gap-3">
                         <button id="btnPagarHadesMP" onclick="pagarRango('hades','mercadopago')"
-                                class="rango-pago-btn rango-pago-mp inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 rounded-2xl font-bold text-sm sm:text-base transition-all hover:scale-[1.02] active:scale-95 shadow-lg">
+                                class="info-slot rango-pago-btn rango-pago-mp inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 font-bold text-sm sm:text-base transition-all hover:scale-[1.02] active:scale-95 shadow-lg">
                             <i class="fas fa-credit-card"></i> PAGAR CON MERCADOPAGO
                         </button>
                         <button id="btnPagarHadesPP" onclick="pagarRango('hades','paypal')"
-                                class="rango-pago-btn rango-pago-pp inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 rounded-2xl font-bold text-sm sm:text-base transition-all hover:scale-[1.02] active:scale-95 shadow-lg">
+                                class="info-slot rango-pago-btn rango-pago-pp inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 font-bold text-sm sm:text-base transition-all hover:scale-[1.02] active:scale-95 shadow-lg">
                             <i class="fab fa-paypal"></i> PAGAR CON PAYPAL
                         </button>
                     </div>
@@ -342,11 +368,11 @@
         </div>
 
         <!-- Poseidón -->
-        <div id="rango-poseidon" data-rango-panel class="rango-panel hidden bg-black border-2 rounded-3xl p-6 sm:p-8">
+        <div id="rango-poseidon" data-rango-panel class="rango-panel card-slot hidden bg-black border-2 p-6 sm:p-8">
             <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
                 <!-- EDITAR: reemplazar por la imagen real del rango, formato 9:16 -->
                 <img src="assets/rango-poseidon.png" alt="Rango Poseidón"
-                     class="w-28 sm:w-32 aspect-[9/16] object-cover rounded-2xl border-2 flex-shrink-0 rango-img">
+                     class="w-28 sm:w-32 aspect-[9/16] object-cover card-slot border-2 flex-shrink-0 rango-img">
                 <div class="flex-1 text-center sm:text-left">
                     <h3 class="text-2xl sm:text-3xl font-bold mb-1 rango-titulo">POSEIDÓN</h3>
                     <p class="text-lg sm:text-xl font-bold mb-2" style="color:#22c55e;">$19,99 USD <span class="text-xs sm:text-sm font-semibold text-purple-300">· de por vida</span></p>
@@ -361,21 +387,21 @@
                         <div>
                             <label class="block text-xs uppercase tracking-widest text-purple-400 mb-1.5">Tu usuario en el server</label>
                             <input type="text" id="rangoUsuarioMC_poseidon" placeholder="Tu nombre exacto en Minecraft" required
-                                   class="w-full bg-black border border-purple-500/40 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-purple-500">
+                                   class="info-slot w-full bg-black border-2 border-purple-500/40 px-4 py-3 text-sm focus:outline-none focus:border-purple-500">
                         </div>
                         <div>
                             <label class="block text-xs uppercase tracking-widest text-purple-400 mb-1.5">Nombre en MercadoPago / PayPal</label>
                             <input type="text" id="rangoNombrePago_poseidon" placeholder="Como figura en tu Mercado Pago o PayPal" required
-                                   class="w-full bg-black border border-purple-500/40 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-purple-500">
+                                   class="info-slot w-full bg-black border-2 border-purple-500/40 px-4 py-3 text-sm focus:outline-none focus:border-purple-500">
                         </div>
                     </div>
                     <div class="flex flex-col sm:flex-row items-center sm:items-start justify-center sm:justify-start gap-3">
                         <button id="btnPagarPoseidonMP" onclick="pagarRango('poseidon','mercadopago')"
-                                class="rango-pago-btn rango-pago-mp inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 rounded-2xl font-bold text-sm sm:text-base transition-all hover:scale-[1.02] active:scale-95 shadow-lg">
+                                class="info-slot rango-pago-btn rango-pago-mp inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 font-bold text-sm sm:text-base transition-all hover:scale-[1.02] active:scale-95 shadow-lg">
                             <i class="fas fa-credit-card"></i> PAGAR CON MERCADOPAGO
                         </button>
                         <button id="btnPagarPoseidonPP" onclick="pagarRango('poseidon','paypal')"
-                                class="rango-pago-btn rango-pago-pp inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 rounded-2xl font-bold text-sm sm:text-base transition-all hover:scale-[1.02] active:scale-95 shadow-lg">
+                                class="info-slot rango-pago-btn rango-pago-pp inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 font-bold text-sm sm:text-base transition-all hover:scale-[1.02] active:scale-95 shadow-lg">
                             <i class="fab fa-paypal"></i> PAGAR CON PAYPAL
                         </button>
                     </div>
@@ -384,11 +410,11 @@
         </div>
 
         <!-- VIP -->
-        <div id="rango-vip" data-rango-panel class="rango-panel hidden bg-black border-2 rounded-3xl p-6 sm:p-8">
+        <div id="rango-vip" data-rango-panel class="rango-panel card-slot hidden bg-black border-2 p-6 sm:p-8">
             <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
                 <!-- EDITAR: reemplazar por la imagen real del rango, formato 9:16 -->
                 <img src="assets/rango-vip.png" alt="Rango VIP"
-                     class="w-28 sm:w-32 aspect-[9/16] object-cover rounded-2xl border-2 flex-shrink-0 rango-img">
+                     class="w-28 sm:w-32 aspect-[9/16] object-cover card-slot border-2 flex-shrink-0 rango-img">
                 <div class="flex-1 text-center sm:text-left">
                     <h3 class="text-2xl sm:text-3xl font-bold mb-1 rango-titulo">VIP</h3>
                     <p class="text-lg sm:text-xl font-bold mb-2" style="color:#22c55e;">$9,99 USD <span class="text-xs sm:text-sm font-semibold text-purple-300">· de por vida</span></p>
@@ -403,21 +429,21 @@
                         <div>
                             <label class="block text-xs uppercase tracking-widest text-purple-400 mb-1.5">Tu usuario en el server</label>
                             <input type="text" id="rangoUsuarioMC_vip" placeholder="Tu nombre exacto en Minecraft" required
-                                   class="w-full bg-black border border-purple-500/40 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-purple-500">
+                                   class="info-slot w-full bg-black border-2 border-purple-500/40 px-4 py-3 text-sm focus:outline-none focus:border-purple-500">
                         </div>
                         <div>
                             <label class="block text-xs uppercase tracking-widest text-purple-400 mb-1.5">Nombre en MercadoPago / PayPal</label>
                             <input type="text" id="rangoNombrePago_vip" placeholder="Como figura en tu Mercado Pago o PayPal" required
-                                   class="w-full bg-black border border-purple-500/40 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-purple-500">
+                                   class="info-slot w-full bg-black border-2 border-purple-500/40 px-4 py-3 text-sm focus:outline-none focus:border-purple-500">
                         </div>
                     </div>
                     <div class="flex flex-col sm:flex-row items-center sm:items-start justify-center sm:justify-start gap-3">
                         <button id="btnPagarVipMP" onclick="pagarRango('vip','mercadopago')"
-                                class="rango-pago-btn rango-pago-mp inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 rounded-2xl font-bold text-sm sm:text-base transition-all hover:scale-[1.02] active:scale-95 shadow-lg">
+                                class="info-slot rango-pago-btn rango-pago-mp inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 font-bold text-sm sm:text-base transition-all hover:scale-[1.02] active:scale-95 shadow-lg">
                             <i class="fas fa-credit-card"></i> PAGAR CON MERCADOPAGO
                         </button>
                         <button id="btnPagarVipPP" onclick="pagarRango('vip','paypal')"
-                                class="rango-pago-btn rango-pago-pp inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 rounded-2xl font-bold text-sm sm:text-base transition-all hover:scale-[1.02] active:scale-95 shadow-lg">
+                                class="info-slot rango-pago-btn rango-pago-pp inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 font-bold text-sm sm:text-base transition-all hover:scale-[1.02] active:scale-95 shadow-lg">
                             <i class="fab fa-paypal"></i> PAGAR CON PAYPAL
                         </button>
                     </div>
@@ -497,7 +523,7 @@
         <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 tracking-widest">PREGUNTAS FRECUENTES</h2>
 
         <div class="space-y-3">
-            <details class="group bg-black border border-purple-500/30 rounded-2xl px-5 py-4">
+            <details class="rule-slot group bg-black border-2 border-purple-500/40 hover:border-purple-400 px-5 py-4">
                 <summary class="flex items-center justify-between cursor-pointer list-none font-semibold text-sm sm:text-base">
                     ¿Los rangos son de por vida?
                     <i class="fas fa-chevron-down text-purple-400 transition-transform group-open:rotate-180"></i>
@@ -505,7 +531,7 @@
                 <p class="text-purple-300 text-sm sm:text-base mt-3">Sí, los 4 rangos (Zeus, Hades, Poseidón y VIP) son de por vida. No vencen ni se renuevan, los pagás una sola vez.</p>
             </details>
 
-            <details class="group bg-black border border-purple-500/30 rounded-2xl px-5 py-4">
+            <details class="rule-slot group bg-black border-2 border-purple-500/40 hover:border-purple-400 px-5 py-4">
                 <summary class="flex items-center justify-between cursor-pointer list-none font-semibold text-sm sm:text-base">
                     ¿Cuánto tarda en entregarse el rango?
                     <i class="fas fa-chevron-down text-purple-400 transition-transform group-open:rotate-180"></i>
@@ -513,7 +539,7 @@
                 <p class="text-purple-300 text-sm sm:text-base mt-3">Una vez acreditado el pago, el rango se entrega a la brevedad. Normalmente no pasan más de 30 minutos hasta que se entrega.</p>
             </details>
 
-            <details class="group bg-black border border-purple-500/30 rounded-2xl px-5 py-4">
+            <details class="rule-slot group bg-black border-2 border-purple-500/40 hover:border-purple-400 px-5 py-4">
                 <summary class="flex items-center justify-between cursor-pointer list-none font-semibold text-sm sm:text-base">
                     Puse mal mi usuario, ¿me devuelven el dinero?
                     <i class="fas fa-chevron-down text-purple-400 transition-transform group-open:rotate-180"></i>
@@ -521,7 +547,7 @@
                 <p class="text-purple-300 text-sm sm:text-base mt-3">No. Si te equivocás al escribir tu nombre de usuario no hay reembolso, así que revisalo bien (y recordá el punto antes del nombre si jugás desde Bedrock) antes de confirmar el pago.</p>
             </details>
 
-            <details class="group bg-black border border-purple-500/30 rounded-2xl px-5 py-4">
+            <details class="rule-slot group bg-black border-2 border-purple-500/40 hover:border-purple-400 px-5 py-4">
                 <summary class="flex items-center justify-between cursor-pointer list-none font-semibold text-sm sm:text-base">
                     ¿Hay reembolsos?
                     <i class="fas fa-chevron-down text-purple-400 transition-transform group-open:rotate-180"></i>
