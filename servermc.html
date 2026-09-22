@@ -73,8 +73,40 @@
             transform: scale(0.98);
         }
 
-        .rango-panel { border-color: rgba(255,255,255,0.12); }
+        .rango-panel {
+            border-color: rgba(255,255,255,0.12);
+            opacity: 0;
+            transform: translateY(18px) scale(0.98);
+            transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .rango-panel.rango-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
         .rango-icono { width: 1.1em; text-align: center; }
+
+        .rango-dropdown-btn:hover, .rango-dropdown-btn.abierto { border-color: #9f00ff; }
+        #rango-dropdown-icono.girado { transform: rotate(180deg); }
+
+        .rango-dropdown-list {
+            opacity: 0;
+            transform: translateY(-8px);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+        .rango-dropdown-list.rango-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .rango-opcion { background: #000; color: #d8b4fe; border-top: 1px solid rgba(255,255,255,0.08); }
+        .rango-opcion:first-child { border-top: none; }
+        .rango-opcion:hover { background: #1a0630; }
+        .rango-opcion.activo[data-rango-btn="zeus"] { background: rgba(56,189,248,0.15); color: #38bdf8; }
+        .rango-opcion.activo[data-rango-btn="hades"] { background: rgba(225,29,72,0.15); color: #f43f5e; }
+        .rango-opcion.activo[data-rango-btn="poseidon"] { background: rgba(45,212,191,0.15); color: #2dd4bf; }
+        .rango-opcion.activo[data-rango-btn="vip"] { background: rgba(250,204,21,0.15); color: #facc15; }
+
+        #rango-placeholder { transition: opacity 0.3s ease; }
 
         #rango-zeus, #rango-zeus .rango-img { border-color: #38bdf8; }
         #rango-zeus .rango-icono, #rango-zeus .rango-titulo { color: #38bdf8; }
@@ -101,13 +133,6 @@
         #rango-vip .rango-icono, #rango-vip .rango-titulo { color: #facc15; }
         #rango-vip .rango-cta { background: #facc15; color: #1a1200; }
         #rango-vip .rango-cta:hover { background: #fde047; }
-
-        .rango-btn { background: #000; color: #c4b5fd; border-color: rgba(159,0,255,0.3); }
-        .rango-btn:hover { border-color: #9f00ff; }
-        .rango-btn.activo[data-rango-btn="zeus"] { background: #38bdf8; border-color: #38bdf8; color: #00121c; }
-        .rango-btn.activo[data-rango-btn="hades"] { background: linear-gradient(90deg, #ff3b3b, #9f00ff); border-color: #e11d48; color: #fff; }
-        .rango-btn.activo[data-rango-btn="poseidon"] { background: #2dd4bf; border-color: #2dd4bf; color: #00211c; }
-        .rango-btn.activo[data-rango-btn="vip"] { background: #facc15; border-color: #facc15; color: #1a1200; }
 
         section { scroll-margin-top: 80px; }
     </style>
@@ -287,30 +312,40 @@
 
 <section id="rangos" class="py-16 md:py-24 bg-[#150022]">
     <div class="max-w-5xl mx-auto px-6">
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-4 glitch tracking-widest">COMPRÁ TU RANGO</h2>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-4 glitch tracking-widest">ADQUIERE TU RANGO</h2>
         <p class="text-center text-purple-300 mb-10 max-w-2xl mx-auto">Elegí tu rango y sumate los beneficios dentro del server.</p>
 
-        <div class="flex flex-wrap items-center justify-center gap-3 mb-10">
-            <button type="button" onclick="mostrarRango('zeus')" data-rango-btn="zeus"
-                    class="rango-btn px-5 py-2.5 rounded-xl text-sm font-bold uppercase tracking-wide border transition-all">
-                <i class="fas fa-bolt mr-2"></i>Zeus
+        <div class="relative max-w-sm mx-auto mb-10" id="rango-dropdown-wrap">
+            <button type="button" id="rango-dropdown-btn" onclick="toggleRangoDropdown()"
+                    class="rango-dropdown-btn w-full flex items-center justify-between gap-3 bg-black border border-purple-500/40 rounded-2xl px-5 py-4 text-left transition-all">
+                <span id="rango-dropdown-label" class="font-bold tracking-wide text-sm sm:text-base">Seleccioná tu rango</span>
+                <i id="rango-dropdown-icono" class="fas fa-chevron-down transition-transform duration-300"></i>
             </button>
-            <button type="button" onclick="mostrarRango('hades')" data-rango-btn="hades"
-                    class="rango-btn px-5 py-2.5 rounded-xl text-sm font-bold uppercase tracking-wide border transition-all">
-                <i class="fas fa-skull mr-2"></i>Hades
-            </button>
-            <button type="button" onclick="mostrarRango('poseidon')" data-rango-btn="poseidon"
-                    class="rango-btn px-5 py-2.5 rounded-xl text-sm font-bold uppercase tracking-wide border transition-all">
-                <i class="fas fa-water mr-2"></i>Poseidón
-            </button>
-            <button type="button" onclick="mostrarRango('vip')" data-rango-btn="vip"
-                    class="rango-btn px-5 py-2.5 rounded-xl text-sm font-bold uppercase tracking-wide border transition-all">
-                <i class="fas fa-star mr-2"></i>VIP
-            </button>
+
+            <div id="rango-dropdown-list" class="rango-dropdown-list hidden absolute left-0 right-0 mt-2 bg-black border border-purple-500/40 rounded-2xl overflow-hidden z-20 shadow-xl shadow-black/50">
+                <button type="button" onclick="mostrarRango('zeus')" data-rango-btn="zeus"
+                        class="rango-opcion w-full flex items-center gap-3 px-5 py-3 text-left text-sm sm:text-base font-semibold uppercase tracking-wide transition-all">
+                    <i class="fas fa-bolt"></i> Zeus
+                </button>
+                <button type="button" onclick="mostrarRango('hades')" data-rango-btn="hades"
+                        class="rango-opcion w-full flex items-center gap-3 px-5 py-3 text-left text-sm sm:text-base font-semibold uppercase tracking-wide transition-all">
+                    <i class="fas fa-skull"></i> Hades
+                </button>
+                <button type="button" onclick="mostrarRango('poseidon')" data-rango-btn="poseidon"
+                        class="rango-opcion w-full flex items-center gap-3 px-5 py-3 text-left text-sm sm:text-base font-semibold uppercase tracking-wide transition-all">
+                    <i class="fas fa-water"></i> Poseidón
+                </button>
+                <button type="button" onclick="mostrarRango('vip')" data-rango-btn="vip"
+                        class="rango-opcion w-full flex items-center gap-3 px-5 py-3 text-left text-sm sm:text-base font-semibold uppercase tracking-wide transition-all">
+                    <i class="fas fa-star"></i> VIP
+                </button>
+            </div>
         </div>
 
+        <p id="rango-placeholder" class="text-center text-purple-400 text-sm mb-2">Elegí un rango arriba para ver sus beneficios ✨</p>
+
         <!-- Zeus -->
-        <div id="rango-zeus" data-rango-panel class="rango-panel bg-black border-2 rounded-3xl p-6 sm:p-8">
+        <div id="rango-zeus" data-rango-panel class="rango-panel hidden bg-black border-2 rounded-3xl p-6 sm:p-8">
             <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
                 <!-- EDITAR: reemplazar por la imagen real del rango, formato 9:16 -->
                 <img src="assets/rango-zeus.png" alt="Rango Zeus"
@@ -500,20 +535,77 @@
         }
     }
 
+    const RANGO_NOMBRES = { zeus: 'Zeus', hades: 'Hades', poseidon: 'Poseidón', vip: 'VIP' };
+
     function mostrarRango(rango) {
         document.querySelectorAll('[data-rango-panel]').forEach(panel => {
-            if (panel.id === 'rango-' + rango) {
+            const esElegido = panel.id === 'rango-' + rango;
+            if (esElegido) {
                 panel.classList.remove('hidden');
                 panel.style.display = 'block';
-            } else {
-                panel.classList.add('hidden');
-                panel.style.display = 'none';
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => panel.classList.add('rango-visible'));
+                });
+            } else if (!panel.classList.contains('hidden')) {
+                panel.classList.remove('rango-visible');
+                setTimeout(() => {
+                    panel.classList.add('hidden');
+                    panel.style.display = 'none';
+                }, 450);
             }
         });
+
         document.querySelectorAll('[data-rango-btn]').forEach(btn => {
             btn.classList.toggle('activo', btn.getAttribute('data-rango-btn') === rango);
         });
+
+        const placeholder = document.getElementById('rango-placeholder');
+        if (placeholder && placeholder.style.display !== 'none') {
+            placeholder.style.opacity = '0';
+            setTimeout(() => { placeholder.style.display = 'none'; }, 300);
+        }
+
+        const label = document.getElementById('rango-dropdown-label');
+        if (label) label.textContent = RANGO_NOMBRES[rango] || 'Seleccioná tu rango';
+
+        cerrarRangoDropdown();
     }
+
+    function toggleRangoDropdown() {
+        const list = document.getElementById('rango-dropdown-list');
+        const btn = document.getElementById('rango-dropdown-btn');
+        const icono = document.getElementById('rango-dropdown-icono');
+        if (!list || !btn) return;
+
+        const estaAbierto = !list.classList.contains('hidden');
+        if (estaAbierto) {
+            cerrarRangoDropdown();
+        } else {
+            list.classList.remove('hidden');
+            requestAnimationFrame(() => list.classList.add('rango-visible'));
+            btn.classList.add('abierto');
+            if (icono) icono.classList.add('girado');
+        }
+    }
+
+    function cerrarRangoDropdown() {
+        const list = document.getElementById('rango-dropdown-list');
+        const btn = document.getElementById('rango-dropdown-btn');
+        const icono = document.getElementById('rango-dropdown-icono');
+        if (!list || list.classList.contains('hidden')) return;
+
+        list.classList.remove('rango-visible');
+        setTimeout(() => list.classList.add('hidden'), 200);
+        if (btn) btn.classList.remove('abierto');
+        if (icono) icono.classList.remove('girado');
+    }
+
+    document.addEventListener('click', function(e) {
+        const wrap = document.getElementById('rango-dropdown-wrap');
+        if (wrap && !wrap.contains(e.target)) {
+            cerrarRangoDropdown();
+        }
+    });
 
     function copyEmail() {
         const email = 'perezexiliadomkt@gmail.com';
@@ -547,8 +639,6 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        mostrarRango('zeus');
-
         const mobileLinks = document.querySelectorAll('#mobile-menu a');
         mobileLinks.forEach(link => {
             link.addEventListener('click', function() {
