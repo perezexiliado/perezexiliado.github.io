@@ -371,11 +371,19 @@
 
         if (!menu || !btn) return;
 
-        menu.classList.toggle('hidden');
+        const estaCerrado = menu.classList.contains('hidden') || window.getComputedStyle(menu).display === 'none';
+
+        if (estaCerrado) {
+            menu.classList.remove('hidden');
+            menu.style.display = 'block';
+        } else {
+            menu.classList.add('hidden');
+            menu.style.display = 'none';
+        }
 
         const icon = btn.querySelector('i');
         if (icon) {
-            if (menu.classList.contains('hidden')) {
+            if (!estaCerrado) {
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
             } else {
@@ -438,7 +446,10 @@
             link.addEventListener('click', function() {
                 const menu = document.getElementById('mobile-menu');
                 const btn = document.getElementById('menu-btn');
-                if (menu) menu.classList.add('hidden');
+                if (menu) {
+                    menu.classList.add('hidden');
+                    menu.style.display = 'none';
+                }
                 if (btn) {
                     const icon = btn.querySelector('i');
                     if (icon) {
