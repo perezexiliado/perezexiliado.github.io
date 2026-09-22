@@ -73,66 +73,14 @@
             transform: scale(0.98);
         }
 
-        .rango-panel {
-            border-color: rgba(255,255,255,0.12);
-            opacity: 0;
-            transform: translateY(18px) scale(0.98);
-            transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+        .explora-card {
+            transition: all 0.3s ease;
         }
-        .rango-panel.rango-visible {
-            opacity: 1;
-            transform: translateY(0) scale(1);
+        .explora-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--purple);
+            box-shadow: 0 0 30px -8px var(--purple);
         }
-        .rango-icono { width: 1.1em; text-align: center; }
-
-        .rango-dropdown-btn:hover, .rango-dropdown-btn.abierto { border-color: #9f00ff; }
-        #rango-dropdown-icono.girado { transform: rotate(180deg); }
-
-        .rango-dropdown-list {
-            opacity: 0;
-            transform: translateY(-8px);
-            transition: opacity 0.25s ease, transform 0.25s ease;
-        }
-        .rango-dropdown-list.rango-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .rango-opcion { background: #000; color: #d8b4fe; border-top: 1px solid rgba(255,255,255,0.08); }
-        .rango-opcion:first-child { border-top: none; }
-        .rango-opcion:hover { background: #1a0630; }
-        .rango-opcion.activo[data-rango-btn="zeus"] { background: rgba(56,189,248,0.15); color: #38bdf8; }
-        .rango-opcion.activo[data-rango-btn="hades"] { background: rgba(225,29,72,0.15); color: #f43f5e; }
-        .rango-opcion.activo[data-rango-btn="poseidon"] { background: rgba(45,212,191,0.15); color: #2dd4bf; }
-        .rango-opcion.activo[data-rango-btn="vip"] { background: rgba(250,204,21,0.15); color: #facc15; }
-
-        #rango-placeholder { transition: opacity 0.3s ease; }
-
-        #rango-zeus, #rango-zeus .rango-img { border-color: #38bdf8; }
-        #rango-zeus .rango-icono, #rango-zeus .rango-titulo { color: #38bdf8; }
-        #rango-zeus .rango-cta { background: #38bdf8; color: #00121c; }
-        #rango-zeus .rango-cta:hover { background: #7dd3fc; }
-
-        #rango-hades, #rango-hades .rango-img { border-color: #e11d48; }
-        #rango-hades .rango-icono { color: #f43f5e; }
-        #rango-hades .rango-titulo {
-            background: linear-gradient(90deg, #ff3b3b, #9f00ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        #rango-hades .rango-cta { background: linear-gradient(90deg, #ff3b3b, #9f00ff); color: #fff; }
-        #rango-hades .rango-cta:hover { filter: brightness(1.15); }
-
-        #rango-poseidon, #rango-poseidon .rango-img { border-color: #2dd4bf; }
-        #rango-poseidon .rango-icono, #rango-poseidon .rango-titulo { color: #2dd4bf; }
-        #rango-poseidon .rango-cta { background: #2dd4bf; color: #00211c; }
-        #rango-poseidon .rango-cta:hover { background: #5eead4; }
-
-        #rango-vip, #rango-vip .rango-img { border-color: #facc15; }
-        #rango-vip .rango-icono, #rango-vip .rango-titulo { color: #facc15; }
-        #rango-vip .rango-cta { background: #facc15; color: #1a1200; }
-        #rango-vip .rango-cta:hover { background: #fde047; }
 
         section { scroll-margin-top: 80px; }
     </style>
@@ -142,19 +90,18 @@
 <nav class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-purple-500">
     <div class="max-w-7xl mx-auto px-4 md:px-5 py-3 md:py-4 flex items-center justify-between">
 
-        <div class="flex items-center gap-2 md:gap-3">
+        <a href="exiliadosmc" class="flex items-center gap-2 md:gap-3">
             <div class="w-8 h-8 md:w-9 md:h-9 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center overflow-hidden border border-purple-400/30">
                 <img src="assets/logoaizq.jpg" alt="Exiliado Logo" class="w-8 h-8 md:w-9 md:h-9 object-contain">
             </div>
             <h1 class="text-lg md:text-xl font-bold tracking-widest glitch">EXILIADO</h1>
-        </div>
+        </a>
 
         <div class="hidden md:flex items-center gap-6 text-sm uppercase">
-            <a href="index" class="hover:text-purple-400">INICIO</a>
-            <a href="marcas" class="hover:text-purple-400">MARCAS</a>
-            <a href="saludos" class="hover:text-purple-400">SALUDOS</a>
-            <a href="cursos" class="hover:text-purple-400">CURSOS</a>
-            <a href="servermc" class="text-purple-400 border-b-2 border-purple-400">SERVER MC</a>
+            <a href="exiliadosmc" class="text-purple-400 border-b-2 border-purple-400">EXILIADOS MC</a>
+            <a href="rangos" class="hover:text-purple-400">RANGOS</a>
+            <a href="kits" class="hover:text-purple-400">KITS</a>
+            <a href="keys" class="hover:text-purple-400">KEYS</a>
         </div>
 
         <div class="flex items-center gap-2 md:gap-3">
@@ -178,11 +125,10 @@
 
     <div id="mobile-menu" class="hidden md:hidden bg-[#0a0012] border-t border-purple-700">
         <div class="flex flex-col px-5 py-1 text-sm uppercase">
-            <a href="index" class="py-3 hover:text-purple-400">INICIO</a>
-            <a href="marcas" class="py-3 hover:text-purple-400">MARCAS</a>
-            <a href="saludos" class="py-3 hover:text-purple-400">SALUDOS</a>
-            <a href="cursos" class="py-3 hover:text-purple-400">CURSOS</a>
-            <a href="servermc" class="py-3 text-purple-400 border-b-2 border-purple-400">SERVER MC</a>
+            <a href="exiliadosmc" class="py-3 text-purple-400 border-b-2 border-purple-400 w-fit">EXILIADOS MC</a>
+            <a href="rangos" class="py-3 hover:text-purple-400">RANGOS</a>
+            <a href="kits" class="py-3 hover:text-purple-400">KITS</a>
+            <a href="keys" class="py-3 hover:text-purple-400">KEYS</a>
         </div>
     </div>
 </nav>
@@ -310,130 +256,35 @@
     </div>
 </section>
 
-<section id="rangos" class="py-16 md:py-24 bg-[#150022]">
-    <div class="max-w-5xl mx-auto px-6">
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-4 glitch tracking-widest">ADQUIERE TU RANGO</h2>
-        <p class="text-center text-purple-300 mb-10 max-w-2xl mx-auto">Elegí tu rango y sumate los beneficios dentro del server.</p>
+<section id="explora" class="py-16 md:py-24 bg-[#150022]">
+    <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-4 glitch tracking-widest">SUMATE LOS BENEFICIOS</h2>
+        <p class="text-center text-purple-300 mb-12 max-w-2xl mx-auto">Rangos, kits y keys para llevar tu partida al siguiente nivel.</p>
 
-        <div class="relative max-w-sm mx-auto mb-10" id="rango-dropdown-wrap">
-            <button type="button" id="rango-dropdown-btn" onclick="toggleRangoDropdown()"
-                    class="rango-dropdown-btn w-full flex items-center justify-between gap-3 bg-black border border-purple-500/40 rounded-2xl px-5 py-4 text-left transition-all">
-                <span id="rango-dropdown-label" class="font-bold tracking-wide text-sm sm:text-base">Seleccioná tu rango</span>
-                <i id="rango-dropdown-icono" class="fas fa-chevron-down transition-transform duration-300"></i>
-            </button>
-
-            <div id="rango-dropdown-list" class="rango-dropdown-list hidden absolute left-0 right-0 mt-2 bg-black border border-purple-500/40 rounded-2xl overflow-hidden z-20 shadow-xl shadow-black/50">
-                <button type="button" onclick="mostrarRango('zeus')" data-rango-btn="zeus"
-                        class="rango-opcion w-full flex items-center gap-3 px-5 py-3 text-left text-sm sm:text-base font-semibold uppercase tracking-wide transition-all">
-                    <i class="fas fa-bolt"></i> Zeus
-                </button>
-                <button type="button" onclick="mostrarRango('hades')" data-rango-btn="hades"
-                        class="rango-opcion w-full flex items-center gap-3 px-5 py-3 text-left text-sm sm:text-base font-semibold uppercase tracking-wide transition-all">
-                    <i class="fas fa-skull"></i> Hades
-                </button>
-                <button type="button" onclick="mostrarRango('poseidon')" data-rango-btn="poseidon"
-                        class="rango-opcion w-full flex items-center gap-3 px-5 py-3 text-left text-sm sm:text-base font-semibold uppercase tracking-wide transition-all">
-                    <i class="fas fa-water"></i> Poseidón
-                </button>
-                <button type="button" onclick="mostrarRango('vip')" data-rango-btn="vip"
-                        class="rango-opcion w-full flex items-center gap-3 px-5 py-3 text-left text-sm sm:text-base font-semibold uppercase tracking-wide transition-all">
-                    <i class="fas fa-star"></i> VIP
-                </button>
-            </div>
-        </div>
-
-        <p id="rango-placeholder" class="text-center text-purple-400 text-sm mb-2">Elegí un rango arriba para ver sus beneficios ✨</p>
-
-        <!-- Zeus -->
-        <div id="rango-zeus" data-rango-panel class="rango-panel hidden bg-black border-2 rounded-3xl p-6 sm:p-8">
-            <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
-                <!-- EDITAR: reemplazar por la imagen real del rango, formato 9:16 -->
-                <img src="assets/rango-zeus.png" alt="Rango Zeus"
-                     class="w-28 sm:w-32 aspect-[9/16] object-cover rounded-2xl border-2 flex-shrink-0 rango-img">
-                <div class="flex-1 text-center sm:text-left">
-                    <h3 class="text-2xl sm:text-3xl font-bold mb-1 rango-titulo">ZEUS</h3>
-                    <p class="text-sm text-purple-400 mb-4">El rango más alto del server</p>
-                    <ul class="space-y-2 text-purple-200 text-sm sm:text-base mb-6">
-                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-box-open rango-icono"></i> Acceso al kit Zeus</li>
-                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-briefcase rango-icono"></i> Hasta 6 jobs</li>
-                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-shield-halved rango-icono"></i> Hasta 5 piedras de protección simultáneas</li>
-                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-house rango-icono"></i> Acceso a múltiples homes</li>
-                    </ul>
-                    <button onclick="showContactModal()"
-                            class="rango-cta inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-sm sm:text-base transition-all active:scale-95">
-                        QUIERO EL RANGO ZEUS <i class="fas fa-arrow-right"></i>
-                    </button>
+        <div class="grid sm:grid-cols-3 gap-6">
+            <a href="rangos" class="explora-card bg-black border-2 border-purple-500/30 rounded-3xl p-8 text-center flex flex-col items-center">
+                <div class="w-16 h-16 rounded-2xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center mb-5">
+                    <i class="fas fa-crown text-3xl text-purple-300"></i>
                 </div>
-            </div>
-        </div>
+                <h3 class="text-xl font-bold mb-2">RANGOS</h3>
+                <p class="text-purple-300 text-sm">Zeus, Hades, Poseidón y VIP. Elegí el tuyo y desbloqueá beneficios.</p>
+            </a>
 
-        <!-- Hades -->
-        <div id="rango-hades" data-rango-panel class="rango-panel hidden bg-black border-2 rounded-3xl p-6 sm:p-8">
-            <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
-                <!-- EDITAR: reemplazar por la imagen real del rango, formato 9:16 -->
-                <img src="assets/rango-hades.png" alt="Rango Hades"
-                     class="w-28 sm:w-32 aspect-[9/16] object-cover rounded-2xl border-2 flex-shrink-0 rango-img">
-                <div class="flex-1 text-center sm:text-left">
-                    <h3 class="text-2xl sm:text-3xl font-bold mb-1 rango-titulo">HADES</h3>
-                    <p class="text-sm text-purple-400 mb-4">Poder del inframundo</p>
-                    <ul class="space-y-2 text-purple-200 text-sm sm:text-base mb-6">
-                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-box-open rango-icono"></i> Acceso al kit Hades</li>
-                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-briefcase rango-icono"></i> Hasta 5 jobs</li>
-                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-shield-halved rango-icono"></i> Hasta 4 piedras de protección simultáneas</li>
-                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-house rango-icono"></i> Acceso a múltiples homes</li>
-                    </ul>
-                    <button onclick="showContactModal()"
-                            class="rango-cta inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-sm sm:text-base transition-all active:scale-95">
-                        QUIERO EL RANGO HADES <i class="fas fa-arrow-right"></i>
-                    </button>
+            <a href="kits" class="explora-card bg-black border-2 border-purple-500/30 rounded-3xl p-8 text-center flex flex-col items-center">
+                <div class="w-16 h-16 rounded-2xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center mb-5">
+                    <i class="fas fa-box-open text-3xl text-purple-300"></i>
                 </div>
-            </div>
-        </div>
+                <h3 class="text-xl font-bold mb-2">KITS</h3>
+                <p class="text-purple-300 text-sm">Equipate rápido con los kits del server.</p>
+            </a>
 
-        <!-- Poseidón -->
-        <div id="rango-poseidon" data-rango-panel class="rango-panel hidden bg-black border-2 rounded-3xl p-6 sm:p-8">
-            <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
-                <!-- EDITAR: reemplazar por la imagen real del rango, formato 9:16 -->
-                <img src="assets/rango-poseidon.png" alt="Rango Poseidón"
-                     class="w-28 sm:w-32 aspect-[9/16] object-cover rounded-2xl border-2 flex-shrink-0 rango-img">
-                <div class="flex-1 text-center sm:text-left">
-                    <h3 class="text-2xl sm:text-3xl font-bold mb-1 rango-titulo">POSEIDÓN</h3>
-                    <p class="text-sm text-purple-400 mb-4">Dominá los mares del server</p>
-                    <ul class="space-y-2 text-purple-200 text-sm sm:text-base mb-6">
-                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-box-open rango-icono"></i> Acceso al kit Poseidón</li>
-                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-briefcase rango-icono"></i> Hasta 4 jobs</li>
-                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-shield-halved rango-icono"></i> Hasta 3 piedras de protección simultáneas</li>
-                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-house rango-icono"></i> Acceso a múltiples homes</li>
-                    </ul>
-                    <button onclick="showContactModal()"
-                            class="rango-cta inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-sm sm:text-base transition-all active:scale-95">
-                        QUIERO EL RANGO POSEIDÓN <i class="fas fa-arrow-right"></i>
-                    </button>
+            <a href="keys" class="explora-card bg-black border-2 border-purple-500/30 rounded-3xl p-8 text-center flex flex-col items-center">
+                <div class="w-16 h-16 rounded-2xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center mb-5">
+                    <i class="fas fa-key text-3xl text-purple-300"></i>
                 </div>
-            </div>
-        </div>
-
-        <!-- VIP -->
-        <div id="rango-vip" data-rango-panel class="rango-panel hidden bg-black border-2 rounded-3xl p-6 sm:p-8">
-            <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
-                <!-- EDITAR: reemplazar por la imagen real del rango, formato 9:16 -->
-                <img src="assets/rango-vip.png" alt="Rango VIP"
-                     class="w-28 sm:w-32 aspect-[9/16] object-cover rounded-2xl border-2 flex-shrink-0 rango-img">
-                <div class="flex-1 text-center sm:text-left">
-                    <h3 class="text-2xl sm:text-3xl font-bold mb-1 rango-titulo">VIP</h3>
-                    <p class="text-sm text-purple-400 mb-4">La entrada a los beneficios del server</p>
-                    <ul class="space-y-2 text-purple-200 text-sm sm:text-base mb-6">
-                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-box-open rango-icono"></i> Acceso al kit VIP</li>
-                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-briefcase rango-icono"></i> Hasta 3 jobs</li>
-                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-shield-halved rango-icono"></i> Hasta 2 piedras de protección simultáneas</li>
-                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-house rango-icono"></i> Acceso a múltiples homes</li>
-                    </ul>
-                    <button onclick="showContactModal()"
-                            class="rango-cta inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-sm sm:text-base transition-all active:scale-95">
-                        QUIERO EL RANGO VIP <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-            </div>
+                <h3 class="text-xl font-bold mb-2">KEYS</h3>
+                <p class="text-purple-300 text-sm">Llaves para abrir crates y conseguir recompensas exclusivas.</p>
+            </a>
         </div>
     </div>
 </section>
@@ -482,7 +333,7 @@
             <a href="https://www.instagram.com/martinpemiliano" target="_blank" class="hover:text-purple-100 transition-colors">Instagram</a>
             <a href="https://www.youtube.com/@perezexiliado" target="_blank" class="hover:text-purple-100 transition-colors">YouTube</a>
             <a href="t&c" class="hover:text-purple-100 transition-colors">Términos y Condiciones</a>
-            <a href="servermc" class="hover:text-purple-100 transition-colors">Server MC</a>
+            <a href="exiliadosmc" class="hover:text-purple-100 transition-colors">Server MC</a>
         </div>
         <p class="text-purple-400 text-xs sm:text-sm">Para mis seres queridos y la gente que amo</p>
     </div>
@@ -534,78 +385,6 @@
             modal.classList.remove('flex');
         }
     }
-
-    const RANGO_NOMBRES = { zeus: 'Zeus', hades: 'Hades', poseidon: 'Poseidón', vip: 'VIP' };
-
-    function mostrarRango(rango) {
-        document.querySelectorAll('[data-rango-panel]').forEach(panel => {
-            const esElegido = panel.id === 'rango-' + rango;
-            if (esElegido) {
-                panel.classList.remove('hidden');
-                panel.style.display = 'block';
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => panel.classList.add('rango-visible'));
-                });
-            } else if (!panel.classList.contains('hidden')) {
-                panel.classList.remove('rango-visible');
-                setTimeout(() => {
-                    panel.classList.add('hidden');
-                    panel.style.display = 'none';
-                }, 450);
-            }
-        });
-
-        document.querySelectorAll('[data-rango-btn]').forEach(btn => {
-            btn.classList.toggle('activo', btn.getAttribute('data-rango-btn') === rango);
-        });
-
-        const placeholder = document.getElementById('rango-placeholder');
-        if (placeholder && placeholder.style.display !== 'none') {
-            placeholder.style.opacity = '0';
-            setTimeout(() => { placeholder.style.display = 'none'; }, 300);
-        }
-
-        const label = document.getElementById('rango-dropdown-label');
-        if (label) label.textContent = RANGO_NOMBRES[rango] || 'Seleccioná tu rango';
-
-        cerrarRangoDropdown();
-    }
-
-    function toggleRangoDropdown() {
-        const list = document.getElementById('rango-dropdown-list');
-        const btn = document.getElementById('rango-dropdown-btn');
-        const icono = document.getElementById('rango-dropdown-icono');
-        if (!list || !btn) return;
-
-        const estaAbierto = !list.classList.contains('hidden');
-        if (estaAbierto) {
-            cerrarRangoDropdown();
-        } else {
-            list.classList.remove('hidden');
-            requestAnimationFrame(() => list.classList.add('rango-visible'));
-            btn.classList.add('abierto');
-            if (icono) icono.classList.add('girado');
-        }
-    }
-
-    function cerrarRangoDropdown() {
-        const list = document.getElementById('rango-dropdown-list');
-        const btn = document.getElementById('rango-dropdown-btn');
-        const icono = document.getElementById('rango-dropdown-icono');
-        if (!list || list.classList.contains('hidden')) return;
-
-        list.classList.remove('rango-visible');
-        setTimeout(() => list.classList.add('hidden'), 200);
-        if (btn) btn.classList.remove('abierto');
-        if (icono) icono.classList.remove('girado');
-    }
-
-    document.addEventListener('click', function(e) {
-        const wrap = document.getElementById('rango-dropdown-wrap');
-        if (wrap && !wrap.contains(e.target)) {
-            cerrarRangoDropdown();
-        }
-    });
 
     function copyEmail() {
         const email = 'perezexiliadomkt@gmail.com';
