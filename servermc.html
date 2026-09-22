@@ -73,6 +73,36 @@
             transform: scale(0.98);
         }
 
+        .rango-panel { border-color: rgba(255,255,255,0.12); }
+        .rango-icono { width: 1.1em; text-align: center; }
+
+        #rango-zeus, #rango-zeus .rango-img { border-color: #facc15; }
+        #rango-zeus .rango-icono, #rango-zeus .rango-titulo { color: #facc15; }
+        #rango-zeus .rango-cta { background: #facc15; color: #1a1200; }
+        #rango-zeus .rango-cta:hover { background: #fde047; }
+
+        #rango-hades, #rango-hades .rango-img { border-color: #c084fc; }
+        #rango-hades .rango-icono, #rango-hades .rango-titulo { color: #c084fc; }
+        #rango-hades .rango-cta { background: #9f00ff; color: #fff; }
+        #rango-hades .rango-cta:hover { background: #b833ff; }
+
+        #rango-poseidon, #rango-poseidon .rango-img { border-color: #38bdf8; }
+        #rango-poseidon .rango-icono, #rango-poseidon .rango-titulo { color: #38bdf8; }
+        #rango-poseidon .rango-cta { background: #38bdf8; color: #00121c; }
+        #rango-poseidon .rango-cta:hover { background: #7dd3fc; }
+
+        #rango-vip, #rango-vip .rango-img { border-color: #4ade80; }
+        #rango-vip .rango-icono, #rango-vip .rango-titulo { color: #4ade80; }
+        #rango-vip .rango-cta { background: #4ade80; color: #001a0a; }
+        #rango-vip .rango-cta:hover { background: #86efac; }
+
+        .rango-btn { background: #000; color: #c4b5fd; border-color: rgba(159,0,255,0.3); }
+        .rango-btn:hover { border-color: #9f00ff; }
+        .rango-btn.activo[data-rango-btn="zeus"] { background: #facc15; border-color: #facc15; color: #1a1200; }
+        .rango-btn.activo[data-rango-btn="hades"] { background: #9f00ff; border-color: #9f00ff; color: #fff; }
+        .rango-btn.activo[data-rango-btn="poseidon"] { background: #38bdf8; border-color: #38bdf8; color: #00121c; }
+        .rango-btn.activo[data-rango-btn="vip"] { background: #4ade80; border-color: #4ade80; color: #001a0a; }
+
         section { scroll-margin-top: 80px; }
     </style>
 </head>
@@ -249,64 +279,119 @@
     </div>
 </section>
 
-<section id="que-tiene" class="py-16 md:py-24 bg-[#150022]">
-    <div class="max-w-6xl mx-auto px-6">
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-4 glitch tracking-widest">QUÉ TIENE EL SERVER</h2>
-        <p class="text-center text-purple-300 mb-12 max-w-2xl mx-auto">Nada de vanilla pelado: está armado para que haya progresión, economía y cosas que hacer.</p>
+<section id="rangos" class="py-16 md:py-24 bg-[#150022]">
+    <div class="max-w-5xl mx-auto px-6">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-4 glitch tracking-widest">COMPRÁ TU RANGO</h2>
+        <p class="text-center text-purple-300 mb-10 max-w-2xl mx-auto">Elegí tu rango y sumate los beneficios dentro del server.</p>
 
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="server-card bg-black border border-purple-500/20 rounded-3xl p-6">
-                <i class="fas fa-coins text-3xl text-green-400 mb-4"></i>
-                <h3 class="font-bold text-lg mb-2">Economía y trabajos</h3>
-                <p class="text-purple-300 text-sm">Ganá plata jugando con un sistema de trabajos y economía integrada al servidor.</p>
+        <div class="flex flex-wrap items-center justify-center gap-3 mb-10">
+            <button type="button" onclick="mostrarRango('zeus')" data-rango-btn="zeus"
+                    class="rango-btn px-5 py-2.5 rounded-xl text-sm font-bold uppercase tracking-wide border transition-all">
+                <i class="fas fa-bolt mr-2"></i>Zeus
+            </button>
+            <button type="button" onclick="mostrarRango('hades')" data-rango-btn="hades"
+                    class="rango-btn px-5 py-2.5 rounded-xl text-sm font-bold uppercase tracking-wide border transition-all">
+                <i class="fas fa-skull mr-2"></i>Hades
+            </button>
+            <button type="button" onclick="mostrarRango('poseidon')" data-rango-btn="poseidon"
+                    class="rango-btn px-5 py-2.5 rounded-xl text-sm font-bold uppercase tracking-wide border transition-all">
+                <i class="fas fa-water mr-2"></i>Poseidón
+            </button>
+            <button type="button" onclick="mostrarRango('vip')" data-rango-btn="vip"
+                    class="rango-btn px-5 py-2.5 rounded-xl text-sm font-bold uppercase tracking-wide border transition-all">
+                <i class="fas fa-star mr-2"></i>VIP
+            </button>
+        </div>
+
+        <!-- Zeus -->
+        <div id="rango-zeus" data-rango-panel class="rango-panel bg-black border-2 rounded-3xl p-6 sm:p-8">
+            <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
+                <!-- EDITAR: reemplazar por la imagen real del rango, formato 9:16 -->
+                <img src="assets/rango-zeus.png" alt="Rango Zeus"
+                     class="w-28 sm:w-32 aspect-[9/16] object-cover rounded-2xl border-2 flex-shrink-0 rango-img">
+                <div class="flex-1 text-center sm:text-left">
+                    <h3 class="text-2xl sm:text-3xl font-bold mb-1 rango-titulo">ZEUS</h3>
+                    <p class="text-sm text-purple-400 mb-4">El rango más alto del server</p>
+                    <ul class="space-y-2 text-purple-200 text-sm sm:text-base mb-6">
+                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-box-open rango-icono"></i> Acceso al kit Zeus</li>
+                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-briefcase rango-icono"></i> Hasta 6 jobs</li>
+                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-shield-halved rango-icono"></i> Hasta 5 piedras de protección simultáneas</li>
+                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-house rango-icono"></i> Acceso a múltiples homes</li>
+                    </ul>
+                    <button onclick="showContactModal()"
+                            class="rango-cta inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-sm sm:text-base transition-all active:scale-95">
+                        QUIERO EL RANGO ZEUS <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
             </div>
+        </div>
 
-            <div class="server-card bg-black border border-purple-500/20 rounded-3xl p-6">
-                <i class="fas fa-ranking-star text-3xl text-green-400 mb-4"></i>
-                <h3 class="font-bold text-lg mb-2">Rangos y permisos</h3>
-                <p class="text-purple-300 text-sm">Sistema de rangos con permisos por grupo, para ir escalando dentro del server.</p>
+        <!-- Hades -->
+        <div id="rango-hades" data-rango-panel class="rango-panel hidden bg-black border-2 rounded-3xl p-6 sm:p-8">
+            <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
+                <!-- EDITAR: reemplazar por la imagen real del rango, formato 9:16 -->
+                <img src="assets/rango-hades.png" alt="Rango Hades"
+                     class="w-28 sm:w-32 aspect-[9/16] object-cover rounded-2xl border-2 flex-shrink-0 rango-img">
+                <div class="flex-1 text-center sm:text-left">
+                    <h3 class="text-2xl sm:text-3xl font-bold mb-1 rango-titulo">HADES</h3>
+                    <p class="text-sm text-purple-400 mb-4">Poder del inframundo</p>
+                    <ul class="space-y-2 text-purple-200 text-sm sm:text-base mb-6">
+                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-box-open rango-icono"></i> Acceso al kit Hades</li>
+                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-briefcase rango-icono"></i> Hasta 5 jobs</li>
+                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-shield-halved rango-icono"></i> Hasta 4 piedras de protección simultáneas</li>
+                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-house rango-icono"></i> Acceso a múltiples homes</li>
+                    </ul>
+                    <button onclick="showContactModal()"
+                            class="rango-cta inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-sm sm:text-base transition-all active:scale-95">
+                        QUIERO EL RANGO HADES <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
             </div>
+        </div>
 
-            <div class="server-card bg-black border border-purple-500/20 rounded-3xl p-6">
-                <i class="fas fa-shield-halved text-3xl text-green-400 mb-4"></i>
-                <h3 class="font-bold text-lg mb-2">Terrenos protegidos</h3>
-                <p class="text-purple-300 text-sm">Protegé tu casa y tus construcciones para que nadie te robe ni te griefee.</p>
+        <!-- Poseidón -->
+        <div id="rango-poseidon" data-rango-panel class="rango-panel hidden bg-black border-2 rounded-3xl p-6 sm:p-8">
+            <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
+                <!-- EDITAR: reemplazar por la imagen real del rango, formato 9:16 -->
+                <img src="assets/rango-poseidon.png" alt="Rango Poseidón"
+                     class="w-28 sm:w-32 aspect-[9/16] object-cover rounded-2xl border-2 flex-shrink-0 rango-img">
+                <div class="flex-1 text-center sm:text-left">
+                    <h3 class="text-2xl sm:text-3xl font-bold mb-1 rango-titulo">POSEIDÓN</h3>
+                    <p class="text-sm text-purple-400 mb-4">Dominá los mares del server</p>
+                    <ul class="space-y-2 text-purple-200 text-sm sm:text-base mb-6">
+                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-box-open rango-icono"></i> Acceso al kit Poseidón</li>
+                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-briefcase rango-icono"></i> Hasta 4 jobs</li>
+                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-shield-halved rango-icono"></i> Hasta 3 piedras de protección simultáneas</li>
+                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-house rango-icono"></i> Acceso a múltiples homes</li>
+                    </ul>
+                    <button onclick="showContactModal()"
+                            class="rango-cta inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-sm sm:text-base transition-all active:scale-95">
+                        QUIERO EL RANGO POSEIDÓN <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
             </div>
+        </div>
 
-            <div class="server-card bg-black border border-purple-500/20 rounded-3xl p-6">
-                <i class="fas fa-earth-americas text-3xl text-green-400 mb-4"></i>
-                <h3 class="font-bold text-lg mb-2">Multi-mundos</h3>
-                <p class="text-purple-300 text-sm">Varios mundos separados (survival, eventos, etc.) para no mezclar todo en uno solo.</p>
-            </div>
-
-            <div class="server-card bg-black border border-purple-500/20 rounded-3xl p-6">
-                <i class="fas fa-gift text-3xl text-green-400 mb-4"></i>
-                <h3 class="font-bold text-lg mb-2">Crates y recompensas</h3>
-                <p class="text-purple-300 text-sm">Cofres especiales con recompensas para abrir jugando y participando del server.</p>
-            </div>
-
-            <div class="server-card bg-black border border-purple-500/20 rounded-3xl p-6">
-                <i class="fas fa-cubes text-3xl text-green-400 mb-4"></i>
-                <h3 class="font-bold text-lg mb-2">Ítems y contenido custom</h3>
-                <p class="text-purple-300 text-sm">Ítems y detalles agregados especialmente para el server, más allá del vanilla.</p>
-            </div>
-
-            <div class="server-card bg-black border border-purple-500/20 rounded-3xl p-6">
-                <i class="fas fa-user-lock text-3xl text-green-400 mb-4"></i>
-                <h3 class="font-bold text-lg mb-2">Cuentas protegidas</h3>
-                <p class="text-purple-300 text-sm">Sistema de login para que nadie pueda robarte el nick ni entrar con tu usuario.</p>
-            </div>
-
-            <div class="server-card bg-black border border-purple-500/20 rounded-3xl p-6">
-                <i class="fas fa-gamepad text-3xl text-green-400 mb-4"></i>
-                <h3 class="font-bold text-lg mb-2">Cross-play total</h3>
-                <p class="text-purple-300 text-sm">Java y Bedrock en el mismo mundo, jugando juntos sin drama.</p>
-            </div>
-
-            <div class="server-card bg-black border border-purple-500/20 rounded-3xl p-6">
-                <i class="fas fa-comments text-3xl text-green-400 mb-4"></i>
-                <h3 class="font-bold text-lg mb-2">Comunidad</h3>
-                <p class="text-purple-300 text-sm">Una banda de gente jugando, eventos de vez en cuando y buena onda ante todo.</p>
+        <!-- VIP -->
+        <div id="rango-vip" data-rango-panel class="rango-panel hidden bg-black border-2 rounded-3xl p-6 sm:p-8">
+            <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
+                <!-- EDITAR: reemplazar por la imagen real del rango, formato 9:16 -->
+                <img src="assets/rango-vip.png" alt="Rango VIP"
+                     class="w-28 sm:w-32 aspect-[9/16] object-cover rounded-2xl border-2 flex-shrink-0 rango-img">
+                <div class="flex-1 text-center sm:text-left">
+                    <h3 class="text-2xl sm:text-3xl font-bold mb-1 rango-titulo">VIP</h3>
+                    <p class="text-sm text-purple-400 mb-4">La entrada a los beneficios del server</p>
+                    <ul class="space-y-2 text-purple-200 text-sm sm:text-base mb-6">
+                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-box-open rango-icono"></i> Acceso al kit VIP</li>
+                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-briefcase rango-icono"></i> Hasta 3 jobs</li>
+                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-shield-halved rango-icono"></i> Hasta 2 piedras de protección simultáneas</li>
+                        <li class="flex items-center gap-2 justify-center sm:justify-start"><i class="fas fa-house rango-icono"></i> Acceso a múltiples homes</li>
+                    </ul>
+                    <button onclick="showContactModal()"
+                            class="rango-cta inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-sm sm:text-base transition-all active:scale-95">
+                        QUIERO EL RANGO VIP <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -409,6 +494,21 @@
         }
     }
 
+    function mostrarRango(rango) {
+        document.querySelectorAll('[data-rango-panel]').forEach(panel => {
+            if (panel.id === 'rango-' + rango) {
+                panel.classList.remove('hidden');
+                panel.style.display = 'block';
+            } else {
+                panel.classList.add('hidden');
+                panel.style.display = 'none';
+            }
+        });
+        document.querySelectorAll('[data-rango-btn]').forEach(btn => {
+            btn.classList.toggle('activo', btn.getAttribute('data-rango-btn') === rango);
+        });
+    }
+
     function copyEmail() {
         const email = 'perezexiliadomkt@gmail.com';
         navigator.clipboard.writeText(email).then(() => {
@@ -441,6 +541,8 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
+        mostrarRango('zeus');
+
         const mobileLinks = document.querySelectorAll('#mobile-menu a');
         mobileLinks.forEach(link => {
             link.addEventListener('click', function() {
