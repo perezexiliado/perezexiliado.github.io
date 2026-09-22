@@ -76,32 +76,38 @@
         .rango-panel { border-color: rgba(255,255,255,0.12); }
         .rango-icono { width: 1.1em; text-align: center; }
 
-        #rango-zeus, #rango-zeus .rango-img { border-color: #facc15; }
-        #rango-zeus .rango-icono, #rango-zeus .rango-titulo { color: #facc15; }
-        #rango-zeus .rango-cta { background: #facc15; color: #1a1200; }
-        #rango-zeus .rango-cta:hover { background: #fde047; }
+        #rango-zeus, #rango-zeus .rango-img { border-color: #38bdf8; }
+        #rango-zeus .rango-icono, #rango-zeus .rango-titulo { color: #38bdf8; }
+        #rango-zeus .rango-cta { background: #38bdf8; color: #00121c; }
+        #rango-zeus .rango-cta:hover { background: #7dd3fc; }
 
-        #rango-hades, #rango-hades .rango-img { border-color: #c084fc; }
-        #rango-hades .rango-icono, #rango-hades .rango-titulo { color: #c084fc; }
-        #rango-hades .rango-cta { background: #9f00ff; color: #fff; }
-        #rango-hades .rango-cta:hover { background: #b833ff; }
+        #rango-hades, #rango-hades .rango-img { border-color: #e11d48; }
+        #rango-hades .rango-icono { color: #f43f5e; }
+        #rango-hades .rango-titulo {
+            background: linear-gradient(90deg, #ff3b3b, #9f00ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        #rango-hades .rango-cta { background: linear-gradient(90deg, #ff3b3b, #9f00ff); color: #fff; }
+        #rango-hades .rango-cta:hover { filter: brightness(1.15); }
 
-        #rango-poseidon, #rango-poseidon .rango-img { border-color: #38bdf8; }
-        #rango-poseidon .rango-icono, #rango-poseidon .rango-titulo { color: #38bdf8; }
-        #rango-poseidon .rango-cta { background: #38bdf8; color: #00121c; }
-        #rango-poseidon .rango-cta:hover { background: #7dd3fc; }
+        #rango-poseidon, #rango-poseidon .rango-img { border-color: #2dd4bf; }
+        #rango-poseidon .rango-icono, #rango-poseidon .rango-titulo { color: #2dd4bf; }
+        #rango-poseidon .rango-cta { background: #2dd4bf; color: #00211c; }
+        #rango-poseidon .rango-cta:hover { background: #5eead4; }
 
-        #rango-vip, #rango-vip .rango-img { border-color: #4ade80; }
-        #rango-vip .rango-icono, #rango-vip .rango-titulo { color: #4ade80; }
-        #rango-vip .rango-cta { background: #4ade80; color: #001a0a; }
-        #rango-vip .rango-cta:hover { background: #86efac; }
+        #rango-vip, #rango-vip .rango-img { border-color: #facc15; }
+        #rango-vip .rango-icono, #rango-vip .rango-titulo { color: #facc15; }
+        #rango-vip .rango-cta { background: #facc15; color: #1a1200; }
+        #rango-vip .rango-cta:hover { background: #fde047; }
 
         .rango-btn { background: #000; color: #c4b5fd; border-color: rgba(159,0,255,0.3); }
         .rango-btn:hover { border-color: #9f00ff; }
-        .rango-btn.activo[data-rango-btn="zeus"] { background: #facc15; border-color: #facc15; color: #1a1200; }
-        .rango-btn.activo[data-rango-btn="hades"] { background: #9f00ff; border-color: #9f00ff; color: #fff; }
-        .rango-btn.activo[data-rango-btn="poseidon"] { background: #38bdf8; border-color: #38bdf8; color: #00121c; }
-        .rango-btn.activo[data-rango-btn="vip"] { background: #4ade80; border-color: #4ade80; color: #001a0a; }
+        .rango-btn.activo[data-rango-btn="zeus"] { background: #38bdf8; border-color: #38bdf8; color: #00121c; }
+        .rango-btn.activo[data-rango-btn="hades"] { background: linear-gradient(90deg, #ff3b3b, #9f00ff); border-color: #e11d48; color: #fff; }
+        .rango-btn.activo[data-rango-btn="poseidon"] { background: #2dd4bf; border-color: #2dd4bf; color: #00211c; }
+        .rango-btn.activo[data-rango-btn="vip"] { background: #facc15; border-color: #facc15; color: #1a1200; }
 
         section { scroll-margin-top: 80px; }
     </style>
@@ -258,7 +264,7 @@
                 </div>
                 <h3 class="text-xl font-bold mb-4">Java Edition</h3>
                 <ol class="space-y-3 text-purple-200 text-sm sm:text-base list-decimal list-inside">
-                    <li>Abrí el launcher oficial de Minecraft (versión 1.20.6).</li>
+                    <li>Abrí el launcher oficial de Minecraft (versión 1.21.6 en adelante).</li>
                     <li>Andá a Multijugador → Agregar servidor.</li>
                     <li>Pegá la IP <span class="font-mono text-green-300">exiliados.minehost.pro</span> y conectate.</li>
                 </ol>
