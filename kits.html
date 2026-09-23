@@ -39,6 +39,9 @@
         .kit-panel { opacity: 0; transform: translateY(10px) scale(.99); transition: opacity .35s cubic-bezier(.22,1,.36,1), transform .35s cubic-bezier(.22,1,.36,1); }
         .kit-panel.visible { opacity: 1; transform: none; }
         .kit-card, .kit-img { border-color: var(--c); }
+        /* imagen del kit a tamaño nativo (sin reescalar): la celda solo la recorta, centrada */
+        .kit-img { object-fit: none; object-position: center; }
+        .kit-img.kit-img-cubrir { object-fit: cover; } /* solo si la imagen es más chica que la celda (evita huecos) */
         .kit-titulo, .kit-icono { color: var(--c); }
         .kit-icono { width: 1.1em; text-align: center; }
 
@@ -111,11 +114,15 @@
             mix-blend-mode: screen;
             pointer-events: none;
         }
+        /* olas lentas: dos capas de ondas que derivan en sentidos opuestos + leve vaivén vertical */
         .kit-flag-ender::after {
             content: '';
-            position: absolute; inset: -30%;
-            background: conic-gradient(from 0deg, transparent 0deg, rgba(107,33,168,.22) 90deg, transparent 180deg, rgba(45,212,191,.16) 270deg, transparent 360deg);
-            animation: kitEnderSwirl 16s linear infinite;
+            position: absolute; inset: -8px 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='90'%3E%3Cpath d='M0 45C66 5 133 5 200 45C266 85 333 85 400 45V90H0Z' fill='%236b21a8' fill-opacity='.22'/%3E%3Cpath d='M0 45C66 5 133 5 200 45C266 85 333 85 400 45' fill='none' stroke='%23a855f7' stroke-opacity='.35' stroke-width='1.5'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='110'%3E%3Cpath d='M0 55C93 15 187 15 280 55C373 95 467 95 560 55V110H0Z' fill='%232dd4bf' fill-opacity='.10'/%3E%3Cpath d='M0 55C93 15 187 15 280 55C373 95 467 95 560 55' fill='none' stroke='%235eead4' stroke-opacity='.28' stroke-width='1.5'/%3E%3C/svg%3E");
+            background-repeat: repeat-x, repeat-x;
+            background-size: 400px 90px, 560px 110px;
+            background-position: 0 38%, 0 70%;
+            animation: kitEnderWaves 40s linear infinite, kitEnderBob 9s ease-in-out infinite alternate;
             pointer-events: none;
         }
         .kit-flag-ender .kit-titulo { color: #e9d5ff; text-shadow: 0 0 8px rgba(168,85,247,.75), 0 1px 3px rgba(0,0,0,.7); }
@@ -174,10 +181,15 @@
             0%,100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
         }
-        @keyframes kitEnderSwirl {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        @keyframes kitEnderWaves {
+            from { background-position: 0 38%, 0 70%; }
+            to   { background-position: 400px 38%, -560px 70%; }
         }
+        @keyframes kitEnderBob {
+            from { transform: translateY(-6px); }
+            to   { transform: translateY(6px); }
+        }
+        @media (prefers-reduced-motion: reduce) { .kit-flag-ender::after { animation: none; } }
 
         .pago-mp { background: #009EE3; color: #fff; } .pago-mp:hover { background: #0088CC; }
         .pago-pp { background: #FFC439; color: #003087; } .pago-pp:hover { background: #F0B429; }
@@ -456,7 +468,7 @@
               <div class="kit-card card-slot ${fondoEspecial} border-2 p-6 sm:p-8">
                 <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
                     <!-- EDITAR: reemplazar por la imagen real del kit, formato 9:16 -->
-                    <img src="assets/kit-${id}.png" alt="Kit ${k.n}" class="kit-img w-28 sm:w-32 aspect-[9/16] object-cover card-slot border-2 flex-shrink-0">
+                    <img src="assets/kit-${id}.png" alt="Kit ${k.n}" class="kit-img w-28 sm:w-32 aspect-[9/16] card-slot border-2 flex-shrink-0">
                     <div class="flex-1 text-center sm:text-left">
                         <h3 class="text-2xl sm:text-3xl font-bold mb-1 kit-titulo">${k.n.toUpperCase()}</h3>
                         <p class="text-lg sm:text-xl font-bold mb-2" style="color:#22c55e;">$${k.p} USD <span class="text-xs sm:text-sm font-semibold text-purple-300">· compra única</span></p>
@@ -584,7 +596,21 @@
         }).catch(() => alert('Mail copiado: ' + email));
     }
 
+    // Las imágenes de los kits se muestran a tamaño nativo y solo se recortan.
+    // Si alguna es más chica que la celda, se usa "cover" para no dejar huecos.
+    function revisarImagenesKit() {
+        const ancho = (matchMedia('(min-width: 640px)').matches ? 128 : 112) - 4;   // w-32 / w-28 menos el borde
+        const alto = (ancho + 4) * 16 / 9 - 4;                                     // aspecto 9:16
+        document.querySelectorAll('.kit-img').forEach(img => {
+            const evaluar = () => img.classList.toggle('kit-img-cubrir', img.naturalWidth < ancho || img.naturalHeight < alto);
+            if (img.complete && img.naturalWidth) evaluar();
+            else img.addEventListener('load', evaluar, { once: true });
+        });
+    }
+
     renderKits();
+    revisarImagenesKit();
+    window.addEventListener('resize', revisarImagenesKit);
     document.querySelectorAll('#mobile-menu a').forEach(a => a.addEventListener('click', () => {
         $('mobile-menu').classList.add('hidden');
         const i = $('menu-btn').querySelector('i'); i.classList.add('fa-bars'); i.classList.remove('fa-times');
