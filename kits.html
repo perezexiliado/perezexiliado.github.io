@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kits de EXILIADOS MC: Thor, Ender, Druida, Rose y Arcángel. Elegí tu kit y comprá una sola vez.">
+    <title>KITS | EXILIADOS MC</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <style>
+        * { transition-property: color, background-color, border-color, fill, stroke; transition-timing-function: cubic-bezier(0.4,0,0.2,1); transition-duration: 150ms; }
+        body { font-family: 'Space Grotesk', system-ui, sans-serif; }
+
+        .glitch { font-family: 'Press Start 2P', system-ui; color: white; text-shadow: 0.05em 0 0 #ff00ff, -0.025em -0.05em 0 #00ffff, 0.025em 0.05em 0 #ffff00; animation: glitch 1.5s infinite; }
+        @keyframes glitch {
+            0%,14% { text-shadow: 0.05em 0 0 #ff00ff, -0.05em -0.025em 0 #00ffff, 0.025em 0.05em 0 #ffff00; }
+            15%,49% { text-shadow: -0.05em -0.025em 0 #ff00ff, 0.025em 0.025em 0 #00ffff, -0.05em -0.05em 0 #ffff00; }
+            50%,99% { text-shadow: 0.025em 0.05em 0 #ff00ff, 0.05em 0 0 #00ffff, 0 -0.05em 0 #ffff00; }
+            100% { text-shadow: -0.025em 0 0 #ff00ff, -0.025em -0.025em 0 #00ffff, -0.025em -0.05em 0 #ffff00; }
+        }
+        @media (prefers-reduced-motion: reduce) { .glitch { animation: none; } .kit-panel, .kit-dd-list { transition: none; } }
+        .mc-pixel { font-family: 'Press Start 2P', system-ui; }
+
+        /* slots biselados (mismo estilo que rangos) */
+        .ip-icon-slot { clip-path: polygon(6px 0,100% 0,100% calc(100% - 6px),calc(100% - 6px) 100%,0 100%,0 6px); box-shadow: inset 2px 2px 0 rgba(255,255,255,.12), inset -2px -2px 0 rgba(0,0,0,.6); }
+        .info-slot { clip-path: polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px); box-shadow: inset 2px 2px 0 rgba(255,255,255,.07), inset -2px -2px 0 rgba(0,0,0,.5); }
+        .card-slot { clip-path: polygon(18px 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%,0 18px); box-shadow: inset 3px 3px 0 rgba(255,255,255,.06), inset -3px -3px 0 rgba(0,0,0,.5); }
+        .rule-slot { clip-path: polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px); box-shadow: inset 2px 2px 0 rgba(255,255,255,.06), inset -2px -2px 0 rgba(0,0,0,.5); }
+
+        /* el glow va en un wrapper: clip-path recorta las sombras del propio elemento */
+        .glow { transition: filter .3s ease, transform .25s ease; }
+        .glow:hover { filter: drop-shadow(0 0 14px var(--c)); }
+        button.glow:hover { transform: translateY(-3px); }
+
+        .kit-panel { opacity: 0; transform: translateY(10px) scale(.99); transition: opacity .35s cubic-bezier(.22,1,.36,1), transform .35s cubic-bezier(.22,1,.36,1); }
+        .kit-panel.visible { opacity: 1; transform: none; }
+        .kit-card, .kit-img { border-color: var(--c); }
+        .kit-titulo, .kit-icono { color: var(--c); }
+        .kit-icono { width: 1.1em; text-align: center; }
+
+        .kit-dd-btn:hover, .kit-dd-btn.abierto { border-color: #9f00ff; }
+        #kit-dd-icono.girado { transform: rotate(180deg); }
+        .kit-dd-list { opacity: 0; transform: translateY(-8px); transition: opacity .25s ease, transform .25s ease; }
+        .kit-dd-list.visible { opacity: 1; transform: none; }
+        .kit-opcion { background: #000; color: #d8b4fe; border-top: 1px solid rgba(255,255,255,.08); }
+        .kit-opcion:first-child { border-top: none; }
+        .kit-opcion:hover { background: #1a0630; }
+        .kit-opcion.activo { background: color-mix(in srgb, var(--c) 15%, transparent); color: var(--c); }
+
+        /* el contenido queda POR ENCIMA de las capas decorativas del fondo (antes lo tapaban y opacaban el texto) */
+        [class*="kit-flag-"] > * { position: relative; z-index: 1; }
+
+        /* recuadro especial kit THOR: gradiente bandera EE.UU. + estrellitas (versión atenuada) */
+        .kit-flag-thor {
+            position: relative;
+            background: linear-gradient(135deg, #0b1233 0%, #14286e 24%, #3b4a63 48%, #7f1414 74%, #3a0d0d 100%);
+            background-size: 220% 220%;
+            animation: kitFlagShift 9s ease-in-out infinite;
+            overflow: hidden;
+        }
+        .kit-flag-thor::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image:
+                radial-gradient(#fff 1px, transparent 1.4px),
+                radial-gradient(#fff 1px, transparent 1.4px);
+            background-size: 26px 26px, 26px 26px;
+            background-position: 0 0, 13px 13px;
+            opacity: .3;
+            mix-blend-mode: screen;
+            pointer-events: none;
+        }
+        .kit-flag-thor .kit-titulo { color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,.65); }
+        .kit-flag-thor .ip-icon-slot { border-color: #ffffffaa !important; }
+        .kit-flag-thor p, .kit-flag-thor li, .kit-flag-thor span, .kit-flag-thor label { color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.6); }
+        .kit-flag-thor .kit-icono { color: #fff; }
+
+        /* recuadro especial kit ARCÁNGEL: gradiente amarillo-blanco neón (versión atenuada) */
+        .kit-flag-arcangel {
+            position: relative;
+            background: linear-gradient(135deg, #241a04 0%, #5c4308 30%, #8a6208 55%, #4d3907 80%, #1f1603 100%);
+            background-size: 220% 220%;
+            animation: kitFlagShift 7s ease-in-out infinite;
+            box-shadow: inset 0 0 18px rgba(253, 224, 71, .28), 0 0 10px rgba(253, 224, 71, .25);
+        }
+        .kit-flag-arcangel .kit-titulo { color: #fde68a; text-shadow: 0 0 8px rgba(253,224,71,.6), 0 1px 3px rgba(0,0,0,.6); }
+        .kit-flag-arcangel p, .kit-flag-arcangel li, .kit-flag-arcangel span, .kit-flag-arcangel label { color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.6); }
+        .kit-flag-arcangel .kit-icono { color: #fde047; }
+
+        /* recuadro especial kit ENDER: portal del End */
+        .kit-flag-ender {
+            position: relative;
+            background: radial-gradient(ellipse at 28% 22%, #1d0a38 0%, #10061f 42%, #050110 78%, #010004 100%);
+            background-size: 180% 180%;
+            animation: kitFlagShift 10s ease-in-out infinite;
+            overflow: hidden;
+        }
+        .kit-flag-ender::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image:
+                radial-gradient(circle, rgba(94,234,212,.85) 1px, transparent 1.6px),
+                radial-gradient(circle, rgba(168,85,247,.7) 1px, transparent 1.8px);
+            background-size: 36px 36px, 50px 50px;
+            background-position: 0 0, 20px 26px;
+            opacity: .45;
+            mix-blend-mode: screen;
+            pointer-events: none;
+        }
+        .kit-flag-ender::after {
+            content: '';
+            position: absolute; inset: -30%;
+            background: conic-gradient(from 0deg, transparent 0deg, rgba(107,33,168,.22) 90deg, transparent 180deg, rgba(45,212,191,.16) 270deg, transparent 360deg);
+            animation: kitEnderSwirl 16s linear infinite;
+            pointer-events: none;
+        }
+        .kit-flag-ender .kit-titulo { color: #e9d5ff; text-shadow: 0 0 8px rgba(168,85,247,.75), 0 1px 3px rgba(0,0,0,.7); }
+        .kit-flag-ender p, .kit-flag-ender li, .kit-flag-ender span, .kit-flag-ender label { color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.6); }
+        .kit-flag-ender .kit-icono { color: #5eead4; }
+        .kit-flag-ender .ip-icon-slot { border-color: #a855f7aa !important; }
+
+        /* recuadro especial kit DRUIDA: vegetación y naturaleza */
+        .kit-flag-druida {
+            position: relative;
+            background: linear-gradient(160deg, #0a1d12 0%, #0d3a1e 32%, #2b4409 58%, #14260a 82%, #08130a 100%);
+            background-size: 200% 200%;
+            animation: kitFlagShift 11s ease-in-out infinite;
+            overflow: hidden;
+        }
+        .kit-flag-druida::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image:
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='46' height='46'%3E%3Cpath d='M23 6C13 12 9 22 23 40C37 22 33 12 23 6Z' fill='%2384cc16' opacity='0.16'/%3E%3C/svg%3E"),
+                radial-gradient(circle, rgba(190,242,100,.5) 1.4px, transparent 2px);
+            background-size: 46px 46px, 30px 30px;
+            background-position: 0 0, 12px 16px;
+            opacity: .8;
+            pointer-events: none;
+        }
+        .kit-flag-druida .kit-titulo { color: #ecfccb; text-shadow: 0 1px 4px rgba(0,0,0,.6); }
+        .kit-flag-druida p, .kit-flag-druida li, .kit-flag-druida span, .kit-flag-druida label { color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.55); }
+        .kit-flag-druida .kit-icono { color: #bef264; }
+        .kit-flag-druida .ip-icon-slot { border-color: #a3e635aa !important; }
+
+        /* recuadro especial kit ROSE: flores rosas */
+        .kit-flag-rose {
+            position: relative;
+            background: linear-gradient(140deg, #3d0a22 0%, #831843 28%, #a61e5c 55%, #7a1642 78%, #3f0b24 100%);
+            background-size: 200% 200%;
+            animation: kitFlagShift 8s ease-in-out infinite;
+            overflow: hidden;
+        }
+        .kit-flag-rose::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image:
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cg fill='%23ffffff' opacity='0.28'%3E%3Ccircle cx='20' cy='11' r='4.2'/%3E%3Ccircle cx='28' cy='20' r='4.2'/%3E%3Ccircle cx='20' cy='29' r='4.2'/%3E%3Ccircle cx='12' cy='20' r='4.2'/%3E%3Ccircle cx='20' cy='20' r='3' fill='%23fde68a'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: 40px 40px;
+            background-position: 0 0;
+            opacity: .55;
+            pointer-events: none;
+        }
+        .kit-flag-rose .kit-titulo { color: #fff; text-shadow: 0 1px 4px rgba(107,19,57,.8); }
+        .kit-flag-rose p, .kit-flag-rose li, .kit-flag-rose span, .kit-flag-rose label { color: #fff; text-shadow: 0 1px 3px rgba(107,19,57,.7); }
+        .kit-flag-rose .kit-icono { color: #fde68a; }
+        .kit-flag-rose .ip-icon-slot { border-color: #ffffffaa !important; }
+
+        @keyframes kitFlagShift {
+            0%,100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        @keyframes kitEnderSwirl {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .pago-mp { background: #009EE3; color: #fff; } .pago-mp:hover { background: #0088CC; }
+        .pago-pp { background: #FFC439; color: #003087; } .pago-pp:hover { background: #F0B429; }
+        .pago-btn:disabled { opacity: .6; cursor: not-allowed; }
+        section { scroll-margin-top: 80px; }
+    </style>
+</head>
+<body class="bg-[#150022] text-white overflow-x-hidden">
+
+<nav class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-purple-500">
+    <div class="max-w-7xl mx-auto px-4 md:px-5 py-3 md:py-4 flex items-center justify-between">
+        <a href="servermc" class="flex items-center gap-2 md:gap-3">
+            <div class="w-8 h-8 md:w-9 md:h-9 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center overflow-hidden border border-purple-400/30">
+                <img src="assets/logoaizq.jpg" alt="Exiliado Logo" class="w-8 h-8 md:w-9 md:h-9 object-contain">
+            </div>
+            <span class="text-lg md:text-xl font-bold tracking-widest glitch">EXILIADO</span>
+        </a>
+        <div class="hidden md:flex items-center gap-6 text-sm uppercase">
+            <a href="servermc" class="hover:text-purple-400">HOME</a>
+            <a href="rangos" class="hover:text-purple-400">RANGOS</a>
+            <a href="kits" class="text-purple-400 border-b-2 border-purple-400">KITS</a>
+            <a href="keys" class="hover:text-purple-400">KEYS</a>
+        </div>
+        <div class="flex items-center gap-2 md:gap-3">
+            <div class="hidden sm:flex items-center gap-3 md:gap-4 text-xl">
+                <a href="https://www.tiktok.com/@perezexiliado" target="_blank" class="hover:scale-110"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.instagram.com/martinpemiliano" target="_blank" class="hover:scale-110"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/@perezexiliado" target="_blank" class="hover:scale-110"><i class="fab fa-youtube"></i></a>
+                <a href="https://discord.gg/7crcZmwNey" target="_blank" class="hover:scale-110"><i class="fab fa-discord"></i></a>
+            </div>
+            <button onclick="showContactModal()" class="bg-purple-600 hover:bg-purple-500 px-4 md:px-5 py-1.5 md:py-2 text-xs md:text-sm font-bold rounded-xl flex items-center gap-2 transition-all active:scale-95"><span>CONTACTO</span></button>
+            <button id="menu-btn" onclick="toggleMobileMenu()" class="md:hidden text-2xl px-2 focus:outline-none" aria-label="Menú"><i class="fas fa-bars"></i></button>
+        </div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-[#0a0012] border-t border-purple-700">
+        <div class="flex flex-col px-5 py-1 text-sm uppercase">
+            <a href="servermc" class="py-3 hover:text-purple-400">HOME</a>
+            <a href="rangos" class="py-3 hover:text-purple-400">RANGOS</a>
+            <a href="kits" class="py-3 text-purple-400 border-b-2 border-purple-400 w-fit">KITS</a>
+            <a href="keys" class="py-3 hover:text-purple-400">KEYS</a>
+        </div>
+    </div>
+</nav>
+
+<div id="contactModal" class="hidden fixed inset-0 z-[9999] items-center justify-center">
+    <div onclick="hideContactModal()" class="absolute inset-0 bg-black/70 backdrop-blur-xl"></div>
+    <div class="relative bg-black border-2 border-purple-500 rounded-3xl p-8 max-w-md w-full mx-4 text-center shadow-2xl shadow-purple-500/30">
+        <button onclick="hideContactModal()" class="absolute top-4 right-4 text-4xl leading-none text-purple-400 hover:text-white" aria-label="Cerrar">×</button>
+        <div class="mb-6">
+            <div class="inline-flex items-center gap-2 bg-purple-950 text-purple-300 text-sm px-4 py-1 rounded-full border border-purple-500/30">
+                <span class="relative flex h-3 w-3"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span><span class="relative inline-flex rounded-full h-3 w-3 bg-purple-500"></span></span>
+                COLABORACIONES &amp; NEGOCIOS
+            </div>
+        </div>
+        <h2 class="text-4xl font-bold tracking-widest glitch mb-2">EXILIADO</h2>
+        <p class="text-purple-300 text-lg mb-8">Mi mail oficial</p>
+        <div onclick="copyEmail()" class="group cursor-pointer bg-zinc-900 hover:bg-zinc-800 border border-purple-500/50 hover:border-purple-400 rounded-2xl p-4 sm:p-5 mb-8 flex items-center justify-center gap-3">
+            <span class="font-mono text-base sm:text-lg md:text-xl text-white break-all">perezexiliadomkt@gmail.com</span>
+            <i class="fas fa-copy text-purple-400 flex-shrink-0"></i>
+        </div>
+        <p class="text-sm text-purple-400">Tocá arriba para copiar el mail</p>
+    </div>
+</div>
+
+<header class="relative pt-28 sm:pt-36 pb-10 sm:pb-14 bg-cover bg-center" style="background-image: linear-gradient(180deg, rgba(10,0,18,.6) 0%, rgba(10,0,18,.82) 60%, #150022 100%), url('assets/kitsbanner.png');">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+        <h1 class="text-3xl sm:text-5xl md:text-6xl font-bold mb-4 glitch tracking-widest">KITS</h1>
+        <p class="max-w-2xl mx-auto text-lg sm:text-xl text-purple-200 mb-8">Elegí tu kit y equipate para el server. Se paga una sola vez.</p>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-6">
+        <div class="info-slot max-w-2xl mx-auto mb-4 bg-purple-500/10 border-2 border-purple-500/40 px-5 py-4 flex items-start gap-3 text-left">
+            <i class="fas fa-triangle-exclamation text-purple-300 text-lg mt-0.5"></i>
+            <p class="text-sm sm:text-base text-purple-200">
+                <span class="font-bold text-purple-100">¿Jugás desde Bedrock (Xbox, PlayStation, Switch, celular)?</span>
+                Por el plugin Geyser, tenés que escribir tu usuario con un <span class="font-bold text-purple-100">punto ( . )</span> antes del nombre. Ejemplo: <span class="font-mono">.TuUsuario</span>.
+            </p>
+        </div>
+        <div class="info-slot max-w-2xl mx-auto mb-6 bg-yellow-400/10 border-2 border-yellow-400/40 px-5 py-4 flex items-start gap-3 text-left">
+            <i class="fas fa-shield-halved text-yellow-300 text-lg mt-0.5"></i>
+            <p class="text-sm sm:text-base text-purple-100">
+                <span class="font-bold text-yellow-300">Recomendado: No pérdida de inventario.</span>
+                Es un beneficio opcional que se compra aparte: al morir, tu inventario no se dropea ni se pierde, y tu kit queda siempre con vos. Sin él, el kit se pierde al morir y hay que comprarlo de nuevo.
+            </p>
+        </div>
+
+        <div class="relative max-w-sm mx-auto mb-10" id="kit-dd-wrap">
+            <button type="button" id="kit-dd-btn" onclick="toggleDropdown()" class="info-slot kit-dd-btn w-full flex items-center justify-between gap-3 bg-black border-2 border-purple-500/40 px-5 py-4 text-left">
+                <span id="kit-dd-label" class="font-bold tracking-wide text-sm sm:text-base">Seleccioná tu kit</span>
+                <i id="kit-dd-icono" class="fas fa-chevron-down transition-transform duration-300"></i>
+            </button>
+            <div id="kit-dd-list" class="info-slot kit-dd-list hidden absolute left-0 right-0 mt-2 bg-black border-2 border-purple-500/40 overflow-hidden z-20 shadow-xl shadow-black/50"></div>
+        </div>
+
+        <p id="kit-placeholder" class="text-center text-purple-400 text-sm mb-2">Elegí un kit arriba, o tocá uno de la lista de abajo ✨</p>
+        <p class="text-center text-purple-400 text-xs sm:text-sm max-w-xl mx-auto"><i class="fas fa-clock mr-1"></i> Una vez acreditado el pago, te damos el permiso para reclamar tu kit en /kits lo más rápido posible.</p>
+    </div>
+</header>
+
+<section id="kits" class="-mt-px pt-10 pb-12 md:pb-20 bg-[#150022]">
+    <div class="max-w-5xl mx-auto px-6" id="kit-panels"></div>
+</section>
+
+<section id="todos" class="py-12 md:py-16 bg-[#0f001a]">
+    <div class="max-w-5xl mx-auto px-6">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center mb-2 tracking-widest">TODOS LOS KITS</h2>
+        <p class="text-center text-purple-300 text-sm sm:text-base mb-8">Tocá uno para ver su detalle y comprarlo.</p>
+        <div id="kit-grid" class="grid grid-cols-2 md:grid-cols-5 gap-3"></div>
+    </div>
+</section>
+
+<section id="proteccion" class="py-12 md:py-16 bg-[#150022]">
+    <div class="max-w-5xl mx-auto px-6">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center mb-2 tracking-widest">PROTEGÉ TU KIT</h2>
+        <p class="text-center text-purple-300 text-sm sm:text-base mb-10 max-w-2xl mx-auto">La No pérdida de inventario es un beneficio opcional que se compra aparte: cuando morís, tu inventario no se dropea y no perdés lo que llevabas, tu kit incluido.</p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-2">
+            <div class="glow" style="--c:#c084fc"><div class="card-slot bg-black border-2 border-purple-400 w-full sm:w-56 p-5 text-center">
+                <div class="ip-icon-slot w-12 h-12 mx-auto flex items-center justify-center bg-purple-400/15 border border-purple-400/40 text-purple-300 text-xl mb-3"><i class="fas fa-box-open"></i></div>
+                <p class="mc-pixel text-[9px] mb-2 text-purple-300">TU KIT</p>
+                <p class="text-xs text-purple-300">Lo comprás una sola vez y recibís el permiso para reclamarlo en /kits.</p>
+            </div></div>
+            <i class="fas fa-chevron-right text-purple-500 text-xl rotate-90 sm:rotate-0"></i>
+            <div class="glow" style="--c:#facc15"><div class="card-slot bg-black border-2 border-yellow-400 w-full sm:w-56 p-5 text-center">
+                <div class="ip-icon-slot w-12 h-12 mx-auto flex items-center justify-center bg-yellow-400/15 border border-yellow-400/40 text-yellow-300 text-xl mb-3"><i class="fas fa-shield-halved"></i></div>
+                <p class="mc-pixel text-[9px] mb-2 text-yellow-300">NO PÉRDIDA</p>
+                <p class="text-xs text-purple-300">Opcional: sumás este beneficio y, al morir, tu inventario no se dropea ni se pierde.</p>
+            </div></div>
+            <i class="fas fa-chevron-right text-purple-500 text-xl rotate-90 sm:rotate-0"></i>
+            <div class="glow" style="--c:#4ade80"><div class="card-slot bg-black border-2 border-green-400 w-full sm:w-56 p-5 text-center">
+                <div class="ip-icon-slot w-12 h-12 mx-auto flex items-center justify-center bg-green-400/15 border border-green-400/40 text-green-300 text-xl mb-3"><i class="fas fa-gamepad"></i></div>
+                <p class="mc-pixel text-[9px] mb-2 text-green-300">A JUGAR</p>
+                <p class="text-xs text-purple-300">Si te matan, seguís con tu kit y tu inventario, sin volver a comprar el kit.</p>
+            </div></div>
+        </div>
+        <div class="info-slot max-w-2xl mx-auto mt-8 bg-purple-500/10 border-2 border-purple-500/40 px-5 py-4 flex items-start gap-3 text-left">
+            <i class="fas fa-circle-info text-purple-300 text-lg mt-0.5"></i>
+            <p class="text-sm sm:text-base text-purple-200">Comprar la No pérdida de inventario es <span class="font-bold text-purple-100">opcional</span>. Si te matan sin este beneficio y otro jugador se queda con tu kit, el server no se hace responsable de esa pérdida.</p>
+        </div>
+        <!-- EDITAR: si querés, sumá acá un botón o link a donde se compra la no pérdida de inventario -->
+    </div>
+</section>
+
+<section id="faq" class="py-12 md:py-16 bg-[#0f001a]">
+    <div class="max-w-3xl mx-auto px-6">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 tracking-widest">PREGUNTAS FRECUENTES</h2>
+        <div class="space-y-3">
+            <details open class="rule-slot group bg-yellow-400/10 border-2 border-yellow-400/50 px-5 py-4">
+                <summary class="flex items-center justify-between gap-3 cursor-pointer list-none font-semibold text-sm sm:text-base">
+                    ¿Los kits son de compra única? ¿Qué pasa si me matan en el juego?
+                    <i class="fas fa-chevron-down text-yellow-300 transition-transform group-open:rotate-180"></i>
+                </summary>
+                <p class="text-purple-100 text-sm sm:text-base mt-3">Los kits se pagan una sola vez y no se renuevan. Si morís en el juego sin la <span class="font-bold text-yellow-300">No pérdida de inventario</span>, tus ítems se dropean y el kit se pierde, así que habría que comprarlo de nuevo. Además, si otro jugador se queda con tu kit, el server no se hace responsable. Por eso te recomendamos sumar este beneficio, que es opcional: con él, al morir tu inventario no se dropea ni se pierde, y conservás tu kit.</p>
+            </details>
+            <details class="rule-slot group bg-black border-2 border-purple-500/40 hover:border-purple-400 px-5 py-4">
+                <summary class="flex items-center justify-between gap-3 cursor-pointer list-none font-semibold text-sm sm:text-base">
+                    ¿Qué es la No pérdida de inventario y cómo la consigo?
+                    <i class="fas fa-chevron-down text-purple-400 transition-transform group-open:rotate-180"></i>
+                </summary>
+                <p class="text-purple-300 text-sm sm:text-base mt-3">Es un beneficio opcional que se compra aparte: mientras lo tengas, al morir tu inventario no se dropea ni se pierde. Para conseguirlo, escribinos por Discord o dentro del server.</p>
+            </details>
+            <details class="rule-slot group bg-black border-2 border-purple-500/40 hover:border-purple-400 px-5 py-4">
+                <summary class="flex items-center justify-between gap-3 cursor-pointer list-none font-semibold text-sm sm:text-base">
+                    ¿Es obligatorio comprar la No pérdida de inventario?
+                    <i class="fas fa-chevron-down text-purple-400 transition-transform group-open:rotate-180"></i>
+                </summary>
+                <p class="text-purple-300 text-sm sm:text-base mt-3">No, es completamente opcional. Podés comprar y usar tu kit sin ella, pero tené en cuenta que, si morís sin este beneficio, el kit se pierde y habría que comprarlo de nuevo.</p>
+            </details>
+            <details class="rule-slot group bg-black border-2 border-purple-500/40 hover:border-purple-400 px-5 py-4">
+                <summary class="flex items-center justify-between gap-3 cursor-pointer list-none font-semibold text-sm sm:text-base">
+                    ¿El server se hace responsable si otro jugador se queda con mi kit?
+                    <i class="fas fa-chevron-down text-purple-400 transition-transform group-open:rotate-180"></i>
+                </summary>
+                <p class="text-purple-300 text-sm sm:text-base mt-3">No. Si te matan y otro jugador se queda con tu kit, el server no se hace responsable de esa pérdida. Por eso recomendamos sumar la No pérdida de inventario, que evita que tus ítems se dropeen al morir.</p>
+            </details>
+            <details class="rule-slot group bg-black border-2 border-purple-500/40 hover:border-purple-400 px-5 py-4">
+                <summary class="flex items-center justify-between gap-3 cursor-pointer list-none font-semibold text-sm sm:text-base">
+                    ¿Cuánto tarda en habilitarse mi kit y cómo lo reclamo?
+                    <i class="fas fa-chevron-down text-purple-400 transition-transform group-open:rotate-180"></i>
+                </summary>
+                <p class="text-purple-300 text-sm sm:text-base mt-3">Una vez acreditado el pago, te damos el permiso para reclamar tu kit, algo que normalmente no lleva más de 30 minutos. Cuando lo tengas, reclamalo dentro del server con el comando /kits.</p>
+            </details>
+            <details class="rule-slot group bg-black border-2 border-purple-500/40 hover:border-purple-400 px-5 py-4">
+                <summary class="flex items-center justify-between gap-3 cursor-pointer list-none font-semibold text-sm sm:text-base">
+                    Puse mal mi usuario, ¿me devuelven el dinero?
+                    <i class="fas fa-chevron-down text-purple-400 transition-transform group-open:rotate-180"></i>
+                </summary>
+                <p class="text-purple-300 text-sm sm:text-base mt-3">No, si el usuario se escribe mal no hay reembolso. Revisalo bien antes de confirmar el pago, y recordá el punto antes del nombre si jugás desde Bedrock.</p>
+            </details>
+            <details class="rule-slot group bg-black border-2 border-purple-500/40 hover:border-purple-400 px-5 py-4">
+                <summary class="flex items-center justify-between gap-3 cursor-pointer list-none font-semibold text-sm sm:text-base">
+                    ¿Hay reembolsos?
+                    <i class="fas fa-chevron-down text-purple-400 transition-transform group-open:rotate-180"></i>
+                </summary>
+                <p class="text-purple-300 text-sm sm:text-base mt-3">No hacemos reembolsos. La información de cada kit está disponible en el server y en esta página antes de comprar, así que podés revisarla con tranquilidad antes de decidir.</p>
+            </details>
+            <details class="rule-slot group bg-black border-2 border-purple-500/40 hover:border-purple-400 px-5 py-4">
+                <summary class="flex items-center justify-between gap-3 cursor-pointer list-none font-semibold text-sm sm:text-base">
+                    Juego desde Bedrock, ¿mi kit funciona igual que en Java?
+                    <i class="fas fa-chevron-down text-purple-400 transition-transform group-open:rotate-180"></i>
+                </summary>
+                <p class="text-purple-300 text-sm sm:text-base mt-3">Sí. Gracias al plugin Geyser, los efectos de armaduras y armas (resistencia al daño, encantamientos, etc.) se aplican igual. Lo único que puede variar es que la barra de armadura no se vea llena al 100% en la interfaz de Bedrock; es solo un detalle gráfico y la protección funciona igual.</p>
+            </details>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-black py-8 sm:py-10 border-t border-purple-900">
+    <div class="max-w-6xl mx-auto px-5 sm:px-6 flex flex-col md:flex-row items-center justify-center md:justify-between text-sm gap-y-3 md:gap-4 text-center md:text-left">
+        <p class="text-purple-200">© 2026 PEREZEXILIADO • HECHO CON MUCHO HUMOR Y AMOR</p>
+        <div class="flex flex-wrap justify-center gap-x-6 gap-y-1 text-purple-300">
+            <a href="https://www.tiktok.com/@perezexiliado" target="_blank" class="hover:text-purple-100">TikTok</a>
+            <a href="https://www.instagram.com/martinpemiliano" target="_blank" class="hover:text-purple-100">Instagram</a>
+            <a href="https://www.youtube.com/@perezexiliado" target="_blank" class="hover:text-purple-100">YouTube</a>
+            <a href="https://discord.gg/7crcZmwNey" target="_blank" class="hover:text-purple-100">Discord</a>
+            <a href="t&c" class="hover:text-purple-100">Términos y Condiciones</a>
+            <a href="servermc" class="hover:text-purple-100">Server MC</a>
+        </div>
+        <p class="text-purple-400 text-xs sm:text-sm">Para mis seres queridos y la gente que amo</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+    const EMAILJS_PUBLIC_KEY = "KMYGAyGuz9uYee6ci";
+    const EMAILJS_SERVICE_ID = "service_0cvl5ce";
+    // EDITAR: si creás una plantilla de EmailJS propia para kits, pegá su ID acá (por ahora usa la de rangos)
+    const EMAILJS_TEMPLATE_ID_KIT = "template_ajlxln8";
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+
+    // ⚠️ EDITAR: color, ícono y descripción de cada kit (ordenados de menor a mayor precio)
+    const KITS = {
+        thor:     { n: 'Thor',     p: '14,99', c: '#fb923c', i: 'fa-hammer',  t: 'El trueno en tus manos' },
+        ender:    { n: 'Ender',    p: '39,99', c: '#d946ef', i: 'fa-eye',     t: 'El poder del End' },
+        druida:   { n: 'Druida',   p: '49,99', c: '#a3e635', i: 'fa-leaf',    t: 'La fuerza de la naturaleza' },
+        rose:     { n: 'Rose',     p: '59,99', c: '#f472b6', i: 'fa-spa',     t: 'Elegancia con filo' },
+        arcangel: { n: 'Arcángel', p: '79,99', c: '#e0e7ff', i: 'fa-dove',    t: 'Poder celestial' }
+    };
+
+    // ⚠️ EDITAR: pegá el link de pago real de cada kit y método.
+    const KIT_PAGO_LINKS = {
+        thor:     { mercadopago: 'https://mpago.la/TU-LINK-THOR',     paypal: 'https://www.paypal.com/ncp/payment/TU-LINK-THOR' },
+        ender:    { mercadopago: 'https://mpago.la/TU-LINK-ENDER',    paypal: 'https://www.paypal.com/ncp/payment/TU-LINK-ENDER' },
+        druida:   { mercadopago: 'https://mpago.la/TU-LINK-DRUIDA',   paypal: 'https://www.paypal.com/ncp/payment/TU-LINK-DRUIDA' },
+        rose:     { mercadopago: 'https://mpago.la/TU-LINK-ROSE',     paypal: 'https://www.paypal.com/ncp/payment/TU-LINK-ROSE' },
+        arcangel: { mercadopago: 'https://mpago.la/TU-LINK-ARCANGEL', paypal: 'https://www.paypal.com/ncp/payment/TU-LINK-ARCANGEL' }
+    };
+
+    const $ = id => document.getElementById(id);
+
+    function renderKits() {
+        const ids = Object.keys(KITS);
+        $('kit-dd-list').innerHTML = ids.map(id => `
+            <button type="button" onclick="mostrarKit('${id}')" data-kit-btn="${id}" style="--c:${KITS[id].c}"
+                class="kit-opcion w-full flex items-center gap-3 px-5 py-3 text-left text-sm sm:text-base font-semibold uppercase tracking-wide">
+                <i class="fas ${KITS[id].i}"></i> ${KITS[id].n} <span class="ml-auto text-xs opacity-70">$${KITS[id].p}</span>
+            </button>`).join('');
+
+        $('kit-grid').innerHTML = ids.map(id => {
+            return `
+            <button type="button" onclick="mostrarKit('${id}', true)" class="glow text-center" style="--c:${KITS[id].c}">
+                <div class="kit-card card-slot bg-black border-2 p-4 h-full">
+                    <div class="ip-icon-slot w-12 h-12 mx-auto flex items-center justify-center border text-xl mb-3" style="border-color:${KITS[id].c}66;background:${KITS[id].c}22;color:${KITS[id].c}"><i class="fas ${KITS[id].i}"></i></div>
+                    <p class="mc-pixel text-[9px] mb-2 kit-titulo">${KITS[id].n.toUpperCase()}</p>
+                    <p class="font-bold" style="color:#22c55e;">$${KITS[id].p} <span class="text-[10px] text-purple-300">USD</span></p>
+                </div>
+            </button>`;
+        }).join('');
+
+        $('kit-panels').innerHTML = ids.map(id => {
+            const k = KITS[id];
+            const s = id.charAt(0).toUpperCase() + id.slice(1);
+            const fondosEspeciales = { thor: 'kit-flag-thor', ender: 'kit-flag-ender', druida: 'kit-flag-druida', rose: 'kit-flag-rose', arcangel: 'kit-flag-arcangel' };
+            const fondoEspecial = fondosEspeciales[id] || 'bg-black';
+            return `
+            <div id="kit-${id}" data-kit-panel class="kit-panel glow hidden" style="--c:${k.c}">
+              <div class="kit-card card-slot ${fondoEspecial} border-2 p-6 sm:p-8">
+                <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
+                    <!-- EDITAR: reemplazar por la imagen real del kit, formato 9:16 -->
+                    <img src="assets/kit-${id}.png" alt="Kit ${k.n}" class="kit-img w-28 sm:w-32 aspect-[9/16] object-cover card-slot border-2 flex-shrink-0">
+                    <div class="flex-1 text-center sm:text-left">
+                        <h3 class="text-2xl sm:text-3xl font-bold mb-1 kit-titulo">${k.n.toUpperCase()}</h3>
+                        <p class="text-lg sm:text-xl font-bold mb-2" style="color:#22c55e;">$${k.p} USD <span class="text-xs sm:text-sm font-semibold text-purple-300">· compra única</span></p>
+                        <p class="text-sm text-purple-400 mb-4">${k.t}</p>
+                        <!-- EDITAR: ajustá los beneficios según el contenido real de cada kit -->
+                        <ul class="space-y-2 text-purple-200 text-sm sm:text-base mb-6 max-w-xs mx-auto sm:max-w-none sm:mx-0 text-left">
+                            <li class="flex items-start gap-2"><i class="fas fa-shield-halved kit-icono shrink-0 mt-1"></i><span>Armadura del kit ${k.n}</span></li>
+                            <li class="flex items-start gap-2"><i class="fas fa-khanda kit-icono shrink-0 mt-1"></i><span>Armas con encantamientos exclusivos</span></li>
+                            <li class="flex items-start gap-2"><i class="fas fa-box-open kit-icono shrink-0 mt-1"></i><span>Se paga una sola vez y lo reclamás en el server con /kits</span></li>
+                            <li class="flex items-start gap-2"><i class="fas fa-shield-heart kit-icono shrink-0 mt-1"></i><span>Recomendado: sumá la No pérdida de inventario para conservarlo al morir</span></li>
+                        </ul>
+                        <div class="grid sm:grid-cols-2 gap-3 mb-5 text-left">
+                            <div>
+                                <label class="block text-xs uppercase tracking-widest text-purple-400 mb-1.5">Tu usuario en el server</label>
+                                <input type="text" id="kitUsuarioMC_${id}" placeholder="Tu nombre exacto en Minecraft" required class="info-slot w-full bg-black border-2 border-purple-500/40 px-4 py-3 text-sm focus:outline-none focus:border-purple-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-widest text-purple-400 mb-1.5">Nombre en MercadoPago / PayPal</label>
+                                <input type="text" id="kitNombrePago_${id}" placeholder="Como figura en tu Mercado Pago o PayPal" required class="info-slot w-full bg-black border-2 border-purple-500/40 px-4 py-3 text-sm focus:outline-none focus:border-purple-500">
+                            </div>
+                        </div>
+                        <div class="flex flex-col sm:flex-row items-center sm:items-start justify-center sm:justify-start gap-3">
+                            <button id="btnPagar${s}MP" onclick="pagarKit('${id}','mercadopago')" class="info-slot pago-btn pago-mp inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 font-bold text-sm sm:text-base hover:scale-[1.02] active:scale-95"><i class="fas fa-credit-card"></i> PAGAR CON MERCADOPAGO</button>
+                            <button id="btnPagar${s}PP" onclick="pagarKit('${id}','paypal')" class="info-slot pago-btn pago-pp inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 font-bold text-sm sm:text-base hover:scale-[1.02] active:scale-95"><i class="fab fa-paypal"></i> PAGAR CON PAYPAL</button>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>`;
+        }).join('');
+    }
+
+    function mostrarKit(id, scroll) {
+        document.querySelectorAll('[data-kit-panel]').forEach(p => {
+            p.classList.remove('visible');
+            if (p.id === 'kit-' + id) {
+                p.classList.remove('hidden');
+                requestAnimationFrame(() => requestAnimationFrame(() => p.classList.add('visible')));
+            } else {
+                p.classList.add('hidden');
+            }
+        });
+        document.querySelectorAll('[data-kit-btn]').forEach(b => b.classList.toggle('activo', b.dataset.kitBtn === id));
+        const ph = $('kit-placeholder');
+        if (ph) ph.style.display = 'none';
+        $('kit-dd-label').textContent = KITS[id].n;
+        cerrarDropdown();
+        if (scroll) $('kits').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function toggleDropdown() {
+        const list = $('kit-dd-list');
+        if (list.classList.contains('hidden')) {
+            list.classList.remove('hidden');
+            requestAnimationFrame(() => list.classList.add('visible'));
+            $('kit-dd-btn').classList.add('abierto');
+            $('kit-dd-icono').classList.add('girado');
+        } else {
+            cerrarDropdown();
+        }
+    }
+    function cerrarDropdown() {
+        const list = $('kit-dd-list');
+        if (list.classList.contains('hidden')) return;
+        list.classList.remove('visible');
+        setTimeout(() => list.classList.add('hidden'), 200);
+        $('kit-dd-btn').classList.remove('abierto');
+        $('kit-dd-icono').classList.remove('girado');
+    }
+    document.addEventListener('click', e => { if (!$('kit-dd-wrap').contains(e.target)) cerrarDropdown(); });
+
+    function pagarKit(id, metodo) {
+        const link = KIT_PAGO_LINKS[id] && KIT_PAGO_LINKS[id][metodo];
+        if (!link || link.includes('TU-LINK')) {
+            alert('Todavía no cargaste el link de pago para este kit. Editá KIT_PAGO_LINKS en el código.');
+            return;
+        }
+        const usuarioMC = $('kitUsuarioMC_' + id);
+        const nombrePago = $('kitNombrePago_' + id);
+        if (!usuarioMC.value.trim()) { alert('Escribí tu usuario del server (Minecraft) antes de pagar.'); usuarioMC.focus(); return; }
+        if (!nombrePago.value.trim()) { alert('Escribí el nombre con el que figurás en MercadoPago/PayPal antes de pagar.'); nombrePago.focus(); return; }
+
+        const s = id.charAt(0).toUpperCase() + id.slice(1);
+        const btn = $('btnPagar' + s + (metodo === 'paypal' ? 'PP' : 'MP'));
+        const otro = $('btnPagar' + s + (metodo === 'paypal' ? 'MP' : 'PP'));
+        const original = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> PROCESANDO...';
+        btn.disabled = true; otro.disabled = true;
+        const reset = () => { btn.innerHTML = original; btn.disabled = false; otro.disabled = false; };
+
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID_KIT, {
+            rango: 'Kit ' + KITS[id].n,   // se mantiene "rango" para poder reutilizar la plantilla de rangos
+            kit: KITS[id].n,
+            usuario_minecraft: usuarioMC.value.trim(),
+            nombre_pago: nombrePago.value.trim(),
+            metodo_pago: metodo === 'paypal' ? 'PayPal' : 'MercadoPago',
+            fecha: new Date().toLocaleString('es-AR')
+        }).then(() => {
+            if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) window.location.href = link;
+            else window.open(link, '_blank');
+            reset();
+        }).catch(err => {
+            console.error('Error al enviar:', err);
+            alert('Hubo un problema al registrar tu compra. Probá de nuevo o escribime por Instagram @perezexiliado.');
+            reset();
+        });
+    }
+
+    function toggleMobileMenu() {
+        const menu = $('mobile-menu'), icon = $('menu-btn').querySelector('i');
+        const cerrado = menu.classList.contains('hidden');
+        menu.classList.toggle('hidden', !cerrado);
+        icon.classList.toggle('fa-bars', !cerrado);
+        icon.classList.toggle('fa-times', cerrado);
+    }
+    function showContactModal() { const m = $('contactModal'); m.classList.remove('hidden'); m.classList.add('flex'); }
+    function hideContactModal() { const m = $('contactModal'); m.classList.add('hidden'); m.classList.remove('flex'); }
+    function copyEmail() {
+        const email = 'perezexiliadomkt@gmail.com';
+        navigator.clipboard.writeText(email).then(() => {
+            const span = document.querySelector('#contactModal .font-mono');
+            const txt = span.textContent;
+            span.textContent = '✅ COPIADO!';
+            setTimeout(() => { span.textContent = txt; }, 2000);
+        }).catch(() => alert('Mail copiado: ' + email));
+    }
+
+    renderKits();
+    document.querySelectorAll('#mobile-menu a').forEach(a => a.addEventListener('click', () => {
+        $('mobile-menu').classList.add('hidden');
+        const i = $('menu-btn').querySelector('i'); i.classList.add('fa-bars'); i.classList.remove('fa-times');
+    }));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') hideContactModal(); });
+</script>
+</body>
+</html>
