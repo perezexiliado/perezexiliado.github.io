@@ -54,6 +54,9 @@
         .kit-opcion:hover { background: #1a0630; }
         .kit-opcion.activo { background: color-mix(in srgb, var(--c) 15%, transparent); color: var(--c); }
 
+        /* ícono de las tarjetas de la grilla: fondo neutro; borde e ícono toman el color del tema de cada kit */
+        .kit-mini-slot { background: rgba(0,0,0,.35); border-color: rgba(255,255,255,.35); }
+
         /* el contenido queda POR ENCIMA de las capas decorativas del fondo (antes lo tapaban y opacaban el texto) */
         [class*="kit-flag-"] > * { position: relative; z-index: 1; }
 
@@ -93,6 +96,7 @@
         .kit-flag-arcangel .kit-titulo { color: #fde68a; text-shadow: 0 0 8px rgba(253,224,71,.6), 0 1px 3px rgba(0,0,0,.6); }
         .kit-flag-arcangel p, .kit-flag-arcangel li, .kit-flag-arcangel span, .kit-flag-arcangel label { color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.6); }
         .kit-flag-arcangel .kit-icono { color: #fde047; }
+        .kit-flag-arcangel .ip-icon-slot { border-color: #fde047aa !important; }
 
         /* recuadro especial kit ENDER: portal del End */
         .kit-flag-ender {
@@ -471,6 +475,8 @@
 
     function renderKits() {
         const ids = Object.keys(KITS);
+        // mismos fondos temáticos para la grilla y para los paneles de detalle
+        const fondosEspeciales = { thor: 'kit-flag-thor', ender: 'kit-flag-ender', druida: 'kit-flag-druida', rose: 'kit-flag-rose', arcangel: 'kit-flag-arcangel' };
         $('kit-dd-list').innerHTML = ids.map(id => `
             <button type="button" onclick="mostrarKit('${id}')" data-kit-btn="${id}" style="--c:${KITS[id].c}"
                 class="kit-opcion w-full flex items-center gap-3 px-5 py-3 text-left text-sm sm:text-base font-semibold uppercase tracking-wide">
@@ -480,8 +486,8 @@
         $('kit-grid').innerHTML = ids.map(id => {
             return `
             <button type="button" onclick="mostrarKit('${id}', true)" class="glow text-center" style="--c:${KITS[id].c}">
-                <div class="kit-card card-slot bg-black border-2 p-4 h-full">
-                    <div class="ip-icon-slot w-12 h-12 mx-auto flex items-center justify-center border text-xl mb-3" style="border-color:${KITS[id].c}66;background:${KITS[id].c}22;color:${KITS[id].c}"><i class="fas ${KITS[id].i}"></i></div>
+                <div class="kit-card card-slot ${fondosEspeciales[id] || 'bg-black'} border-2 p-4 h-full">
+                    <div class="ip-icon-slot kit-mini-slot w-12 h-12 mx-auto flex items-center justify-center border text-xl mb-3"><i class="fas ${KITS[id].i} kit-icono"></i></div>
                     <p class="mc-pixel text-[9px] mb-2 kit-titulo">${KITS[id].n.toUpperCase()}</p>
                     <p class="font-bold" style="color:#22c55e;">$${KITS[id].p} <span class="text-[10px] text-purple-300">USD</span></p>
                 </div>
@@ -491,7 +497,6 @@
         $('kit-panels').innerHTML = ids.map(id => {
             const k = KITS[id];
             const s = id.charAt(0).toUpperCase() + id.slice(1);
-            const fondosEspeciales = { thor: 'kit-flag-thor', ender: 'kit-flag-ender', druida: 'kit-flag-druida', rose: 'kit-flag-rose', arcangel: 'kit-flag-arcangel' };
             const fondoEspecial = fondosEspeciales[id] || 'bg-black';
             return `
             <div id="kit-${id}" data-kit-panel class="kit-panel glow hidden" style="--c:${k.c}">
