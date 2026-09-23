@@ -415,7 +415,7 @@
 <script>
     const EMAILJS_PUBLIC_KEY = "KMYGAyGuz9uYee6ci";
     const EMAILJS_SERVICE_ID = "service_0cvl5ce";
-    // EDITAR: si creás una plantilla de EmailJS propia para kits, pegá su ID acá (por ahora usa la de rangos)
+    // Misma plantilla que rangos.html. Variables de kits: {{kit}}, {{kit_usuario_minecraft}}, {{kit_nombre_pago}}, {{kit_metodo_pago}}, {{kit_fecha}}
     const EMAILJS_TEMPLATE_ID_KIT = "template_ajlxln8";
     emailjs.init(EMAILJS_PUBLIC_KEY);
 
@@ -560,12 +560,12 @@
         const reset = () => { btn.innerHTML = original; btn.disabled = false; otro.disabled = false; };
 
         emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID_KIT, {
-            rango: 'Kit ' + KITS[id].n,   // se mantiene "rango" para poder reutilizar la plantilla de rangos
-            kit: KITS[id].n,
-            usuario_minecraft: usuarioMC.value.trim(),
-            nombre_pago: nombrePago.value.trim(),
-            metodo_pago: metodo === 'paypal' ? 'PayPal' : 'MercadoPago',
-            fecha: new Date().toLocaleString('es-AR')
+            // Variables propias de kits (equivalentes a las de rangos.html), para usar una sola plantilla
+            kit: KITS[id].n,                                                   // equivale a {{rango}}
+            kit_usuario_minecraft: usuarioMC.value.trim(),                     // equivale a {{usuario_minecraft}}
+            kit_nombre_pago: nombrePago.value.trim(),                          // equivale a {{nombre_pago}}
+            kit_metodo_pago: metodo === 'paypal' ? 'PayPal' : 'MercadoPago',   // equivale a {{metodo_pago}}
+            kit_fecha: new Date().toLocaleString('es-AR')                      // equivale a {{fecha}}
         }).then(() => {
             if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) window.location.href = link;
             else window.open(link, '_blank');
