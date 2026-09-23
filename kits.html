@@ -328,7 +328,31 @@
             <i class="fas fa-circle-info text-purple-300 text-lg mt-0.5"></i>
             <p class="text-sm sm:text-base text-purple-200">Comprar la No pérdida de inventario es <span class="font-bold text-purple-100">opcional</span>. Si te matan sin este beneficio y otro jugador se queda con tu kit, el server no se hace responsable de esa pérdida.</p>
         </div>
-        <!-- EDITAR: si querés, sumá acá un botón o link a donde se compra la no pérdida de inventario -->
+        <div id="no-perdida" class="card-slot bg-black border-2 border-yellow-400 max-w-3xl mx-auto mt-8 p-6 sm:p-8">
+            <div class="flex flex-col sm:flex-row gap-5 sm:gap-6 items-center sm:items-start">
+                <div class="ip-icon-slot w-16 h-16 flex-shrink-0 flex items-center justify-center bg-yellow-400/15 border border-yellow-400/40 text-yellow-300 text-3xl"><i class="fas fa-shield-halved"></i></div>
+                <div class="flex-1 w-full text-center sm:text-left">
+                    <h3 class="text-2xl sm:text-3xl font-bold mb-1 text-yellow-400">NO PÉRDIDA DE INVENTARIO</h3>
+                    <p class="text-lg sm:text-xl font-bold mb-2" style="color:#22c55e;">$<span id="npPrecio"></span> USD <span class="text-xs sm:text-sm font-semibold text-purple-300">· beneficio opcional</span></p>
+                    <p class="text-sm text-purple-300 mb-5">Si morís, tu inventario no se dropea y conservás todo lo que llevabas, tu kit incluido.</p>
+                    <div class="grid sm:grid-cols-2 gap-3 mb-5 text-left">
+                        <div>
+                            <label class="block text-xs uppercase tracking-widest text-purple-400 mb-1.5">Tu usuario en el server</label>
+                            <input type="text" id="npUsuarioMC" placeholder="Tu nombre exacto en Minecraft" required class="info-slot w-full bg-black border-2 border-purple-500/40 px-4 py-3 text-sm focus:outline-none focus:border-purple-500">
+                            <p class="text-[11px] text-purple-400 mt-1.5">Si jugás desde Bedrock, poné un punto al principio (ej: .Steve)</p>
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-widest text-purple-400 mb-1.5">Nombre en MercadoPago / PayPal</label>
+                            <input type="text" id="npNombrePago" placeholder="Como figura en tu Mercado Pago o PayPal" required class="info-slot w-full bg-black border-2 border-purple-500/40 px-4 py-3 text-sm focus:outline-none focus:border-purple-500">
+                        </div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row items-center sm:items-start justify-center sm:justify-start gap-3">
+                        <button id="btnPagarNoPerdidaMP" onclick="pagarNoPerdida('mercadopago')" class="info-slot pago-btn pago-mp inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 font-bold text-sm sm:text-base hover:scale-[1.02] active:scale-95"><i class="fas fa-credit-card"></i> PAGAR CON MERCADOPAGO</button>
+                        <button id="btnPagarNoPerdidaPP" onclick="pagarNoPerdida('paypal')" class="info-slot pago-btn pago-pp inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 font-bold text-sm sm:text-base hover:scale-[1.02] active:scale-95"><i class="fab fa-paypal"></i> PAGAR CON PAYPAL</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -415,11 +439,10 @@
 <script>
     const EMAILJS_PUBLIC_KEY = "KMYGAyGuz9uYee6ci";
     const EMAILJS_SERVICE_ID = "service_0cvl5ce";
-    // Misma plantilla que rangos.html. Variables de kits: {{kit}}, {{kit_usuario_minecraft}}, {{kit_nombre_pago}}, {{kit_metodo_pago}}, {{kit_fecha}}
     const EMAILJS_TEMPLATE_ID_KIT = "template_ajlxln8";
     emailjs.init(EMAILJS_PUBLIC_KEY);
+    const EMAILJS_TEMPLATE_ID_NP = "template_ajlxln8";
 
-    // ⚠️ EDITAR: color, ícono y descripción de cada kit (ordenados de menor a mayor precio)
     const KITS = {
         thor:     { n: 'Thor',     p: '14,99', c: '#fb923c', i: 'fa-hammer',  t: 'El trueno en tus manos' },
         ender:    { n: 'Ender',    p: '39,99', c: '#d946ef', i: 'fa-eye',     t: 'El poder del End' },
@@ -428,13 +451,20 @@
         arcangel: { n: 'Arcángel', p: '79,99', c: '#e0e7ff', i: 'fa-dove',    t: 'Poder celestial' }
     };
 
-    // ⚠️ EDITAR: pegá el link de pago real de cada kit y método.
     const KIT_PAGO_LINKS = {
         thor:     { mercadopago: 'https://mpago.la/2kEtY5P',     paypal: 'https://www.paypal.com/ncp/payment/PUT9L8ZKV5VDW' },
         ender:    { mercadopago: 'https://mpago.la/1KrT3J9',    paypal: 'https://www.paypal.com/ncp/payment/DYFJABZSFEJQQ' },
         druida:   { mercadopago: 'https://mpago.la/2vUECVX',   paypal: 'https://www.paypal.com/ncp/payment/JRHESYJFHN6L2' },
         rose:     { mercadopago: 'https://mpago.la/2XLrjjk',     paypal: 'https://www.paypal.com/ncp/payment/FSRATJLZNZ8P6' },
         arcangel: { mercadopago: 'https://mpago.la/1vZHBLU', paypal: 'https://www.paypal.com/ncp/payment/Z22HUMSHFW5SQ' }
+    };
+
+    const NO_PERDIDA = {
+        precio: '9,99',
+        links: {
+            mercadopago: 'https://mpago.la/1WZDXL8',
+            paypal: 'https://www.paypal.com/ncp/payment/55WQEWQHQLD5Q'
+        }
     };
 
     const $ = id => document.getElementById(id);
@@ -577,6 +607,41 @@
         });
     }
 
+    function pagarNoPerdida(metodo) {
+        const link = NO_PERDIDA.links[metodo];
+        if (!link || link.includes('TU-LINK')) {
+            alert('Todavía no cargaste el link de pago de la No pérdida de inventario. Editá NO_PERDIDA en el código.');
+            return;
+        }
+        const usuarioMC = $('npUsuarioMC');
+        const nombrePago = $('npNombrePago');
+        if (!usuarioMC.value.trim()) { alert('Escribí tu usuario del server (con un punto al principio si jugás desde Bedrock) antes de pagar.'); usuarioMC.focus(); return; }
+        if (!nombrePago.value.trim()) { alert('Escribí el nombre con el que figurás en MercadoPago/PayPal antes de pagar.'); nombrePago.focus(); return; }
+
+        const btn = $('btnPagarNoPerdida' + (metodo === 'paypal' ? 'PP' : 'MP'));
+        const otro = $('btnPagarNoPerdida' + (metodo === 'paypal' ? 'MP' : 'PP'));
+        const original = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> PROCESANDO...';
+        btn.disabled = true; otro.disabled = true;
+        const reset = () => { btn.innerHTML = original; btn.disabled = false; otro.disabled = false; };
+
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID_NP, {
+            np_producto: 'No pérdida de inventario',
+            np_usuario_minecraft: usuarioMC.value.trim(),
+            np_nombre_pago: nombrePago.value.trim(),
+            np_metodo_pago: metodo === 'paypal' ? 'PayPal' : 'MercadoPago',
+            np_fecha: new Date().toLocaleString('es-AR')
+        }).then(() => {
+            if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) window.location.href = link;
+            else window.open(link, '_blank');
+            reset();
+        }).catch(err => {
+            console.error('Error al enviar:', err);
+            alert('Hubo un problema al registrar tu compra. Probá de nuevo o escribime por Instagram @perezexiliado.');
+            reset();
+        });
+    }
+
     function toggleMobileMenu() {
         const menu = $('mobile-menu'), icon = $('menu-btn').querySelector('i');
         const cerrado = menu.classList.contains('hidden');
@@ -608,6 +673,7 @@
         });
     }
 
+    $('npPrecio').textContent = NO_PERDIDA.precio;
     renderKits();
     revisarImagenesKit();
     window.addEventListener('resize', revisarImagenesKit);
