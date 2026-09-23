@@ -114,6 +114,119 @@
         #rango-vip .rango-cta { background: #facc15; color: #1a1200; }
         #rango-vip .rango-cta:hover { background: #fde047; }
 
+        /* --- fondos temáticos de las tarjetas de rango (mismo estilo que los kits en kits.html) --- */
+        .rango-bg { position: relative; overflow: hidden; }
+        .rango-bg > * { position: relative; z-index: 1; }
+        .rango-bg::before, .rango-bg::after { content: ''; position: absolute; pointer-events: none; }
+        .rango-bg li, .rango-bg label { color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.65); }
+        .rango-bg p.text-purple-400 { color: #f3e8ff; text-shadow: 0 1px 3px rgba(0,0,0,.65); }
+        .rango-bg p span { color: #f3e8ff; text-shadow: 0 1px 3px rgba(0,0,0,.65); }
+        .rango-bg .rango-titulo { text-shadow: 0 1px 4px rgba(0,0,0,.7); }
+
+        @keyframes rangoBgShift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+        /* ZEUS: tormenta con lluvia y relámpagos */
+        #rango-zeus.rango-bg {
+            background: linear-gradient(135deg, #050b1f 0%, #0b2a5e 30%, #14427f 50%, #0a1d45 75%, #030814 100%);
+            background-size: 220% 220%;
+            animation: rangoBgShift 9s ease-in-out infinite;
+        }
+        #rango-zeus.rango-bg::before {
+            inset: 0;
+            background-image: repeating-linear-gradient(105deg, rgba(147,197,253,.16) 0 1px, transparent 1px 15px);
+            opacity: .55;
+            mix-blend-mode: screen;
+        }
+        #rango-zeus.rango-bg::after {
+            inset: 0;
+            background: radial-gradient(ellipse at 72% 16%, rgba(186,230,253,.6) 0%, rgba(96,165,250,.2) 35%, transparent 65%);
+            opacity: 0;
+            animation: rangoRayo 7s infinite;
+        }
+        @keyframes rangoRayo { 0%,90%,100% { opacity: 0; } 91% { opacity: .9; } 92.5% { opacity: .1; } 94% { opacity: .7; } 97% { opacity: 0; } }
+        #rango-zeus .rango-icono { color: #7dd3fc; }
+        #rango-zeus .rango-titulo { color: #7dd3fc; text-shadow: 0 0 10px rgba(56,189,248,.7), 0 1px 3px rgba(0,0,0,.7); }
+
+        /* HADES: inframundo con brasas que suben */
+        #rango-hades.rango-bg {
+            background: linear-gradient(160deg, #0d0208 0%, #3a0a14 30%, #6b0f1f 55%, #2b0a3a 80%, #0a0210 100%);
+            background-size: 200% 200%;
+            animation: rangoBgShift 11s ease-in-out infinite;
+        }
+        #rango-hades.rango-bg::before {
+            inset: 0;
+            background-image:
+                radial-gradient(circle, rgba(251,146,60,.75) 1.3px, transparent 2px),
+                radial-gradient(circle, rgba(192,132,252,.6) 1px, transparent 1.8px);
+            background-size: 34px 34px, 34px 34px;
+            background-position: 0 0, 17px 17px;
+            opacity: .5;
+            mix-blend-mode: screen;
+            animation: rangoBrasas 14s linear infinite;
+        }
+        @keyframes rangoBrasas { from { background-position: 0 0, 17px 17px; } to { background-position: 0 -34px, 17px -17px; } }
+        #rango-hades .rango-icono { color: #fda4af; }
+        #rango-hades .rango-titulo {
+            background: linear-gradient(90deg, #ffc2c2, #ecc6ff);
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+            text-shadow: none; filter: drop-shadow(0 1px 3px rgba(0,0,0,.7));
+        }
+
+        /* POSEIDÓN: mar profundo con olas lentas */
+        #rango-poseidon.rango-bg {
+            background: radial-gradient(ellipse at 28% 22%, #0b5a5c 0%, #053a3f 42%, #021f22 78%, #010c0d 100%);
+            background-size: 180% 180%;
+            animation: rangoBgShift 10s ease-in-out infinite;
+        }
+        #rango-poseidon.rango-bg::before {
+            inset: 0;
+            background-image:
+                radial-gradient(circle, rgba(153,246,228,.8) 1px, transparent 1.6px),
+                radial-gradient(circle, rgba(103,232,249,.65) 1px, transparent 1.8px);
+            background-size: 36px 36px, 50px 50px;
+            background-position: 0 0, 20px 26px;
+            opacity: .4;
+            mix-blend-mode: screen;
+        }
+        #rango-poseidon.rango-bg::after {
+            inset: -8px 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='90'%3E%3Cpath d='M0 45C66 5 133 5 200 45C266 85 333 85 400 45V90H0Z' fill='%232dd4bf' fill-opacity='.16'/%3E%3Cpath d='M0 45C66 5 133 5 200 45C266 85 333 85 400 45' fill='none' stroke='%235eead4' stroke-opacity='.35' stroke-width='1.5'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='110'%3E%3Cpath d='M0 55C93 15 187 15 280 55C373 95 467 95 560 55V110H0Z' fill='%2322d3ee' fill-opacity='.10'/%3E%3Cpath d='M0 55C93 15 187 15 280 55C373 95 467 95 560 55' fill='none' stroke='%2367e8f9' stroke-opacity='.28' stroke-width='1.5'/%3E%3C/svg%3E");
+            background-repeat: repeat-x, repeat-x;
+            background-size: 400px 90px, 560px 110px;
+            background-position: 0 38%, 0 70%;
+            animation: rangoOlas 40s linear infinite, rangoVaiven 9s ease-in-out infinite alternate;
+        }
+        @keyframes rangoOlas { from { background-position: 0 38%, 0 70%; } to { background-position: 400px 38%, -560px 70%; } }
+        @keyframes rangoVaiven { from { transform: translateY(-6px); } to { transform: translateY(6px); } }
+        #rango-poseidon .rango-icono { color: #5eead4; }
+        #rango-poseidon .rango-titulo { color: #5eead4; text-shadow: 0 0 10px rgba(45,212,191,.65), 0 1px 3px rgba(0,0,0,.7); }
+
+        /* VIP: dorado con destellos */
+        #rango-vip.rango-bg {
+            background: linear-gradient(135deg, #1c1503 0%, #4d3907 30%, #7a5a0a 55%, #3e2f06 80%, #150f02 100%);
+            background-size: 220% 220%;
+            animation: rangoBgShift 7s ease-in-out infinite;
+            box-shadow: inset 0 0 18px rgba(253,224,71,.25), 0 0 10px rgba(253,224,71,.2);
+        }
+        #rango-vip.rango-bg::before {
+            inset: 0;
+            background-image:
+                radial-gradient(circle, rgba(254,240,138,.85) 1px, transparent 1.6px),
+                radial-gradient(circle, rgba(255,255,255,.7) 1px, transparent 1.4px);
+            background-size: 30px 30px, 44px 44px;
+            background-position: 0 0, 15px 22px;
+            mix-blend-mode: screen;
+            opacity: .3;
+            animation: rangoBrillo 4s ease-in-out infinite alternate;
+        }
+        @keyframes rangoBrillo { from { opacity: .18; } to { opacity: .5; } }
+        #rango-vip .rango-icono { color: #fde047; }
+        #rango-vip .rango-titulo { color: #fde68a; text-shadow: 0 0 8px rgba(253,224,71,.55), 0 1px 3px rgba(0,0,0,.7); }
+
+        @media (prefers-reduced-motion: reduce) {
+            .rango-bg, .rango-bg::before, .rango-bg::after { animation: none !important; }
+        }
+
         .rango-pago-mp { background: #009EE3; color: #ffffff; }
         .rango-pago-mp:hover { background: #0088CC; }
         .rango-pago-pp { background: #FFC439; color: #003087; }
@@ -286,7 +399,7 @@
     <div class="max-w-5xl mx-auto px-6">
 
         <!-- Zeus -->
-        <div id="rango-zeus" data-rango-panel class="rango-panel card-slot hidden bg-black border-2 p-6 sm:p-8">
+        <div id="rango-zeus" data-rango-panel class="rango-panel rango-bg card-slot hidden bg-black border-2 p-6 sm:p-8">
             <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
                 <!-- EDITAR: reemplazar por la imagen real del rango, formato 9:16 -->
                 <img src="assets/rango-zeus.png" alt="Rango Zeus"
@@ -329,7 +442,7 @@
         </div>
 
         <!-- Hades -->
-        <div id="rango-hades" data-rango-panel class="rango-panel card-slot hidden bg-black border-2 p-6 sm:p-8">
+        <div id="rango-hades" data-rango-panel class="rango-panel rango-bg card-slot hidden bg-black border-2 p-6 sm:p-8">
             <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
                 <!-- EDITAR: reemplazar por la imagen real del rango, formato 9:16 -->
                 <img src="assets/rango-hades.png" alt="Rango Hades"
@@ -372,7 +485,7 @@
         </div>
 
         <!-- Poseidón -->
-        <div id="rango-poseidon" data-rango-panel class="rango-panel card-slot hidden bg-black border-2 p-6 sm:p-8">
+        <div id="rango-poseidon" data-rango-panel class="rango-panel rango-bg card-slot hidden bg-black border-2 p-6 sm:p-8">
             <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
                 <!-- EDITAR: reemplazar por la imagen real del rango, formato 9:16 -->
                 <img src="assets/rango-poseidon.png" alt="Rango Poseidón"
@@ -415,7 +528,7 @@
         </div>
 
         <!-- VIP -->
-        <div id="rango-vip" data-rango-panel class="rango-panel card-slot hidden bg-black border-2 p-6 sm:p-8">
+        <div id="rango-vip" data-rango-panel class="rango-panel rango-bg card-slot hidden bg-black border-2 p-6 sm:p-8">
             <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
                 <!-- EDITAR: reemplazar por la imagen real del rango, formato 9:16 -->
                 <img src="assets/rango-vip.png" alt="Rango VIP"
@@ -510,6 +623,20 @@
                         <td class="px-4 py-3 border-b border-purple-500/10 text-center"><i class="fas fa-check text-green-400"></i></td>
                         <td class="px-4 py-3 border-b border-purple-500/10 text-center"><i class="fas fa-check text-green-400"></i></td>
                         <td class="px-4 py-3 border-b border-purple-500/10 text-center"><i class="fas fa-check text-green-400"></i></td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-3 border-b border-purple-500/10 font-semibold text-purple-300">Nickname con colores (/nickname)</td>
+                        <td class="px-4 py-3 border-b border-purple-500/10 text-center"><i class="fas fa-check text-green-400"></i></td>
+                        <td class="px-4 py-3 border-b border-purple-500/10 text-center"><i class="fas fa-check text-green-400"></i></td>
+                        <td class="px-4 py-3 border-b border-purple-500/10 text-center"><i class="fas fa-check text-green-400"></i></td>
+                        <td class="px-4 py-3 border-b border-purple-500/10 text-center"><i class="fas fa-check text-green-400"></i></td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-3 border-b border-purple-500/10 font-semibold text-purple-300">Nickname con RGB</td>
+                        <td class="px-4 py-3 border-b border-purple-500/10 text-center"><i class="fas fa-check text-green-400"></i></td>
+                        <td class="px-4 py-3 border-b border-purple-500/10 text-center"><i class="fas fa-check text-green-400"></i></td>
+                        <td class="px-4 py-3 border-b border-purple-500/10 text-center"><i class="fas fa-check text-green-400"></i></td>
+                        <td class="px-4 py-3 border-b border-purple-500/10 text-center"><i class="fas fa-xmark text-purple-400/50"></i></td>
                     </tr>
                     <tr>
                         <td class="px-4 py-3 font-semibold text-purple-300">Duración</td>
