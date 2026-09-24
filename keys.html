@@ -121,6 +121,27 @@
         .key-icono { width: 1.1em; text-align: center; }
         .key-mini-slot { background: rgba(0,0,0,.35); border-color: rgba(255,255,255,.35); }
 
+        /* Imagen de cada key: mismo slot vertical 9:16 usado en Kits/Rangos. */
+        .key-img-wrap {
+            position: relative;
+            flex-shrink: 0;
+        }
+        .key-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            border-color: var(--c);
+            background: rgba(0,0,0,.28);
+        }
+        .key-img-fallback {
+            border-color: var(--c);
+            background: rgba(0,0,0,.28);
+        }
+        .key-img-fallback .key-symbol {
+            font-size: clamp(3.5rem, 8vw, 5.5rem);
+        }
+
         .key-visual {
             position: relative;
             min-height: 220px;
@@ -280,7 +301,7 @@
     </div>
 </div>
 
-<header class="keys-hero relative pt-28 sm:pt-36 pb-10 sm:pb-14 bg-cover bg-center overflow-visible">
+<header class="keys-hero relative pt-28 sm:pt-36 pb-4 sm:pb-5 bg-cover bg-center overflow-visible">
     <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
         <div class="inline-flex items-center gap-2 bg-black/40 border border-purple-400/30 text-purple-200 px-4 py-1.5 mb-5 info-slot text-xs sm:text-sm uppercase tracking-widest">
             <i class="fas fa-key text-yellow-300"></i>
@@ -299,7 +320,7 @@
             </p>
         </div>
 
-        <div class="relative max-w-sm mx-auto mb-10" id="key-dd-wrap">
+        <div class="relative max-w-sm mx-auto mb-5" id="key-dd-wrap">
             <button type="button" id="key-dd-btn" onclick="toggleDropdown()" class="info-slot key-dd-btn w-full flex items-center justify-between gap-3 bg-black border-2 border-purple-500/40 px-5 py-4 text-left">
                 <span id="key-dd-label" class="font-bold tracking-wide text-sm sm:text-base">Seleccioná tu key</span>
                 <i id="key-dd-icono" class="fas fa-chevron-down transition-transform duration-300"></i>
@@ -307,26 +328,19 @@
             <div id="key-dd-list" class="info-slot key-dd-list hidden absolute left-0 right-0 mt-2 bg-black border-2 border-purple-500/40 overflow-hidden shadow-xl shadow-black/50"></div>
         </div>
 
-        <p id="key-placeholder" class="text-center text-purple-400 text-sm mb-2">Elegí una key arriba, o tocá una de la lista de abajo ✨</p>
+        <p id="key-placeholder" class="text-center text-purple-400 text-sm mb-2">Elegí una key arriba para ver su detalle ✨</p>
         <p class="text-center text-purple-400 text-xs sm:text-sm max-w-xl mx-auto">
             <i class="fas fa-clock mr-1"></i> Una vez acreditado el pago, la entrega se procesa lo más rápido posible.
         </p>
     </div>
 </header>
 
-<section id="keys" class="-mt-px pt-10 pb-12 md:pb-20 bg-[#150022]">
+<section id="keys" class="-mt-px pt-4 sm:pt-5 pb-5 md:pb-6 bg-[#150022]">
     <div class="max-w-5xl mx-auto px-6" id="key-panels"></div>
 </section>
 
-<section id="todas" class="py-12 md:py-16 bg-[#0f001a]">
-    <div class="max-w-5xl mx-auto px-6">
-        <h2 class="text-2xl sm:text-3xl font-bold text-center mb-2 tracking-widest">TODAS LAS KEYS</h2>
-        <p class="text-center text-purple-300 text-sm sm:text-base mb-8">Tocá una para ver el detalle y comprarla.</p>
-        <div id="key-grid" class="grid grid-cols-1 sm:grid-cols-3 gap-3"></div>
-    </div>
-</section>
 
-<section id="como-funciona" class="py-12 md:py-16 bg-[#150022]">
+<section id="como-funciona" class="pt-6 pb-12 md:pt-8 md:pb-16 bg-[#150022]">
     <div class="max-w-5xl mx-auto px-6">
         <h2 class="text-2xl sm:text-3xl font-bold text-center mb-2 tracking-widest">¿CÓMO FUNCIONA?</h2>
         <p class="text-center text-purple-300 text-sm sm:text-base mb-10">El mismo flujo simple del resto de la tienda.</p>
@@ -420,10 +434,11 @@
     /* ================================================================
        CONFIGURACIÓN RÁPIDA
        ----------------------------------------------------------------
-       Las keys disponibles son Común, Legendaria y Mítica. Los precios y links siguen pendientes de configuración.
+       Las keys disponibles son Común, Legendaria y Mítica. Los precios ya están configurados; los links de pago siguen pendientes de configuración.
        Por eso TODO lo editable está concentrado en estos dos objetos.
 
        - Cambiá nombre, precio, descripción y bullets dentro de KEYS.
+       - Imágenes: assets/key-comun.png, assets/key-legendaria.png y assets/key-mitica.png.
        - Pegá los links reales dentro de KEY_PAGO_LINKS.
        - Mientras un link tenga "TU-LINK", el botón NO abre ningún pago.
        ================================================================ */
@@ -436,9 +451,10 @@
     const KEYS = {
         comun: {
             n: 'Común',
-            p: '',
+            p: '3,99',
             c: '#7dd3fc',
             i: 'fa-key',
+            img: 'assets/key-comun.png',
             bg: 'key-bg-comun',
             t: 'Una apertura para el cofre Común del server.',
             beneficios: [
@@ -449,9 +465,10 @@
         },
         legendaria: {
             n: 'Legendaria',
-            p: '',
+            p: '5,99',
             c: '#fde047',
             i: 'fa-crown',
+            img: 'assets/key-legendaria.png',
             bg: 'key-bg-legendaria',
             t: 'Una apertura del cofre Legendario del server.',
             beneficios: [
@@ -462,9 +479,10 @@
         },
         mitica: {
             n: 'Mítica',
-            p: '',
+            p: '7,99',
             c: '#f472b6',
             i: 'fa-gem',
+            img: 'assets/key-mitica.png',
             bg: 'key-bg-mitica',
             t: 'Una apertura del cofre Mítico del server.',
             beneficios: [
@@ -498,38 +516,30 @@
                 </button>`;
         }).join('');
 
-        $('key-grid').innerHTML = ids.map(id => {
-            const k = KEYS[id];
-            return `
-                <button type="button" onclick="mostrarKey('${id}', true)" class="glow text-center" style="--c:${k.c}">
-                    <div class="key-card card-slot ${k.bg} border-2 p-4 h-full">
-                        <div class="ip-icon-slot key-mini-slot w-12 h-12 mx-auto flex items-center justify-center border text-xl mb-3">
-                            <i class="fas ${k.i} key-icono"></i>
-                        </div>
-                        <p class="mc-pixel text-[9px] mb-2 key-titulo">${k.n.toUpperCase()}</p>
-                        <p class="font-bold text-sm" style="color:#22c55e;">${precioTexto(k)}</p>
-                    </div>
-                </button>`;
-        }).join('');
-
         $('key-panels').innerHTML = ids.map(id => {
             const k = KEYS[id];
             const s = id.charAt(0).toUpperCase() + id.slice(1);
             return `
                 <div id="key-${id}" data-key-panel class="key-panel glow hidden" style="--c:${k.c}">
                     <div class="key-card card-slot ${k.bg} border-2 p-6 sm:p-8">
-                        <div class="grid md:grid-cols-[220px_1fr] gap-7 sm:gap-9 items-stretch">
-                            <div class="key-visual card-slot border-2 flex flex-col items-center justify-center text-center p-5" style="border-color:${k.c}; --c:${k.c}">
-                                <i class="fas ${k.i} key-symbol key-icono"></i>
-                                <p class="mc-pixel text-[9px] mt-5 key-titulo">KEY ${k.n.toUpperCase()}</p>
+                        <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
+                            <!-- PNG automático: assets/key-comun.png, key-legendaria.png y key-mitica.png -->
+                            <div class="key-img-wrap w-28 sm:w-32 aspect-[9/16]" style="--c:${k.c}">
+                                <img src="${k.img}" alt="Key ${k.n}"
+                                     class="key-img card-slot border-2"
+                                     onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');">
+                                <div class="key-img-fallback card-slot border-2 hidden absolute inset-0 flex flex-col items-center justify-center text-center p-3" style="--c:${k.c}">
+                                    <i class="fas ${k.i} key-symbol key-icono"></i>
+                                    <p class="mc-pixel text-[8px] mt-4 key-titulo">KEY ${k.n.toUpperCase()}</p>
+                                </div>
                             </div>
 
-                            <div class="text-center md:text-left">
+                            <div class="flex-1 text-center sm:text-left">
                                 <h3 class="text-2xl sm:text-3xl font-bold mb-1 key-titulo">KEY ${k.n.toUpperCase()}</h3>
                                 <p class="text-lg sm:text-xl font-bold mb-2" style="color:#22c55e;">${precioTexto(k)}</p>
                                 <p class="text-sm text-purple-100/90 mb-5">${k.t}</p>
 
-                                <ul class="space-y-2 text-purple-100 text-sm sm:text-base mb-6 max-w-md mx-auto md:mx-0 text-left">
+                                <ul class="space-y-2 text-purple-100 text-sm sm:text-base mb-6 max-w-md mx-auto sm:mx-0 text-left">
                                     ${k.beneficios.map(b => `
                                         <li class="flex items-start gap-2">
                                             <i class="fas fa-star key-icono shrink-0 mt-1"></i>
@@ -555,7 +565,7 @@
                                         Esta key todavía tiene el precio sin configurar en el bloque <span class="font-mono">KEYS</span> del JavaScript.
                                     </div>`}
 
-                                <div class="flex flex-col sm:flex-row items-center md:items-start justify-center md:justify-start gap-3">
+                                <div class="flex flex-col sm:flex-row items-center sm:items-start justify-center sm:justify-start gap-3">
                                     <button id="btnPagar${s}MP" onclick="pagarKey('${id}','mercadopago')" class="info-slot pago-btn pago-mp inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 font-bold text-sm sm:text-base hover:scale-[1.02] active:scale-95">
                                         <i class="fas fa-credit-card"></i> PAGAR CON MERCADOPAGO
                                     </button>
