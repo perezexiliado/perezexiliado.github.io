@@ -184,6 +184,76 @@
         .kit-flag-rose .kit-icono { color: #fde68a; }
         .kit-flag-rose .ip-icon-slot { border-color: #ffffffaa !important; }
 
+        /* recuadro especial kit PHANTOM: verdes, blancos y azules fantasmales */
+        .kit-flag-phantom {
+            position: relative;
+            background: linear-gradient(145deg, #071714 0%, #0f3a34 25%, #dff7f5 50%, #0f4f83 74%, #041320 100%);
+            background-size: 220% 220%;
+            animation: kitFlagShift 8s ease-in-out infinite;
+            overflow: hidden;
+        }
+        .kit-flag-phantom::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image:
+                radial-gradient(circle, rgba(220,252,231,.65) 1px, transparent 1.6px),
+                radial-gradient(circle, rgba(186,230,253,.55) 1px, transparent 1.8px),
+                linear-gradient(120deg, transparent 0 42%, rgba(255,255,255,.14) 50%, transparent 58% 100%);
+            background-size: 32px 32px, 48px 48px, 240px 240px;
+            background-position: 0 0, 14px 18px, -240px 0;
+            opacity: .6;
+            mix-blend-mode: screen;
+            animation: kitPhantomSweep 9s linear infinite;
+            pointer-events: none;
+        }
+        .kit-flag-phantom .kit-titulo { color: #ecfeff; text-shadow: 0 0 10px rgba(103,232,249,.65), 0 1px 3px rgba(0,0,0,.65); }
+        .kit-flag-phantom p, .kit-flag-phantom li, .kit-flag-phantom span, .kit-flag-phantom label { color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.6); }
+        .kit-flag-phantom .kit-icono { color: #bbf7d0; }
+        .kit-flag-phantom .ip-icon-slot { border-color: #93c5fdaa !important; }
+
+        /* recuadro especial kit DRACULA: degradientes intensos de rojo */
+        .kit-flag-dracula {
+            position: relative;
+            background: linear-gradient(145deg, #170103 0%, #4a040d 24%, #8f0718 52%, #5b0715 76%, #160103 100%);
+            background-size: 220% 220%;
+            animation: kitFlagShift 7s ease-in-out infinite;
+            overflow: hidden;
+            box-shadow: inset 0 0 18px rgba(239,68,68,.18), 0 0 10px rgba(127,29,29,.25);
+        }
+        .kit-flag-dracula::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image:
+                radial-gradient(circle, rgba(254,202,202,.20) 1px, transparent 1.7px),
+                radial-gradient(circle, rgba(127,29,29,.38) 1px, transparent 1.9px);
+            background-size: 28px 28px, 46px 46px;
+            background-position: 0 0, 12px 16px;
+            opacity: .55;
+            mix-blend-mode: screen;
+            pointer-events: none;
+        }
+        .kit-flag-dracula::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(circle at 50% 25%, rgba(254,202,202,.18), transparent 32%), radial-gradient(circle at 50% 100%, rgba(127,29,29,.28), transparent 55%);
+            pointer-events: none;
+        }
+        .kit-flag-dracula .kit-titulo {
+            background: linear-gradient(90deg, #fecaca, #ef4444, #b91c1c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            filter: drop-shadow(0 1px 3px rgba(0,0,0,.75));
+        }
+        .kit-flag-dracula p, .kit-flag-dracula li, .kit-flag-dracula span, .kit-flag-dracula label { color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.65); }
+        .kit-flag-dracula .kit-icono { color: #fca5a5; }
+        .kit-flag-dracula .ip-icon-slot { border-color: #ef4444aa !important; }
+
+        @keyframes kitPhantomSweep {
+            from { background-position: 0 0, 14px 18px, -240px 0; }
+            to   { background-position: 32px -64px, -28px -72px, 240px 0; }
+        }
+
         @keyframes kitFlagShift {
             0%,100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -451,19 +521,23 @@
     const EMAILJS_TEMPLATE_ID_NP = "template_do0vu6p";
 
     const KITS = {
-        thor:     { n: 'Thor',     p: '14,99', c: '#fb923c', i: 'fa-hammer',  t: 'El trueno en tus manos' },
-        ender:    { n: 'Ender',    p: '39,99', c: '#d946ef', i: 'fa-eye',     t: 'El poder del End' },
-        druida:   { n: 'Druida',   p: '49,99', c: '#a3e635', i: 'fa-leaf',    t: 'La fuerza de la naturaleza' },
-        rose:     { n: 'Rose',     p: '59,99', c: '#f472b6', i: 'fa-spa',     t: 'Elegancia con filo' },
-        arcangel: { n: 'Arcángel', p: '79,99', c: '#e0e7ff', i: 'fa-dove',    t: 'Poder celestial' }
+        thor:     { n: 'Thor',     p: '14,99', c: '#fb923c', i: 'fa-hammer',    t: 'El trueno en tus manos' },
+        ender:    { n: 'Ender',    p: '39,99', c: '#d946ef', i: 'fa-eye',       t: 'El poder del End' },
+        druida:   { n: 'Druida',   p: '49,99', c: '#a3e635', i: 'fa-leaf',      t: 'La fuerza de la naturaleza' },
+        rose:     { n: 'Rose',     p: '59,99', c: '#f472b6', i: 'fa-spa',       t: 'Elegancia con filo' },
+        arcangel: { n: 'Arcángel', p: '79,99', c: '#e0e7ff', i: 'fa-dove',      t: 'Poder celestial' },
+        phantom:  { n: 'Phantom',  p: '39,99',      c: '#67e8f9', i: 'fa-ghost',     t: 'Presencia espectral entre verdes, blancos y azules' },
+        dracula:  { n: 'Dracula',  p: '17,99',      c: '#ef4444', i: 'fa-droplet',   t: 'Poder oscuro envuelto en degradientes rojos' }
     };
 
     const KIT_PAGO_LINKS = {
-        thor:     { mercadopago: 'https://mpago.la/2kEtY5P',     paypal: 'https://www.paypal.com/ncp/payment/PUT9L8ZKV5VDW' },
-        ender:    { mercadopago: 'https://mpago.la/1KrT3J9',    paypal: 'https://www.paypal.com/ncp/payment/DYFJABZSFEJQQ' },
-        druida:   { mercadopago: 'https://mpago.la/2vUECVX',   paypal: 'https://www.paypal.com/ncp/payment/JRHESYJFHN6L2' },
-        rose:     { mercadopago: 'https://mpago.la/2XLrjjk',     paypal: 'https://www.paypal.com/ncp/payment/FSRATJLZNZ8P6' },
-        arcangel: { mercadopago: 'https://mpago.la/1vZHBLU', paypal: 'https://www.paypal.com/ncp/payment/Z22HUMSHFW5SQ' }
+        thor:     { mercadopago: 'https://mpago.la/2kEtY5P',      paypal: 'https://www.paypal.com/ncp/payment/PUT9L8ZKV5VDW' },
+        ender:    { mercadopago: 'https://mpago.la/1KrT3J9',      paypal: 'https://www.paypal.com/ncp/payment/DYFJABZSFEJQQ' },
+        druida:   { mercadopago: 'https://mpago.la/2vUECVX',      paypal: 'https://www.paypal.com/ncp/payment/JRHESYJFHN6L2' },
+        rose:     { mercadopago: 'https://mpago.la/2XLrjjk',      paypal: 'https://www.paypal.com/ncp/payment/FSRATJLZNZ8P6' },
+        arcangel: { mercadopago: 'https://mpago.la/1vZHBLU',      paypal: 'https://www.paypal.com/ncp/payment/Z22HUMSHFW5SQ' },
+        phantom:  { mercadopago: 'TU-LINK-MP-PHANTOM',           paypal: 'TU-LINK-PAYPAL-PHANTOM' },
+        dracula:  { mercadopago: 'TU-LINK-MP-DRACULA',           paypal: 'TU-LINK-PAYPAL-DRACULA' }
     };
 
     const NO_PERDIDA = {
@@ -475,15 +549,17 @@
     };
 
     const $ = id => document.getElementById(id);
+    const precioKitBadge = k => k.p ? '$' + k.p : 'EDITAR';
+    const precioKitPanel = k => k.p ? '$' + k.p + ' USD <span class="text-xs sm:text-sm font-semibold text-purple-300">· compra única</span>' : 'PRECIO A DEFINIR <span class="text-xs sm:text-sm font-semibold text-yellow-300">· configurá el valor</span>';
 
     function renderKits() {
         const ids = Object.keys(KITS);
         // mismos fondos temáticos para la grilla y para los paneles de detalle
-        const fondosEspeciales = { thor: 'kit-flag-thor', ender: 'kit-flag-ender', druida: 'kit-flag-druida', rose: 'kit-flag-rose', arcangel: 'kit-flag-arcangel' };
+        const fondosEspeciales = { thor: 'kit-flag-thor', ender: 'kit-flag-ender', druida: 'kit-flag-druida', rose: 'kit-flag-rose', arcangel: 'kit-flag-arcangel', phantom: 'kit-flag-phantom', dracula: 'kit-flag-dracula' };
         $('kit-dd-list').innerHTML = ids.map(id => `
             <button type="button" onclick="mostrarKit('${id}')" data-kit-btn="${id}" style="--c:${KITS[id].c}"
                 class="kit-opcion w-full flex items-center gap-3 px-5 py-3 text-left text-sm sm:text-base font-semibold uppercase tracking-wide">
-                <i class="fas ${KITS[id].i}"></i> ${KITS[id].n} <span class="ml-auto text-xs opacity-70">$${KITS[id].p}</span>
+                <i class="fas ${KITS[id].i}"></i> ${KITS[id].n} <span class="ml-auto text-xs opacity-70">${precioKitBadge(KITS[id])}</span>
             </button>`).join('');
 
         $('kit-grid').innerHTML = ids.map(id => {
@@ -492,7 +568,7 @@
                 <div class="kit-card card-slot ${fondosEspeciales[id] || 'bg-black'} border-2 p-4 h-full">
                     <div class="ip-icon-slot kit-mini-slot w-12 h-12 mx-auto flex items-center justify-center border text-xl mb-3"><i class="fas ${KITS[id].i} kit-icono"></i></div>
                     <p class="mc-pixel text-[9px] mb-2 kit-titulo">${KITS[id].n.toUpperCase()}</p>
-                    <p class="font-bold" style="color:#22c55e;">$${KITS[id].p} <span class="text-[10px] text-purple-300">USD</span></p>
+                    <p class="font-bold" style="color:#22c55e;">${KITS[id].p ? '$' + KITS[id].p + ' ' : ''}<span class="text-[10px] text-purple-300">${KITS[id].p ? 'USD' : 'PRECIO A DEFINIR'}</span></p>
                 </div>
             </button>`;
         }).join('');
@@ -509,7 +585,7 @@
                     <img src="assets/kit-${id}.png?v=2" alt="Kit ${k.n}" class="kit-img w-44 sm:w-52 lg:w-56 aspect-[9/16] card-slot border-2 flex-shrink-0">
                     <div class="flex-1 text-center sm:text-left">
                         <h3 class="text-2xl sm:text-3xl font-bold mb-1 kit-titulo">${k.n.toUpperCase()}</h3>
-                        <p class="text-lg sm:text-xl font-bold mb-2" style="color:#22c55e;">$${k.p} USD <span class="text-xs sm:text-sm font-semibold text-purple-300">· compra única</span></p>
+                        <p class="text-lg sm:text-xl font-bold mb-2" style="color:#22c55e;">${precioKitPanel(k)}</p>
                         <p class="text-sm text-purple-400 mb-4">${k.t}</p>
                         <!-- EDITAR: ajustá los beneficios según el contenido real de cada kit -->
                         <ul class="space-y-2 text-purple-200 text-sm sm:text-base mb-6 max-w-xs mx-auto sm:max-w-none sm:mx-0 text-left">
@@ -528,6 +604,7 @@
                                 <input type="text" id="kitNombrePago_${id}" placeholder="Como figura en tu Mercado Pago o PayPal" required class="info-slot w-full bg-black border-2 border-purple-500/40 px-4 py-3 text-sm focus:outline-none focus:border-purple-500">
                             </div>
                         </div>
+                        ${k.p ? '' : `<div class="info-slot bg-yellow-400/10 border-2 border-yellow-400/40 px-4 py-3 mb-4 text-left text-xs sm:text-sm text-yellow-100"><i class="fas fa-pen-to-square text-yellow-300 mr-2"></i>Este kit todavía no tiene precio configurado. Editá el objeto <span class="font-mono">KITS</span> antes de publicarlo.</div>`}
                         <div class="flex flex-col sm:flex-row items-center sm:items-start justify-center sm:justify-start gap-3">
                             <button id="btnPagar${s}MP" onclick="pagarKit('${id}','mercadopago')" class="info-slot pago-btn pago-mp inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 font-bold text-sm sm:text-base hover:scale-[1.02] active:scale-95"><i class="fas fa-credit-card"></i> PAGAR CON MERCADOPAGO</button>
                             <button id="btnPagar${s}PP" onclick="pagarKit('${id}','paypal')" class="info-slot pago-btn pago-pp inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 font-bold text-sm sm:text-base hover:scale-[1.02] active:scale-95"><i class="fab fa-paypal"></i> PAGAR CON PAYPAL</button>
@@ -579,6 +656,10 @@
     document.addEventListener('click', e => { if (!$('kit-dd-wrap').contains(e.target)) cerrarDropdown(); });
 
     function pagarKit(id, metodo) {
+        if (!KITS[id].p) {
+            alert('Todavía no cargaste el precio real de este kit. Editá KITS en el código antes de publicarlo.');
+            return;
+        }
         const link = KIT_PAGO_LINKS[id] && KIT_PAGO_LINKS[id][metodo];
         if (!link || link.includes('TU-LINK')) {
             alert('Todavía no cargaste el link de pago para este kit. Editá KIT_PAGO_LINKS en el código.');
