@@ -65,6 +65,9 @@
         }
         .rango-icono { width: 1.1em; text-align: center; }
 
+        /* Mantener las previews nítidas: render normal y tamaño suficiente para conservar detalle */
+        .rango-img { image-rendering: auto; -ms-interpolation-mode: bicubic; }
+
         .rango-dropdown-btn:hover, .rango-dropdown-btn.abierto { border-color: #9f00ff; }
         #rango-dropdown-icono.girado { transform: rotate(180deg); }
 
@@ -403,7 +406,7 @@
             <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
                 <!-- EDITAR: reemplazar por la imagen real del rango, formato 9:16 -->
                 <img src="assets/rango-zeus.png" alt="Rango Zeus"
-                     class="w-28 sm:w-32 aspect-[9/16] object-cover card-slot border-2 flex-shrink-0 rango-img">
+                     class="w-44 sm:w-52 md:w-56 aspect-[9/16] object-cover card-slot border-2 flex-shrink-0 rango-img">
                 <div class="flex-1 text-center sm:text-left">
                     <h3 class="text-2xl sm:text-3xl font-bold mb-1 rango-titulo">ZEUS</h3>
                     <p class="text-lg sm:text-xl font-bold mb-2" style="color:#22c55e;">$59,99 USD <span class="text-xs sm:text-sm font-semibold text-purple-300">· de por vida</span></p>
@@ -446,7 +449,7 @@
             <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
                 <!-- EDITAR: reemplazar por la imagen real del rango, formato 9:16 -->
                 <img src="assets/rango-hades.png" alt="Rango Hades"
-                     class="w-28 sm:w-32 aspect-[9/16] object-cover card-slot border-2 flex-shrink-0 rango-img">
+                     class="w-44 sm:w-52 md:w-56 aspect-[9/16] object-cover card-slot border-2 flex-shrink-0 rango-img">
                 <div class="flex-1 text-center sm:text-left">
                     <h3 class="text-2xl sm:text-3xl font-bold mb-1 rango-titulo">HADES</h3>
                     <p class="text-lg sm:text-xl font-bold mb-2" style="color:#22c55e;">$39,99 USD <span class="text-xs sm:text-sm font-semibold text-purple-300">· de por vida</span></p>
@@ -489,7 +492,7 @@
             <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
                 <!-- EDITAR: reemplazar por la imagen real del rango, formato 9:16 -->
                 <img src="assets/rango-poseidon.png" alt="Rango Poseidón"
-                     class="w-28 sm:w-32 aspect-[9/16] object-cover card-slot border-2 flex-shrink-0 rango-img">
+                     class="w-44 sm:w-52 md:w-56 aspect-[9/16] object-cover card-slot border-2 flex-shrink-0 rango-img">
                 <div class="flex-1 text-center sm:text-left">
                     <h3 class="text-2xl sm:text-3xl font-bold mb-1 rango-titulo">POSEIDÓN</h3>
                     <p class="text-lg sm:text-xl font-bold mb-2" style="color:#22c55e;">$19,99 USD <span class="text-xs sm:text-sm font-semibold text-purple-300">· de por vida</span></p>
@@ -532,7 +535,7 @@
             <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
                 <!-- EDITAR: reemplazar por la imagen real del rango, formato 9:16 -->
                 <img src="assets/rango-vip.png" alt="Rango VIP"
-                     class="w-28 sm:w-32 aspect-[9/16] object-cover card-slot border-2 flex-shrink-0 rango-img">
+                     class="w-44 sm:w-52 md:w-56 aspect-[9/16] object-cover card-slot border-2 flex-shrink-0 rango-img">
                 <div class="flex-1 text-center sm:text-left">
                     <h3 class="text-2xl sm:text-3xl font-bold mb-1 rango-titulo">VIP</h3>
                     <p class="text-lg sm:text-xl font-bold mb-2" style="color:#22c55e;">$9,99 USD <span class="text-xs sm:text-sm font-semibold text-purple-300">· de por vida</span></p>

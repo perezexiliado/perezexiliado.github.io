@@ -39,9 +39,12 @@
         .kit-panel { opacity: 0; transform: translateY(10px) scale(.99); transition: opacity .35s cubic-bezier(.22,1,.36,1), transform .35s cubic-bezier(.22,1,.36,1); }
         .kit-panel.visible { opacity: 1; transform: none; }
         .kit-card, .kit-img { border-color: var(--c); }
-        /* imagen del kit a tamaño nativo (sin reescalar): la celda solo la recorta, centrada */
-        .kit-img { object-fit: none; object-position: center; }
-        .kit-img.kit-img-cubrir { object-fit: cover; } /* solo si la imagen es más chica que la celda (evita huecos) */
+        /* previews HD: se muestran más grandes y con interpolación normal para conservar detalle */
+        .kit-img {
+            object-fit: cover;
+            object-position: center;
+            image-rendering: auto;
+        }
         .kit-titulo, .kit-icono { color: var(--c); }
         .kit-icono { width: 1.1em; text-align: center; }
 
@@ -503,7 +506,7 @@
               <div class="kit-card card-slot ${fondoEspecial} border-2 p-6 sm:p-8">
                 <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
                     <!-- EDITAR: reemplazar por la imagen real del kit, formato 9:16 -->
-                    <img src="assets/kit-${id}.png" alt="Kit ${k.n}" class="kit-img w-28 sm:w-32 aspect-[9/16] card-slot border-2 flex-shrink-0">
+                    <img src="assets/kit-${id}.png" alt="Kit ${k.n}" class="kit-img w-44 sm:w-52 lg:w-56 aspect-[9/16] card-slot border-2 flex-shrink-0">
                     <div class="flex-1 text-center sm:text-left">
                         <h3 class="text-2xl sm:text-3xl font-bold mb-1 kit-titulo">${k.n.toUpperCase()}</h3>
                         <p class="text-lg sm:text-xl font-bold mb-2" style="color:#22c55e;">$${k.p} USD <span class="text-xs sm:text-sm font-semibold text-purple-300">· compra única</span></p>
@@ -666,22 +669,8 @@
         }).catch(() => alert('Mail copiado: ' + email));
     }
 
-    // Las imágenes de los kits se muestran a tamaño nativo y solo se recortan.
-    // Si alguna es más chica que la celda, se usa "cover" para no dejar huecos.
-    function revisarImagenesKit() {
-        const ancho = (matchMedia('(min-width: 640px)').matches ? 128 : 112) - 4;   // w-32 / w-28 menos el borde
-        const alto = (ancho + 4) * 16 / 9 - 4;                                     // aspecto 9:16
-        document.querySelectorAll('.kit-img').forEach(img => {
-            const evaluar = () => img.classList.toggle('kit-img-cubrir', img.naturalWidth < ancho || img.naturalHeight < alto);
-            if (img.complete && img.naturalWidth) evaluar();
-            else img.addEventListener('load', evaluar, { once: true });
-        });
-    }
-
     $('npPrecio').textContent = NO_PERDIDA.precio;
     renderKits();
-    revisarImagenesKit();
-    window.addEventListener('resize', revisarImagenesKit);
     document.querySelectorAll('#mobile-menu a').forEach(a => a.addEventListener('click', () => {
         $('mobile-menu').classList.add('hidden');
         const i = $('menu-btn').querySelector('i'); i.classList.add('fa-bars'); i.classList.remove('fa-times');
