@@ -121,7 +121,6 @@
         .key-icono { width: 1.1em; text-align: center; }
         .key-mini-slot { background: rgba(0,0,0,.35); border-color: rgba(255,255,255,.35); }
 
-        /* Imagen de cada key: mismo slot vertical 9:16 usado en Kits/Rangos. */
         .key-img-wrap {
             position: relative;
             flex-shrink: 0;
@@ -165,7 +164,6 @@
             to { transform: translateY(7px) rotate(5deg); }
         }
 
-        /* Fondos temáticos de keys */
         .key-bg-comun {
             background: linear-gradient(145deg, #07111e 0%, #12355a 44%, #101827 72%, #03070d 100%);
         }
@@ -431,17 +429,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
-    /* ================================================================
-       CONFIGURACIÓN RÁPIDA
-       ----------------------------------------------------------------
-       Las keys disponibles son Común, Legendaria y Mítica. Los precios ya están configurados; los links de pago siguen pendientes de configuración.
-       Por eso TODO lo editable está concentrado en estos dos objetos.
-
-       - Cambiá nombre, precio, descripción y bullets dentro de KEYS.
-       - Imágenes: assets/key-comun.png, assets/key-legendaria.png y assets/key-mitica.png.
-       - Pegá los links reales dentro de KEY_PAGO_LINKS.
-       - Mientras un link tenga "TU-LINK", el botón NO abre ningún pago.
-       ================================================================ */
 
     const EMAILJS_PUBLIC_KEY = "KMYGAyGuz9uYee6ci";
     const EMAILJS_SERVICE_ID = "service_0cvl5ce";
@@ -494,9 +481,9 @@
     };
 
     const KEY_PAGO_LINKS = {
-        comun:      { mercadopago: 'TU-LINK-MP-COMUN',      paypal: 'TU-LINK-PAYPAL-COMUN' },
-        legendaria: { mercadopago: 'TU-LINK-MP-LEGENDARIA', paypal: 'TU-LINK-PAYPAL-LEGENDARIA' },
-        mitica:     { mercadopago: 'TU-LINK-MP-MITICA',     paypal: 'TU-LINK-PAYPAL-MITICA' }
+        comun:      { mercadopago: 'https://mpago.la/22HhC9j',      paypal: 'https://www.paypal.com/ncp/payment/GQZAQ6G9Q79SJ' },
+        legendaria: { mercadopago: 'https://mpago.la/2qp2sg8', paypal: 'https://www.paypal.com/ncp/payment/2M2YSWADDMALJ' },
+        mitica:     { mercadopago: 'https://mpago.la/2kkUfRp',     paypal: 'https://www.paypal.com/ncp/payment/XYPDG4GCEJA2U' }
     };
 
     const $ = id => document.getElementById(id);
@@ -678,13 +665,17 @@
         }
 
         emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID_KEY, {
-            // Variables específicas de keys. Si tu plantilla usa otros nombres, cambialos acá.
-            key: k.n,
-            key_precio: k.p,
+            // Usá estas variables en tu plantilla de EmailJS:
+            // {{key_producto}}, {{key_usuario_minecraft}}, {{key_nombre_pago}},
+            // {{key_metodo_pago}} y {{key_fecha}}.
+            key_producto: 'Key ' + k.n,
             key_usuario_minecraft: usuarioMC.value.trim(),
             key_nombre_pago: nombrePago.value.trim(),
             key_metodo_pago: metodo === 'paypal' ? 'PayPal' : 'MercadoPago',
-            key_fecha: new Date().toLocaleString('es-AR')
+            key_fecha: new Date().toLocaleString('es-AR'),
+            // Compatibilidad con plantillas anteriores; el precio es opcional.
+            key: k.n,
+            key_precio: k.p
         }).then(() => {
             if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
                 window.location.href = link;
