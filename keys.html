@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Keys de EXILIADOS MC. Elegí tu llave, completá tus datos y conseguí acceso a recompensas dentro del server.">
+    <title>KEYS | EXILIADOS MC</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --purple: #9f00ff;
+            --mc-green: #4ade80;
+        }
+
+        * {
+            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Space Grotesk', system-ui, sans-serif; }
+
+        .glitch {
+            font-family: 'Press Start 2P', system-ui;
+            position: relative;
+            color: white;
+            text-shadow:
+                0.05em 0 0 #ff00ff,
+                -0.025em -0.05em 0 #00ffff,
+                0.025em 0.05em 0 #ffff00;
+            animation: glitch 1.5s infinite;
+        }
+
+        @keyframes glitch {
+            0%,14% { text-shadow: 0.05em 0 0 #ff00ff, -0.05em -0.025em 0 #00ffff, 0.025em 0.05em 0 #ffff00; }
+            15%,49% { text-shadow: -0.05em -0.025em 0 #ff00ff, 0.025em 0.025em 0 #00ffff, -0.05em -0.05em 0 #ffff00; }
+            50%,99% { text-shadow: 0.025em 0.05em 0 #ff00ff, 0.05em 0 0 #00ffff, 0 -0.05em 0 #ffff00; }
+            100% { text-shadow: -0.025em 0 0 #ff00ff, -0.025em -0.025em 0 #00ffff, -0.025em -0.05em 0 #ffff00; }
+        }
+
+        .mc-pixel { font-family: 'Press Start 2P', system-ui; }
+
+        /* Slots biselados: mismo lenguaje visual que rangos.html / kits.html */
+        .ip-icon-slot {
+            clip-path: polygon(6px 0,100% 0,100% calc(100% - 6px),calc(100% - 6px) 100%,0 100%,0 6px);
+            box-shadow: inset 2px 2px 0 rgba(255,255,255,.12), inset -2px -2px 0 rgba(0,0,0,.6);
+        }
+        .info-slot {
+            clip-path: polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);
+            box-shadow: inset 2px 2px 0 rgba(255,255,255,.07), inset -2px -2px 0 rgba(0,0,0,.5);
+        }
+        .card-slot {
+            clip-path: polygon(18px 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%,0 18px);
+            box-shadow: inset 3px 3px 0 rgba(255,255,255,.06), inset -3px -3px 0 rgba(0,0,0,.5);
+        }
+        .rule-slot {
+            clip-path: polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);
+            box-shadow: inset 2px 2px 0 rgba(255,255,255,.06), inset -2px -2px 0 rgba(0,0,0,.5);
+        }
+
+        .glow { transition: filter .3s ease, transform .25s ease; }
+        .glow:hover { filter: drop-shadow(0 0 14px var(--c)); }
+        button.glow:hover { transform: translateY(-3px); }
+
+        /* Hero. portadakeys.png es opcional: si no existe, queda el gradiente animado. */
+        .keys-hero {
+            background-image:
+                linear-gradient(180deg, rgba(10,0,18,.58) 0%, rgba(10,0,18,.84) 62%, #150022 100%),
+                url('assets/portadakeys.png'),
+                radial-gradient(circle at 20% 10%, #52207a 0%, #1b052a 42%, #09000f 100%);
+            background-size: cover, cover, cover;
+            background-position: center;
+        }
+        .keys-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                radial-gradient(circle, rgba(216,180,254,.65) 1px, transparent 1.6px),
+                radial-gradient(circle, rgba(103,232,249,.45) 1px, transparent 1.6px);
+            background-size: 44px 44px, 68px 68px;
+            background-position: 0 0, 16px 22px;
+            opacity: .28;
+            animation: heroDust 18s linear infinite;
+            mix-blend-mode: screen;
+        }
+        @keyframes heroDust {
+            from { background-position: 0 0, 16px 22px; }
+            to { background-position: 44px 88px, -52px 158px; }
+        }
+
+        /* Selector */
+        /* El dropdown debe poder salir del hero y quedar por encima del panel de preview. */
+        #key-dd-wrap { position: relative; z-index: 80; }
+        .key-dd-btn { position: relative; z-index: 81; }
+        .key-dd-btn:hover, .key-dd-btn.abierto { border-color: #9f00ff; }
+        #key-dd-icono.girado { transform: rotate(180deg); }
+        .key-dd-list { opacity: 0; transform: translateY(-8px); transition: opacity .25s ease, transform .25s ease; z-index: 90; }
+        .key-dd-list.visible { opacity: 1; transform: none; }
+        .key-opcion { background: #000; color: #d8b4fe; border-top: 1px solid rgba(255,255,255,.08); }
+        .key-opcion:first-child { border-top: none; }
+        .key-opcion:hover { background: #1a0630; }
+        .key-opcion.activo { background: color-mix(in srgb, var(--c) 15%, transparent); color: var(--c); }
+
+        /* Paneles */
+        .key-panel {
+            opacity: 0;
+            transform: translateY(10px) scale(.99);
+            transition: opacity .35s cubic-bezier(.22,1,.36,1), transform .35s cubic-bezier(.22,1,.36,1);
+        }
+        .key-panel.visible { opacity: 1; transform: none; }
+        .key-card { border-color: var(--c); }
+        .key-titulo, .key-icono { color: var(--c); }
+        .key-icono { width: 1.1em; text-align: center; }
+        .key-mini-slot { background: rgba(0,0,0,.35); border-color: rgba(255,255,255,.35); }
+
+        .key-visual {
+            position: relative;
+            min-height: 220px;
+            overflow: hidden;
+            isolation: isolate;
+        }
+        .key-visual::before, .key-visual::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+        .key-visual > * { position: relative; z-index: 2; }
+        .key-symbol {
+            font-size: clamp(4.5rem, 12vw, 8rem);
+            filter: drop-shadow(0 0 18px color-mix(in srgb, var(--c) 70%, transparent));
+            animation: keyFloat 3.2s ease-in-out infinite alternate;
+        }
+        @keyframes keyFloat {
+            from { transform: translateY(-5px) rotate(-4deg); }
+            to { transform: translateY(7px) rotate(5deg); }
+        }
+
+        /* Fondos temáticos de keys */
+        .key-bg-comun {
+            background: linear-gradient(145deg, #07111e 0%, #12355a 44%, #101827 72%, #03070d 100%);
+        }
+        .key-bg-comun::before {
+            background-image: repeating-linear-gradient(115deg, rgba(125,211,252,.18) 0 1px, transparent 1px 16px);
+            opacity: .55;
+        }
+        .key-bg-comun::after {
+            background: radial-gradient(circle at 70% 20%, rgba(125,211,252,.32), transparent 48%);
+        }
+
+        .key-bg-legendaria {
+            background: linear-gradient(135deg, #211602 0%, #5a3c05 28%, #8b650a 52%, #402804 80%, #100a01 100%);
+            background-size: 220% 220%;
+            animation: keyGoldShift 8s ease-in-out infinite;
+        }
+        @keyframes keyGoldShift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        .key-bg-legendaria::before {
+            background-image:
+                radial-gradient(circle, rgba(254,240,138,.9) 1px, transparent 1.7px),
+                radial-gradient(circle, rgba(255,255,255,.75) 1px, transparent 1.5px);
+            background-size: 30px 30px, 47px 47px;
+            background-position: 0 0, 16px 24px;
+            opacity: .4;
+            animation: goldTwinkle 3.6s ease-in-out infinite alternate;
+        }
+        @keyframes goldTwinkle { from { opacity: .18; } to { opacity: .55; } }
+        .key-bg-legendaria::after { background: radial-gradient(circle at 50% 45%, rgba(253,224,71,.22), transparent 42%); }
+
+        .key-bg-mitica {
+            background: linear-gradient(135deg, #25062f 0%, #75104f 28%, #6d28d9 55%, #0f4c5c 82%, #06020b 100%);
+            background-size: 240% 240%;
+            animation: mythShift 9s ease-in-out infinite;
+        }
+        @keyframes mythShift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        .key-bg-mitica::before {
+            background-image:
+                linear-gradient(120deg, transparent 0 45%, rgba(255,255,255,.12) 50%, transparent 55% 100%),
+                radial-gradient(circle, rgba(244,114,182,.75) 1px, transparent 1.8px),
+                radial-gradient(circle, rgba(103,232,249,.7) 1px, transparent 1.8px);
+            background-size: 220px 220px, 34px 34px, 54px 54px;
+            background-position: -220px 0, 0 0, 18px 26px;
+            opacity: .5;
+            animation: mythSweep 7s linear infinite;
+        }
+        @keyframes mythSweep { to { background-position: 220px 0, 34px -68px, -36px -82px; } }
+        .key-bg-mitica::after { background: radial-gradient(circle at 50% 45%, rgba(216,180,254,.20), transparent 45%); }
+
+        .pago-mp { background: #009EE3; color: #fff; }
+        .pago-mp:hover { background: #0088CC; }
+        .pago-pp { background: #FFC439; color: #003087; }
+        .pago-pp:hover { background: #F0B429; }
+        .pago-btn:disabled { opacity: .6; cursor: not-allowed; }
+
+        section { scroll-margin-top: 80px; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .glitch, .keys-hero::before, .key-symbol,
+            .key-bg-legendaria, .key-bg-legendaria::before, .key-bg-mitica, .key-bg-mitica::before {
+                animation: none !important;
+            }
+            .key-panel, .key-dd-list { transition: none; }
+        }
+    </style>
+</head>
+
+<body class="bg-[#150022] text-white overflow-x-hidden">
+
+<nav class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-purple-500">
+    <div class="max-w-7xl mx-auto px-4 md:px-5 py-3 md:py-4 flex items-center justify-between">
+        <a href="servermc" class="flex items-center gap-2 md:gap-3">
+            <div class="w-8 h-8 md:w-9 md:h-9 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center overflow-hidden border border-purple-400/30">
+                <img src="assets/logoaizq.jpg" alt="Exiliado Logo" class="w-8 h-8 md:w-9 md:h-9 object-contain">
+            </div>
+            <span class="text-lg md:text-xl font-bold tracking-widest glitch">EXILIADO</span>
+        </a>
+
+        <div class="hidden md:flex items-center gap-6 text-sm uppercase">
+            <a href="servermc" class="hover:text-purple-400">HOME</a>
+            <a href="rangos" class="hover:text-purple-400">RANGOS</a>
+            <a href="kits" class="hover:text-purple-400">KITS</a>
+            <a href="keys" class="text-purple-400 border-b-2 border-purple-400">KEYS</a>
+        </div>
+
+        <div class="flex items-center gap-2 md:gap-3">
+            <div class="hidden sm:flex items-center gap-3 md:gap-4 text-xl">
+                <a href="https://www.tiktok.com/@perezexiliado" target="_blank" rel="noopener noreferrer" class="hover:scale-110"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.instagram.com/martinpemiliano" target="_blank" rel="noopener noreferrer" class="hover:scale-110"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/@perezexiliado" target="_blank" rel="noopener noreferrer" class="hover:scale-110"><i class="fab fa-youtube"></i></a>
+                <a href="https://discord.gg/7crcZmwNey" target="_blank" rel="noopener noreferrer" class="hover:scale-110"><i class="fab fa-discord"></i></a>
+            </div>
+
+            <button onclick="showContactModal()" class="bg-purple-600 hover:bg-purple-500 px-4 md:px-5 py-1.5 md:py-2 text-xs md:text-sm font-bold rounded-xl flex items-center gap-2 transition-all active:scale-95">
+                <span>CONTACTO</span>
+            </button>
+
+            <button id="menu-btn" onclick="toggleMobileMenu()" class="md:hidden text-2xl px-2 focus:outline-none" aria-label="Menú">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden md:hidden bg-[#0a0012] border-t border-purple-700">
+        <div class="flex flex-col px-5 py-1 text-sm uppercase">
+            <a href="servermc" class="py-3 hover:text-purple-400">HOME</a>
+            <a href="rangos" class="py-3 hover:text-purple-400">RANGOS</a>
+            <a href="kits" class="py-3 hover:text-purple-400">KITS</a>
+            <a href="keys" class="py-3 text-purple-400 border-b-2 border-purple-400 w-fit">KEYS</a>
+        </div>
+    </div>
+</nav>
+
+<div id="contactModal" class="hidden fixed inset-0 z-[9999] items-center justify-center">
+    <div onclick="hideContactModal()" class="absolute inset-0 bg-black/70 backdrop-blur-xl"></div>
+    <div class="relative bg-black border-2 border-purple-500 rounded-3xl p-8 max-w-md w-full mx-4 text-center shadow-2xl shadow-purple-500/30">
+        <button onclick="hideContactModal()" class="absolute top-4 right-4 text-4xl leading-none text-purple-400 hover:text-white" aria-label="Cerrar">×</button>
+        <div class="mb-6">
+            <div class="inline-flex items-center gap-2 bg-purple-950 text-purple-300 text-sm px-4 py-1 rounded-full border border-purple-500/30">
+                <span class="relative flex h-3 w-3">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-purple-500"></span>
+                </span>
+                COLABORACIONES &amp; NEGOCIOS
+            </div>
+        </div>
+        <h2 class="text-4xl font-bold tracking-widest glitch mb-2">EXILIADO</h2>
+        <p class="text-purple-300 text-lg mb-8">Mi mail oficial</p>
+        <div onclick="copyEmail()" class="group cursor-pointer bg-zinc-900 hover:bg-zinc-800 border border-purple-500/50 hover:border-purple-400 rounded-2xl p-4 sm:p-5 mb-8 flex items-center justify-center gap-3">
+            <span class="font-mono text-base sm:text-lg md:text-xl text-white break-all">perezexiliadomkt@gmail.com</span>
+            <i class="fas fa-copy text-purple-400 flex-shrink-0"></i>
+        </div>
+        <p class="text-sm text-purple-400">Tocá arriba para copiar el mail</p>
+    </div>
+</div>
+
+<header class="keys-hero relative pt-28 sm:pt-36 pb-10 sm:pb-14 bg-cover bg-center overflow-visible">
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+        <div class="inline-flex items-center gap-2 bg-black/40 border border-purple-400/30 text-purple-200 px-4 py-1.5 mb-5 info-slot text-xs sm:text-sm uppercase tracking-widest">
+            <i class="fas fa-key text-yellow-300"></i>
+            Abrí cofres. Probá tu suerte.
+        </div>
+        <h1 class="text-3xl sm:text-5xl md:text-6xl font-bold mb-4 glitch tracking-widest">KEYS</h1>
+        <p class="max-w-2xl mx-auto text-lg sm:text-xl text-purple-200 mb-8">Elegí tu key, completá tus datos y usala dentro del server para abrir su cofre correspondiente.</p>
+    </div>
+
+    <div class="relative z-10 max-w-5xl mx-auto px-6">
+        <div class="info-slot max-w-2xl mx-auto mb-6 bg-purple-500/10 border-2 border-purple-500/40 px-5 py-4 flex items-start gap-3 text-left">
+            <i class="fas fa-triangle-exclamation text-purple-300 text-lg mt-0.5"></i>
+            <p class="text-sm sm:text-base text-purple-200">
+                <span class="font-bold text-purple-100">¿Jugás desde Bedrock (Xbox, PlayStation, Switch, celular)?</span>
+                Por el plugin Geyser, escribí tu usuario con un <span class="font-bold text-purple-100">punto ( . )</span> antes del nombre. Ejemplo: <span class="font-mono">.TuUsuario</span>.
+            </p>
+        </div>
+
+        <div class="relative max-w-sm mx-auto mb-10" id="key-dd-wrap">
+            <button type="button" id="key-dd-btn" onclick="toggleDropdown()" class="info-slot key-dd-btn w-full flex items-center justify-between gap-3 bg-black border-2 border-purple-500/40 px-5 py-4 text-left">
+                <span id="key-dd-label" class="font-bold tracking-wide text-sm sm:text-base">Seleccioná tu key</span>
+                <i id="key-dd-icono" class="fas fa-chevron-down transition-transform duration-300"></i>
+            </button>
+            <div id="key-dd-list" class="info-slot key-dd-list hidden absolute left-0 right-0 mt-2 bg-black border-2 border-purple-500/40 overflow-hidden shadow-xl shadow-black/50"></div>
+        </div>
+
+        <p id="key-placeholder" class="text-center text-purple-400 text-sm mb-2">Elegí una key arriba, o tocá una de la lista de abajo ✨</p>
+        <p class="text-center text-purple-400 text-xs sm:text-sm max-w-xl mx-auto">
+            <i class="fas fa-clock mr-1"></i> Una vez acreditado el pago, la entrega se procesa lo más rápido posible.
+        </p>
+    </div>
+</header>
+
+<section id="keys" class="-mt-px pt-10 pb-12 md:pb-20 bg-[#150022]">
+    <div class="max-w-5xl mx-auto px-6" id="key-panels"></div>
+</section>
+
+<section id="todas" class="py-12 md:py-16 bg-[#0f001a]">
+    <div class="max-w-5xl mx-auto px-6">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center mb-2 tracking-widest">TODAS LAS KEYS</h2>
+        <p class="text-center text-purple-300 text-sm sm:text-base mb-8">Tocá una para ver el detalle y comprarla.</p>
+        <div id="key-grid" class="grid grid-cols-1 sm:grid-cols-3 gap-3"></div>
+    </div>
+</section>
+
+<section id="como-funciona" class="py-12 md:py-16 bg-[#150022]">
+    <div class="max-w-5xl mx-auto px-6">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center mb-2 tracking-widest">¿CÓMO FUNCIONA?</h2>
+        <p class="text-center text-purple-300 text-sm sm:text-base mb-10">El mismo flujo simple del resto de la tienda.</p>
+
+        <div class="grid md:grid-cols-3 gap-4">
+            <div class="glow" style="--c:#c084fc">
+                <div class="card-slot bg-black border-2 border-purple-400 p-6 h-full text-center">
+                    <div class="ip-icon-slot w-12 h-12 mx-auto flex items-center justify-center bg-purple-400/15 border border-purple-400/40 text-purple-300 text-xl mb-4"><i class="fas fa-hand-pointer"></i></div>
+                    <p class="mc-pixel text-[9px] mb-3 text-purple-300">1. ELEGÍ</p>
+                    <p class="text-sm text-purple-200">Seleccioná la key que querés y revisá su descripción antes de comprar.</p>
+                </div>
+            </div>
+            <div class="glow" style="--c:#38bdf8">
+                <div class="card-slot bg-black border-2 border-sky-400 p-6 h-full text-center">
+                    <div class="ip-icon-slot w-12 h-12 mx-auto flex items-center justify-center bg-sky-400/15 border border-sky-400/40 text-sky-300 text-xl mb-4"><i class="fas fa-credit-card"></i></div>
+                    <p class="mc-pixel text-[9px] mb-3 text-sky-300">2. PAGÁ</p>
+                    <p class="text-sm text-purple-200">Completá tu usuario y tu nombre de pago. Después elegí MercadoPago o PayPal.</p>
+                </div>
+            </div>
+            <div class="glow" style="--c:#facc15">
+                <div class="card-slot bg-black border-2 border-yellow-400 p-6 h-full text-center">
+                    <div class="ip-icon-slot w-12 h-12 mx-auto flex items-center justify-center bg-yellow-400/15 border border-yellow-400/40 text-yellow-300 text-xl mb-4"><i class="fas fa-box-open"></i></div>
+                    <p class="mc-pixel text-[9px] mb-3 text-yellow-300">3. ABRÍ</p>
+                    <p class="text-sm text-purple-200">Cuando recibas la key, usala en el cofre correspondiente dentro del server.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="faq" class="py-12 md:py-16 bg-[#0f001a]">
+    <div class="max-w-3xl mx-auto px-6">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 tracking-widest">PREGUNTAS FRECUENTES</h2>
+        <div class="space-y-3">
+            <details open class="rule-slot group bg-purple-500/10 border-2 border-purple-500/50 px-5 py-4">
+                <summary class="flex items-center justify-between gap-3 cursor-pointer list-none font-semibold text-sm sm:text-base">
+                    ¿Qué es una key?
+                    <i class="fas fa-chevron-down text-purple-300 transition-transform group-open:rotate-180"></i>
+                </summary>
+                <p class="text-purple-100 text-sm sm:text-base mt-3">Es una llave virtual que se usa dentro del server para abrir el cofre o crate correspondiente y recibir una recompensa.</p>
+            </details>
+            <details class="rule-slot group bg-black border-2 border-purple-500/40 hover:border-purple-400 px-5 py-4">
+                <summary class="flex items-center justify-between gap-3 cursor-pointer list-none font-semibold text-sm sm:text-base">
+                    ¿La recompensa está garantizada?
+                    <i class="fas fa-chevron-down text-purple-400 transition-transform group-open:rotate-180"></i>
+                </summary>
+                <p class="text-purple-300 text-sm sm:text-base mt-3">La key garantiza la apertura del cofre. La recompensa obtenida depende de la configuración y probabilidades de ese crate dentro del server.</p>
+            </details>
+            <details class="rule-slot group bg-black border-2 border-purple-500/40 hover:border-purple-400 px-5 py-4">
+                <summary class="flex items-center justify-between gap-3 cursor-pointer list-none font-semibold text-sm sm:text-base">
+                    ¿Cuánto tarda en llegar?
+                    <i class="fas fa-chevron-down text-purple-400 transition-transform group-open:rotate-180"></i>
+                </summary>
+                <p class="text-purple-300 text-sm sm:text-base mt-3">La entrega se procesa una vez acreditado el pago. El tiempo exacto puede variar según el medio de pago y la disponibilidad del staff.</p>
+            </details>
+            <details class="rule-slot group bg-black border-2 border-purple-500/40 hover:border-purple-400 px-5 py-4">
+                <summary class="flex items-center justify-between gap-3 cursor-pointer list-none font-semibold text-sm sm:text-base">
+                    Juego desde Bedrock, ¿qué usuario pongo?
+                    <i class="fas fa-chevron-down text-purple-400 transition-transform group-open:rotate-180"></i>
+                </summary>
+                <p class="text-purple-300 text-sm sm:text-base mt-3">Escribí un punto antes de tu nombre por el plugin Geyser. Por ejemplo: <span class="font-mono text-purple-100">.TuUsuario</span>.</p>
+            </details>
+            <details class="rule-slot group bg-black border-2 border-purple-500/40 hover:border-purple-400 px-5 py-4">
+                <summary class="flex items-center justify-between gap-3 cursor-pointer list-none font-semibold text-sm sm:text-base">
+                    Puse mal mi usuario, ¿qué hago?
+                    <i class="fas fa-chevron-down text-purple-400 transition-transform group-open:rotate-180"></i>
+                </summary>
+                <p class="text-purple-300 text-sm sm:text-base mt-3">Revisá bien el usuario antes de pagar. Si ya realizaste la compra con un dato incorrecto, contactanos cuanto antes por Discord o Instagram.</p>
+            </details>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-black py-8 sm:py-10 border-t border-purple-900">
+    <div class="max-w-6xl mx-auto px-5 sm:px-6 flex flex-col md:flex-row items-center justify-center md:justify-between text-sm gap-y-3 md:gap-4 text-center md:text-left">
+        <p class="text-purple-200">© 2026 PEREZEXILIADO • HECHO CON MUCHO HUMOR Y AMOR</p>
+        <div class="flex flex-wrap justify-center gap-x-6 gap-y-1 text-purple-300">
+            <a href="https://www.tiktok.com/@perezexiliado" target="_blank" rel="noopener noreferrer" class="hover:text-purple-100">TikTok</a>
+            <a href="https://www.instagram.com/martinpemiliano" target="_blank" rel="noopener noreferrer" class="hover:text-purple-100">Instagram</a>
+            <a href="https://www.youtube.com/@perezexiliado" target="_blank" rel="noopener noreferrer" class="hover:text-purple-100">YouTube</a>
+            <a href="https://discord.gg/7crcZmwNey" target="_blank" rel="noopener noreferrer" class="hover:text-purple-100">Discord</a>
+            <a href="t&c" class="hover:text-purple-100">Términos y Condiciones</a>
+            <a href="servermc" class="hover:text-purple-100">Server MC</a>
+        </div>
+        <p class="text-purple-400 text-xs sm:text-sm">Para mis seres queridos y la gente que amo</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+    /* ================================================================
+       CONFIGURACIÓN RÁPIDA
+       ----------------------------------------------------------------
+       Las keys disponibles son Común, Legendaria y Mítica. Los precios y links siguen pendientes de configuración.
+       Por eso TODO lo editable está concentrado en estos dos objetos.
+
+       - Cambiá nombre, precio, descripción y bullets dentro de KEYS.
+       - Pegá los links reales dentro de KEY_PAGO_LINKS.
+       - Mientras un link tenga "TU-LINK", el botón NO abre ningún pago.
+       ================================================================ */
+
+    const EMAILJS_PUBLIC_KEY = "KMYGAyGuz9uYee6ci";
+    const EMAILJS_SERVICE_ID = "service_0cvl5ce";
+    const EMAILJS_TEMPLATE_ID_KEY = "template_ajlxln8";
+    if (window.emailjs) emailjs.init(EMAILJS_PUBLIC_KEY);
+
+    const KEYS = {
+        comun: {
+            n: 'Común',
+            p: '',
+            c: '#7dd3fc',
+            i: 'fa-key',
+            bg: 'key-bg-comun',
+            t: 'Una apertura para el cofre Común del server.',
+            beneficios: [
+                'Abre el cofre Común del server',
+                'Recompensa aleatoria según el crate',
+                'Entrega asociada a tu usuario de Minecraft'
+            ]
+        },
+        legendaria: {
+            n: 'Legendaria',
+            p: '',
+            c: '#fde047',
+            i: 'fa-crown',
+            bg: 'key-bg-legendaria',
+            t: 'Una apertura del cofre Legendario del server.',
+            beneficios: [
+                'Abre el cofre Legendario del server',
+                'Pool de recompensas propio del crate',
+                'Entrega asociada a tu usuario de Minecraft'
+            ]
+        },
+        mitica: {
+            n: 'Mítica',
+            p: '',
+            c: '#f472b6',
+            i: 'fa-gem',
+            bg: 'key-bg-mitica',
+            t: 'Una apertura del cofre Mítico del server.',
+            beneficios: [
+                'Abre el cofre Mítico del server',
+                'Pool de recompensas propio del crate',
+                'Entrega asociada a tu usuario de Minecraft'
+            ]
+        }
+    };
+
+    const KEY_PAGO_LINKS = {
+        comun:      { mercadopago: 'TU-LINK-MP-COMUN',      paypal: 'TU-LINK-PAYPAL-COMUN' },
+        legendaria: { mercadopago: 'TU-LINK-MP-LEGENDARIA', paypal: 'TU-LINK-PAYPAL-LEGENDARIA' },
+        mitica:     { mercadopago: 'TU-LINK-MP-MITICA',     paypal: 'TU-LINK-PAYPAL-MITICA' }
+    };
+
+    const $ = id => document.getElementById(id);
+    const precioTexto = key => key.p ? `$${key.p} USD` : 'PRECIO A DEFINIR';
+
+    function renderKeys() {
+        const ids = Object.keys(KEYS);
+
+        $('key-dd-list').innerHTML = ids.map(id => {
+            const k = KEYS[id];
+            return `
+                <button type="button" onclick="mostrarKey('${id}')" data-key-btn="${id}" style="--c:${k.c}"
+                    class="key-opcion w-full flex items-center gap-3 px-5 py-3 text-left text-sm sm:text-base font-semibold uppercase tracking-wide">
+                    <i class="fas ${k.i}"></i>
+                    ${k.n}
+                    <span class="ml-auto text-xs opacity-70">${k.p ? '$' + k.p : 'EDITAR'}</span>
+                </button>`;
+        }).join('');
+
+        $('key-grid').innerHTML = ids.map(id => {
+            const k = KEYS[id];
+            return `
+                <button type="button" onclick="mostrarKey('${id}', true)" class="glow text-center" style="--c:${k.c}">
+                    <div class="key-card card-slot ${k.bg} border-2 p-4 h-full">
+                        <div class="ip-icon-slot key-mini-slot w-12 h-12 mx-auto flex items-center justify-center border text-xl mb-3">
+                            <i class="fas ${k.i} key-icono"></i>
+                        </div>
+                        <p class="mc-pixel text-[9px] mb-2 key-titulo">${k.n.toUpperCase()}</p>
+                        <p class="font-bold text-sm" style="color:#22c55e;">${precioTexto(k)}</p>
+                    </div>
+                </button>`;
+        }).join('');
+
+        $('key-panels').innerHTML = ids.map(id => {
+            const k = KEYS[id];
+            const s = id.charAt(0).toUpperCase() + id.slice(1);
+            return `
+                <div id="key-${id}" data-key-panel class="key-panel glow hidden" style="--c:${k.c}">
+                    <div class="key-card card-slot ${k.bg} border-2 p-6 sm:p-8">
+                        <div class="grid md:grid-cols-[220px_1fr] gap-7 sm:gap-9 items-stretch">
+                            <div class="key-visual card-slot border-2 flex flex-col items-center justify-center text-center p-5" style="border-color:${k.c}; --c:${k.c}">
+                                <i class="fas ${k.i} key-symbol key-icono"></i>
+                                <p class="mc-pixel text-[9px] mt-5 key-titulo">KEY ${k.n.toUpperCase()}</p>
+                            </div>
+
+                            <div class="text-center md:text-left">
+                                <h3 class="text-2xl sm:text-3xl font-bold mb-1 key-titulo">KEY ${k.n.toUpperCase()}</h3>
+                                <p class="text-lg sm:text-xl font-bold mb-2" style="color:#22c55e;">${precioTexto(k)}</p>
+                                <p class="text-sm text-purple-100/90 mb-5">${k.t}</p>
+
+                                <ul class="space-y-2 text-purple-100 text-sm sm:text-base mb-6 max-w-md mx-auto md:mx-0 text-left">
+                                    ${k.beneficios.map(b => `
+                                        <li class="flex items-start gap-2">
+                                            <i class="fas fa-star key-icono shrink-0 mt-1"></i>
+                                            <span>${b}</span>
+                                        </li>`).join('')}
+                                </ul>
+
+                                <div class="grid sm:grid-cols-2 gap-3 mb-5 text-left">
+                                    <div>
+                                        <label class="block text-xs uppercase tracking-widest text-purple-100/80 mb-1.5">Tu usuario en el server</label>
+                                        <input type="text" id="keyUsuarioMC_${id}" placeholder="Tu nombre exacto en Minecraft" required class="info-slot w-full bg-black/80 border-2 border-purple-500/40 px-4 py-3 text-sm focus:outline-none focus:border-purple-500">
+                                        <p class="text-[11px] text-purple-100/70 mt-1.5">Bedrock: agregá un punto al principio (ej: .Steve)</p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs uppercase tracking-widest text-purple-100/80 mb-1.5">Nombre en MercadoPago / PayPal</label>
+                                        <input type="text" id="keyNombrePago_${id}" placeholder="Como figura en tu Mercado Pago o PayPal" required class="info-slot w-full bg-black/80 border-2 border-purple-500/40 px-4 py-3 text-sm focus:outline-none focus:border-purple-500">
+                                    </div>
+                                </div>
+
+                                ${k.p ? '' : `
+                                    <div class="info-slot bg-yellow-400/10 border-2 border-yellow-400/40 px-4 py-3 mb-4 text-left text-xs sm:text-sm text-yellow-100">
+                                        <i class="fas fa-pen-to-square text-yellow-300 mr-2"></i>
+                                        Esta key todavía tiene el precio sin configurar en el bloque <span class="font-mono">KEYS</span> del JavaScript.
+                                    </div>`}
+
+                                <div class="flex flex-col sm:flex-row items-center md:items-start justify-center md:justify-start gap-3">
+                                    <button id="btnPagar${s}MP" onclick="pagarKey('${id}','mercadopago')" class="info-slot pago-btn pago-mp inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 font-bold text-sm sm:text-base hover:scale-[1.02] active:scale-95">
+                                        <i class="fas fa-credit-card"></i> PAGAR CON MERCADOPAGO
+                                    </button>
+                                    <button id="btnPagar${s}PP" onclick="pagarKey('${id}','paypal')" class="info-slot pago-btn pago-pp inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 font-bold text-sm sm:text-base hover:scale-[1.02] active:scale-95">
+                                        <i class="fab fa-paypal"></i> PAGAR CON PAYPAL
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+        }).join('');
+    }
+
+    function mostrarKey(id, scroll) {
+        if (!KEYS[id]) return;
+
+        document.querySelectorAll('[data-key-panel]').forEach(panel => {
+            panel.classList.remove('visible');
+            if (panel.id === 'key-' + id) {
+                panel.classList.remove('hidden');
+                requestAnimationFrame(() => requestAnimationFrame(() => panel.classList.add('visible')));
+            } else {
+                panel.classList.add('hidden');
+            }
+        });
+
+        document.querySelectorAll('[data-key-btn]').forEach(btn => {
+            btn.classList.toggle('activo', btn.dataset.keyBtn === id);
+        });
+
+        const placeholder = $('key-placeholder');
+        if (placeholder) placeholder.style.display = 'none';
+
+        $('key-dd-label').textContent = 'Key ' + KEYS[id].n;
+        cerrarDropdown();
+
+        if (scroll) $('keys').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function toggleDropdown() {
+        const list = $('key-dd-list');
+        const estaCerrado = list.classList.contains('hidden');
+        if (estaCerrado) {
+            list.classList.remove('hidden');
+            requestAnimationFrame(() => list.classList.add('visible'));
+            $('key-dd-btn').classList.add('abierto');
+            $('key-dd-icono').classList.add('girado');
+        } else {
+            cerrarDropdown();
+        }
+    }
+
+    function cerrarDropdown() {
+        const list = $('key-dd-list');
+        if (!list || list.classList.contains('hidden')) return;
+        list.classList.remove('visible');
+        setTimeout(() => list.classList.add('hidden'), 200);
+        $('key-dd-btn').classList.remove('abierto');
+        $('key-dd-icono').classList.remove('girado');
+    }
+
+    function pagarKey(id, metodo) {
+        const k = KEYS[id];
+        const link = KEY_PAGO_LINKS[id] && KEY_PAGO_LINKS[id][metodo];
+
+        if (!k) return;
+        if (!k.p) {
+            alert('Todavía no cargaste el precio real de esta key. Editá KEYS en el código antes de publicar.');
+            return;
+        }
+        if (!link || link.includes('TU-LINK')) {
+            alert('Todavía no cargaste el link de pago para esta key. Editá KEY_PAGO_LINKS en el código.');
+            return;
+        }
+
+        const usuarioMC = $('keyUsuarioMC_' + id);
+        const nombrePago = $('keyNombrePago_' + id);
+
+        if (!usuarioMC.value.trim()) {
+            alert('Escribí tu usuario del server (Minecraft) antes de pagar.');
+            usuarioMC.focus();
+            return;
+        }
+        if (!nombrePago.value.trim()) {
+            alert('Escribí el nombre con el que figurás en MercadoPago/PayPal antes de pagar.');
+            nombrePago.focus();
+            return;
+        }
+
+        const s = id.charAt(0).toUpperCase() + id.slice(1);
+        const btn = $('btnPagar' + s + (metodo === 'paypal' ? 'PP' : 'MP'));
+        const otro = $('btnPagar' + s + (metodo === 'paypal' ? 'MP' : 'PP'));
+        const original = btn.innerHTML;
+
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> PROCESANDO...';
+        btn.disabled = true;
+        otro.disabled = true;
+
+        const reset = () => {
+            btn.innerHTML = original;
+            btn.disabled = false;
+            otro.disabled = false;
+        };
+
+        if (!window.emailjs) {
+            alert('No se pudo cargar el sistema de registro de compra. Recargá la página o contactanos por Instagram/Discord.');
+            reset();
+            return;
+        }
+
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID_KEY, {
+            // Variables específicas de keys. Si tu plantilla usa otros nombres, cambialos acá.
+            key: k.n,
+            key_precio: k.p,
+            key_usuario_minecraft: usuarioMC.value.trim(),
+            key_nombre_pago: nombrePago.value.trim(),
+            key_metodo_pago: metodo === 'paypal' ? 'PayPal' : 'MercadoPago',
+            key_fecha: new Date().toLocaleString('es-AR')
+        }).then(() => {
+            if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+                window.location.href = link;
+            } else {
+                window.open(link, '_blank', 'noopener,noreferrer');
+            }
+            reset();
+        }).catch(err => {
+            console.error('Error al enviar:', err);
+            alert('Hubo un problema al registrar tu compra. Probá de nuevo o escribime por Instagram @perezexiliado.');
+            reset();
+        });
+    }
+
+    function toggleMobileMenu() {
+        const menu = $('mobile-menu');
+        const icon = $('menu-btn').querySelector('i');
+        const abrir = menu.classList.contains('hidden');
+        menu.classList.toggle('hidden', !abrir);
+        icon.classList.toggle('fa-bars', !abrir);
+        icon.classList.toggle('fa-times', abrir);
+    }
+
+    function showContactModal() {
+        const modal = $('contactModal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    }
+
+    function hideContactModal() {
+        const modal = $('contactModal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+
+    function copyEmail() {
+        const email = 'perezexiliadomkt@gmail.com';
+        navigator.clipboard.writeText(email).then(() => {
+            const span = document.querySelector('#contactModal .font-mono');
+            if (!span) return;
+            const original = span.textContent;
+            span.textContent = '✅ COPIADO!';
+            setTimeout(() => { span.textContent = original; }, 2000);
+        }).catch(() => alert('Mail copiado: ' + email));
+    }
+
+    document.addEventListener('click', e => {
+        const wrap = $('key-dd-wrap');
+        if (wrap && !wrap.contains(e.target)) cerrarDropdown();
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        renderKeys();
+
+        document.querySelectorAll('#mobile-menu a').forEach(a => {
+            a.addEventListener('click', () => {
+                $('mobile-menu').classList.add('hidden');
+                const icon = $('menu-btn').querySelector('i');
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-times');
+            });
+        });
+    });
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+            cerrarDropdown();
+            hideContactModal();
+        }
+    });
+</script>
+</body>
+</html>
